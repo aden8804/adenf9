@@ -1,10 +1,11 @@
 <?php
-// LIFETIME UNIQUE VISITORS COUNTER (PHP + TXT)
-// Kode ini ditambahkan di atas tanpa mengubah apa pun di bawahnya
+// LIFETIME UNIQUE VISITORS COUNTER - Sudah dibenarkan dengan error handling
+// Jika tidak bekerja, cek permission folder dan file
 
 $counterFile = 'visitors.txt';
 $hashFile    = 'visitors_hash.txt';
 
+// Fungsi identifier pengunjung
 function getVisitorId() {
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     $agent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
@@ -13,18 +14,34 @@ function getVisitorId() {
 
 $visitorHash = md5(getVisitorId());
 
-if (!file_exists($counterFile)) file_put_contents($counterFile, "0\n");
-if (!file_exists($hashFile))    file_put_contents($hashFile, "");
+// Inisialisasi file jika belum ada
+if (!file_exists($counterFile)) {
+    if (!file_put_contents($counterFile, "0\n")) {
+        echo "<!-- Error: Tidak bisa buat visitors.txt - cek permission folder -->";
+    }
+}
+if (!file_exists($hashFile)) {
+    if (!file_put_contents($hashFile, "")) {
+        echo "<!-- Error: Tidak bisa buat visitors_hash.txt - cek permission folder -->";
+    }
+}
 
-$count = (int) trim(file_get_contents($counterFile));
+// Baca counter saat ini
+$count = (int) trim(file_get_contents($counterFile) ?: '0');
 
-$existing = file_get_contents($hashFile);
-$hashes   = explode("\n", trim($existing));
+// Cek apakah pengunjung ini sudah ada
+$existingHashes = file_get_contents($hashFile) ?: '';
+$hashList = explode("\n", trim($existingHashes));
 
-if (!in_array($visitorHash, $hashes)) {
+if (!in_array($visitorHash, $hashList)) {
+    // Pengunjung baru
     $count++;
-    file_put_contents($counterFile, $count);
-    file_put_contents($hashFile, $visitorHash . "\n", FILE_APPEND);
+    if (!file_put_contents($counterFile, $count)) {
+        echo "<!-- Error: Gagal update visitors.txt -->";
+    }
+    if (!file_put_contents($hashFile, $visitorHash . "\n", FILE_APPEND)) {
+        echo "<!-- Error: Gagal update visitors_hash.txt -->";
+    }
 }
 
 $formattedCount = number_format($count, 0, ',', '.');
