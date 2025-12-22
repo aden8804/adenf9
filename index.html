@@ -97,6 +97,33 @@
         .hover-glow:hover {
             box-shadow: 0 0 25px rgba(37, 99, 235, 0.2);
         }
+
+        /* Running text style - DIPOSISIKAN CENTER + JARAK LEBIH BANYAK */
+        .running-text {
+            background: rgba(6, 182, 212, 0.1);
+            padding: 12px 20px;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 12px;
+            font-weight: 600;
+            color: #06b6d4;
+            font-size: 0.95rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        marquee {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-cyan selection:text-white">
@@ -168,14 +195,14 @@
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #kipas-ps
         </p>
 
-        <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap">
+        <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap mb-8">
             <a href="https://www.mediafire.com/file/3ki40iuus9408wl/KIPAS-PS+(+INI+APK+GRATISAN.+KALAU+KAMU+BELI+KAMU+DI+TIPU).zip/file" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-download"></i>
                 <span>DOWNLOAD APK</span>
                 <span class="text-xs font-normal opacity-70 ml-1 text-blue-100">(88 MB.)</span>
             </a>
 
-<a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-cyan hover:text-kps-cyan transition-all w-full md:w-auto flex items-center justify-center gap-2">
+            <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-cyan hover:text-kps-cyan transition-all w-full md:w-auto flex items-center justify-center gap-2">
                 <i class="fas fa-user-circle"></i>
                 <span>Saluran Resmi</span>
             </a>
@@ -184,9 +211,13 @@
                 <i class="fas fa-id-badge"></i>
                 <span>VERIFY ID (BUAT LOGIN)</span>
             </a>
+        </div>
 
-
-        
+        <!-- Running Text - CENTER + JARAK LEBIH BANYAK -->
+        <div class="running-text">
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+                 ✨ WEB INI AKAN DIPERBAHARUI SETIAP 3 JAM. BELI VIP? PENCET SALURAN RESMI!
+            </marquee>
         </div>
     </header>
 
@@ -197,7 +228,7 @@
                 <div class="text-center px-4">
                     <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Jumlah Pemain hari ini</div>
                     <div class="font-tech text-5xl font-bold text-white flex justify-center gap-2">
-                        31.551
+                        49.985
                     </div>
                 </div>
                 <div class="text-center px-4 py-4 md:py-0">
@@ -206,7 +237,7 @@
                 </div>
                 <div class="text-center px-4 py-4 md:py-0">
                     <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">TOTAL DOWNLOAD</div>
-                    <div class="font-tech text-5xl font-bold text-kps-cyan">4.204</div>
+                    <div class="font-tech text-5xl font-bold text-kps-cyan">4.210</div>
                 </div>
             </div>
         </div>
@@ -255,44 +286,4 @@
                     <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Social System</div>
                     <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom Mail System</div>
                     <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Fast, Anti-Lag Server</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom Inventory</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Account Level MAX</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Fake Top Rank</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black border-t border-kps-border py-12">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <img src="image.png" alt="Server Logo" class="h-8 w-auto grayscale opacity-50">
-                <span class="text-slate-400 font-bold tracking-wider"></span>
-            </div>
-            <div class="flex gap-8 text-sm font-semibold text-slate-500">
-                <a href="/download" class="hover:text-white transition">DOWNLOAD</a>
-                <a href="/panel" class="hover:text-white transition">PANEL</a>
-                <a href="/verifyuid" class="hover:text-white transition">VERIFY</a>
-            </div>
-            <div class="text-slate-600 text-sm">
-                © 2025 Kipas Private Server
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        if (btn && menu) {
-            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-        }
-    </script>
-</body>
-</html>
-
-
-
-
-
+                    <div class="flex
