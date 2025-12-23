@@ -29,6 +29,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <!-- Tailwind Custom Config -->
     <script>
         tailwind.config = {
@@ -206,7 +210,7 @@
                 <!-- Total Kunjungan (badge kecil seperti VER) -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN: <span class="text-yellow-500 animate-visitors">0</span></span>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN: <span class="animate-visitors">0</span></span>
                 </div>
             </div>
         </div>
@@ -216,7 +220,7 @@
             KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
         </h1>
 
-        <!-- Total Download (tetap di bawah judul) -->
+        <!-- Total Download -->
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">TOTAL DOWNLOAD</div>
@@ -320,7 +324,7 @@
         </div>
     </section>
 
-    <!-- Script -->
+    <!-- Script untuk Firebase Visitor Counter Global Real-Time -->
     <script>
         // Mobile menu toggle
         const btn = document.getElementById('mobile-menu-btn');
@@ -329,35 +333,50 @@
             btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         }
 
-        // Fungsi animasi count-up
-        function animateCountUp(element, target) {
-            let count = 0;
-            const increment = target / 100;
-            const interval = setInterval(() => {
-                count += increment;
-                if (count >= target) {
-                    count = target;
-                    clearInterval(interval);
-                }
-                element.textContent = Math.floor(count).toLocaleString();
-            }, 20);
-        }
+        // Firebase Config (dari project kamu)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxs6sOaKQmtF3D1_pS7dXx4PMab3bzquE",
+            authDomain: "adenf9-9a0c7.firebaseapp.com",
+            projectId: "adenf9-9a0c7",
+            storageBucket: "adenf9-9a0c7.firebasestorage.app",
+            messagingSenderId: "477025405364",
+            appId: "1:477025405364:web:43456bb129e1defc42cae1",
+            measurementId: "G-ZZM4H1DYV9",
+            databaseURL: "https://adenf9-9a0c7-default-rtdb.firebaseio.com"  // Pastikan ini ada
+        };
 
-        // Jalankan animasi setelah halaman load
-        window.addEventListener('load', () => {
-            // Total Download
-            const downloadElement = document.querySelector('.animate-count');
-            if (downloadElement) {
-                animateCountUp(downloadElement, 953);
-            }
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const visitorRef = db.ref('visitors/total');
 
-            // Total Kunjungan (real-time per browser)
+        // Increment kunjungan saat halaman dibuka (global)
+        visitorRef.transaction(current => (current || 0) + 1);
+
+        // Update angka kunjungan secara real-time (semua pengunjung lihat angka sama)
+        visitorRef.on('value', (snapshot) => {
+            const count = snapshot.val() || 0;
             const visitorElement = document.querySelector('.animate-visitors');
             if (visitorElement) {
-                let visitorCount = localStorage.getItem('visitorCount') || 0;
-                visitorCount = parseInt(visitorCount) + 1;
-                localStorage.setItem('visitorCount', visitorCount);
-                animateCountUp(visitorElement, visitorCount);
+                visitorElement.textContent = count.toLocaleString(); // Tampilkan dengan koma ribuan
+            }
+        });
+
+        // Animasi count-up untuk Total Download (lokal)
+        window.addEventListener('load', () => {
+            const downloadElement = document.querySelector('.animate-count');
+            if (downloadElement) {
+                let count = 0;
+                const target = 953;
+                const increment = target / 100;
+                const interval = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    downloadElement.textContent = Math.floor(count).toLocaleString();
+                }, 20);
             }
         });
     </script>
