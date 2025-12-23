@@ -360,13 +360,13 @@
             visitorElement.textContent = visitorCount.toLocaleString();
         }
 
-        // Tambah +1 setiap 2 menit (1200 ms = 2 menit)
+        // Tambah +1 setiap 2 menit (12000 ms = 2 menit)
         setInterval(() => {
             visitorCount += 1;
             if (visitorElement) {
                 visitorElement.textContent = visitorCount.toLocaleString();
             }
-        }, 1200); // 2 menit
+        }, 12000); // 2 menit
     </script>
 </body>
 </html>
