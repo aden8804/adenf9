@@ -129,9 +129,71 @@
 
         .animate-count {
             display: inline-block;
-            min-width: 80px;
+            min-width: 100px;
             font-weight: bold;
             color: #F59E0B;
+        }
+
+        /* Partikel */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            background: #F97316;
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+            pointer-events: none;
+        }
+
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        #login-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #login-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Animasi floating untuk gambar di login */
+        @keyframes float-login {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+        .login-image {
+            animation: float-login 6s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
+            border-radius: 12px;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -139,6 +201,28 @@
 
     <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
+
+    <!-- Partikel Container -->
+    <div id="particles-container"></div>
+
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay">
+        <div id="login-box">
+            <h2 class="font-tech text-4xl md:text-5xl font-bold text-white mb-6">
+                ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
+            </h2>
+
+            <!-- GAMBAR BARU DI BAWAH ADEN KIPAS -->
+            <img src="image.png" alt="Aden Kipas Character" class="login-image w-64 md:w-80 mx-auto">
+
+            <p class="text-slate-400 mb-8 text-lg">Masukkan nama kamu untuk masuk</p>
+            <input type="text" id="username-input" placeholder="Nama kamu..." class="w-full px-6 py-4 bg-kps-panel border border-kps-border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange mb-6 text-lg">
+            <button id="login-btn" class="w-full bg-gradient-kps text-white font-bold py-4 rounded-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition text-lg">
+                LOGIN
+            </button>
+            <p class="text-xs text-slate-500 mt-6">Tidak ada password • Nama bebas • Hanya untuk identitas Player.</p>
+        </div>
+    </div>
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 top-0 bg-kps-main/90 backdrop-blur-md border-b border-kps-border/50">
@@ -150,35 +234,43 @@
                         ADEN <span class="text-transparent bg-clip-text bg-gradient-text">KIPAS</span>
                     </span>
                 </div>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Home</a>
-                    <a href="#features" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Features</a>
-                    <div class="flex gap-4 ml-4">
-                        <a href="/verifyuid" class="border border-kps-border bg-kps-panel px-5 py-2 text-sm font-bold rounded hover:border-kps-orange hover:text-kps-orange transition">
-                            VERIFY ID
-                        </a>
-                        <a href="/panel" class="bg-white text-kps-main px-5 py-2 text-sm font-bold rounded hover:bg-kps-orange hover:text-white transition">
-                            PANEL
-                        </a>
+                <div class="flex items-center gap-6">
+                    <span class="text-slate-300 text-sm hidden md:block">
+                        Halo, <span id="username-display" class="text-kps-orange font-bold">Guest</span>!
+                    </span>
+                    <button id="logout-btn" class="text-slate-400 hover:text-kps-orange text-sm font-bold hidden">
+                        <i class="fas fa-sign-out-alt mr-1"></i> LOGOUT
+                    </button>
+                    <div class="hidden md:flex items-center gap-8">
+                        <a href="#home" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Home</a>
+                        <a href="#features" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Features</a>
+                        <div class="flex gap-4">
+                            <a href="/verifyuid" class="border border-kps-border bg-kps-panel px-5 py-2 text-sm font-bold rounded hover:border-kps-orange hover:text-kps-orange transition">
+                                VERIFY ID
+                            </a>
+                            <a href="/panel" class="bg-white text-kps-main px-5 py-2 text-sm font-bold rounded hover:bg-kps-orange hover:text-white transition">
+                                PANEL
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-white hover:text-kps-orange">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white hover:text-kps-orange" aria-label="Open Menu">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-kps-panel border-b border-kps-border">
-            <div class="px-4 py-4 space-y-3">
-                <a href="/verifyuid" class="block text-slate-300 hover:text-kps-orange font-bold">VERIFY ID</a>
-                <a href="/panel" class="block text-slate-300 hover:text-kps-orange font-bold">ACCOUNT PANEL</a>
-                <a href="/download" class="block text-kps-orange font-bold">DOWNLOAD APK</a>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-kps-panel border-b border-kps-border">
+        <div class="px-4 py-4 space-y-3">
+            <a href="/verifyuid" class="block text-slate-300 hover:text-kps-orange font-bold">VERIFY ID</a>
+            <a href="/panel" class="block text-slate-300 hover:text-kps-orange font-bold">ACCOUNT PANEL</a>
+            <a href="/download" class="block text-kps-orange font-bold">DOWNLOAD APK</a>
+        </div>
+    </div>
 
     <!-- Header -->
     <header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center max-w-7xl mx-auto">
@@ -199,7 +291,9 @@
 
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN MU : <span class="animate-visitors">0</span></span>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI : 
+                        <span class="animate-count" data-target="19521">0</span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -211,7 +305,7 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">TOTAL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500 animate-count" data-target="2319">2319</div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500 animate-count" data-target="1393">0</div>
             </div>
         </div>
 
@@ -258,7 +352,7 @@
                 </div>
                 <div class="text-center px-4 py-4 md:py-0">
                     <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Kosong..</div>
-                    <div class="font-tech text-5xl font-bold text-yellow-500 animate-count" data-target="999">999</div>
+                    <div class="font-tech text-5xl font-bold text-yellow-500 animate-count" data-target="999">0</div>
                 </div>
             </div>
         </div>
@@ -308,20 +402,80 @@
         </div>
     </section>
 
-    <!-- Script (di akhir body agar aman) -->
+    <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu toggle
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            if (btn && menu) {
-                btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            // === SISTEM LOGIN ===
+            const loginOverlay = document.getElementById('login-overlay');
+            const usernameInput = document.getElementById('username-input');
+            const loginBtn = document.getElementById('login-btn');
+            const usernameDisplay = document.getElementById('username-display');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            const savedUsername = localStorage.getItem('kipasUsername');
+            if (savedUsername) {
+                usernameDisplay.textContent = savedUsername;
+                logoutBtn.classList.remove('hidden');
+                loginOverlay.classList.add('hidden');
             }
 
-            // Fungsi animasi count-up
+            loginBtn.addEventListener('click', () => {
+                let name = usernameInput.value.trim();
+                if (name === '') name = 'Player';
+                localStorage.setItem('kipasUsername', name);
+                usernameDisplay.textContent = name;
+                logoutBtn.classList.remove('hidden');
+                loginOverlay.style.opacity = '0';
+                setTimeout(() => loginOverlay.classList.add('hidden'), 500);
+            });
+
+            usernameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') loginBtn.click();
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('kipasUsername');
+                location.reload();
+            });
+
+            // Mobile menu
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
+
+            // Partikel
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 5 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                const duration = Math.random() * 10 + 10;
+                particle.style.animation = `fall ${duration}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.opacity = Math.random() * 0.6 + 0.3;
+                particlesContainer.appendChild(particle);
+            }
+
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fall {
+                    0% { transform: translateY(-100vh) translateX(0); }
+                    100% { transform: translateY(100vh) translateX(100px); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Animasi count-up
             function animateCountUp(element, target) {
                 let count = 0;
-                const increment = target / 100;
+                const increment = target / 200;
                 const interval = setInterval(() => {
                     count += increment;
                     if (count >= target) {
@@ -332,27 +486,12 @@
                 }, 20);
             }
 
-            // Animasi semua elemen .animate-count
-            const downloadElements = document.querySelectorAll('.animate-count');
-            downloadElements.forEach(el => {
-                const target = parseInt(el.getAttribute('data-target')) || 953;
+            const countElements = document.querySelectorAll('.animate-count');
+            countElements.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target')) || 0;
                 animateCountUp(el, target);
             });
-
-            // === VISITOR COUNT: +1 setiap kunjungan (pakai localStorage) ===
-            const visitorElement = document.querySelector('.animate-visitors');
-            if (visitorElement) {
-                let visitorCount = parseInt(localStorage.getItem('kipasVisitorCount') || '0');
-                visitorCount += 1; // Tambah 1 untuk kunjungan kali ini
-                localStorage.setItem('kipasVisitorCount', visitorCount);
-                visitorElement.textContent = visitorCount.toLocaleString('en-US');
-            }
         });
     </script>
 </body>
 </html>
-
-
-
-
-
