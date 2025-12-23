@@ -29,6 +29,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <!-- Tailwind Custom Config -->
     <script>
         tailwind.config = {
@@ -320,7 +324,7 @@
         </div>
     </section>
 
-    <!-- Script -->
+    <!-- Script untuk Firebase Visitor Counter Global Real-Time -->
     <script>
         // Mobile menu toggle
         const btn = document.getElementById('mobile-menu-btn');
@@ -329,44 +333,52 @@
             btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         }
 
-        // Fungsi animasi count-up
-        function animateCountUp(element, target) {
-            let count = 0;
-            const increment = target / 100;
-            const interval = setInterval(() => {
-                count += increment;
-                if (count >= target) {
-                    count = target;
-                    clearInterval(interval);
-                }
-                element.textContent = Math.floor(count).toLocaleString();
-            }, 20);
-        }
+        // Firebase Config (dari project kamu)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxs6sOaKQmtF3D1_pS7dXx4PMab3bzquE",
+            authDomain: "adenf9-9a0c7.firebaseapp.com",
+            projectId: "adenf9-9a0c7",
+            storageBucket: "adenf9-9a0c7.firebasestorage.app",
+            messagingSenderId: "477025405364",
+            appId: "1:477025405364:web:43456bb129e1defc42cae1",
+            measurementId: "G-ZZM4H1DYV9",
+            databaseURL: "https://adenf9-9a0c7-default-rtdb.firebaseio.com"
+        };
 
-        // Jalankan animasi untuk Total Download setelah halaman load
-        window.addEventListener('load', () => {
-            const downloadElement = document.querySelector('.animate-count');
-            if (downloadElement) {
-                animateCountUp(downloadElement, 953);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const visitorRef = db.ref('visitors/total');
+
+        // Increment kunjungan saat halaman dibuka (global)
+        visitorRef.transaction(current => (current || 0) + 1);
+
+        // Update angka kunjungan secara real-time (semua pengunjung lihat angka sama)
+        visitorRef.on('value', (snapshot) => {
+            const count = snapshot.val() || 0;
+            const visitorElement = document.querySelector('.animate-visitors');
+            if (visitorElement) {
+                visitorElement.textContent = count.toLocaleString(); // Tampilkan dengan koma ribuan
             }
         });
 
-        // Total Kunjungan: Bertambah +1 setiap 2 menit (real-time simulasi global)
-        let visitorCount = 0;
-        const visitorElement = document.querySelector('.animate-visitors');
-
-        // Update tampilan awal (opsional, bisa dari nilai awal)
-        if (visitorElement) {
-            visitorElement.textContent = visitorCount.toLocaleString();
-        }
-
-        // Tambah +1 setiap 2 menit (12000 ms = 2 menit)
-        setInterval(() => {
-            visitorCount += 1;
-            if (visitorElement) {
-                visitorElement.textContent = visitorCount.toLocaleString();
+        // Animasi count-up untuk Total Download (lokal)
+        window.addEventListener('load', () => {
+            const downloadElement = document.querySelector('.animate-count');
+            if (downloadElement) {
+                let count = 0;
+                const target = 953;
+                const increment = target / 100;
+                const interval = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    downloadElement.textContent = Math.floor(count).toLocaleString();
+                }, 20);
             }
-        }, 12000); // 2 menit
+        });
     </script>
 </body>
 </html>
