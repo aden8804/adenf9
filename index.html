@@ -309,7 +309,7 @@
             btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         }
 
-        // Firebase Config (SUDAH DIPERBAIKI DENGAN URL REGION ASIA-SOUTH1)
+        // Firebase Config (FORMAT URL BENAR UNTUK REGION asia-south1)
         const firebaseConfig = {
             apiKey: "AIzaSyCxs6sOaKQmtF3D1_pS7dXx4PMab3bzquE",
             authDomain: "adenf9-9a0c7.firebaseapp.com",
@@ -334,11 +334,11 @@
             const count = snapshot.val() || 0;
             const visitorElement = document.querySelector('.animate-visitors');
             if (visitorElement) {
-                visitorElement.textContent = count.toLocaleString(); // Tampilkan dengan koma ribuan
+                visitorElement.textContent = count.toLocaleString();
             }
         });
 
-        // Animasi count-up untuk Total Download (lokal, bukan dari Firebase)
+        // Animasi count-up untuk Total Download (lokal)
         window.addEventListener('load', () => {
             const elements = document.querySelectorAll('.animate-count');
             elements.forEach(el => {
