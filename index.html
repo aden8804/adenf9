@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
+    <!-- Meta Tags Dasar -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADEN KIPAS | DOWNLOAD KIPAS-PS</title>
@@ -9,6 +10,8 @@
     <meta name="author" content="Kipas Team">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ffkipas.my.id/">
+
+    <!-- Open Graph & Twitter Card -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ffkipas.my.id/">
     <meta property="og:title" content="Kipas Private Server - Download Ultimate MOD">
@@ -26,6 +29,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Tailwind Custom Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,20 +43,21 @@
                             main: '#0f172a',
                             panel: '#1e293b',
                             border: '#334155',
-                            blue: '#2563eb',
-                            cyan: '#06b6d4',
-                            glow: 'rgba(6, 182, 212, 0.15)'
+                            orange: '#F97316',
+                            orangeDark: '#EA580C',
+                            glow: 'rgba(249, 115, 22, 0.25)'
                         }
                     },
                     backgroundImage: {
-                        'gradient-kps': 'linear-gradient(135deg, #2563eb 0%, #06b6d4 100%)',
-                        'gradient-text': 'linear-gradient(to right, #60a5fa, #22d3ee)',
+                        'gradient-kps': 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
+                        'gradient-text': 'linear-gradient(to right, #FB923C, #EA580C)',
                     }
                 }
             }
         }
     </script>
 
+    <!-- Custom Styles -->
     <style>
         /* Font Inter (fallback ke sistem font) */
         @font-face {
@@ -95,38 +100,47 @@
         }
 
         .hover-glow:hover {
-            box-shadow: 0 0 25px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.3);
         }
 
-        /* Running text style - DIPOSISIKAN CENTER + JARAK LEBIH BANYAK */
+        /* Running text style - ORANGE THEME */
         .running-text {
-            background: rgba(6, 182, 212, 0.1);
+            background: rgba(249, 115, 22, 0.1);
             padding: 12px 20px;
             margin-top: 2rem;
             margin-bottom: 1rem;
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.3);
             border-radius: 12px;
             font-weight: 600;
-            color: #06b6d4;
+            color: #F97316;
             font-size: 0.95rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.1);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.15);
             display: block;
             width: 100%;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
-
         marquee {
             width: 100%;
             height: auto;
             margin: 0;
             padding: 0;
         }
+
+        /* Animasi untuk angka count-up */
+        .animate-count {
+            display: inline-block;
+            min-width: 80px;
+            font-weight: bold;
+            color: #F59E0B;
+        }
     </style>
 </head>
-<body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-cyan selection:text-white">
+<body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
+
+    <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
     <!-- Navbar -->
@@ -134,27 +148,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center gap-3">
-                    <img src="image.png" alt="Server Logo" class="h-10 w-auto rounded" onerror="this.src='https://placehold.co/100x100/2563eb/white?text=KPS'">
+                    <img src="image.png" alt="Server Logo" class="h-10 w-auto rounded" onerror="this.src='https://placehold.co/100x100/F97316/white?text=KPS'">
                     <span class="font-tech font-bold text-xl md:text-2xl tracking-widest text-white">
                         ADEN <span class="text-transparent bg-clip-text bg-gradient-text">KIPAS</span>
                     </span>
                 </div>
-
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="text-slate-400 hover:text-kps-cyan text-sm font-semibold transition uppercase">Home</a>
-                    <a href="#features" class="text-slate-400 hover:text-kps-cyan text-sm font-semibold transition uppercase">Features</a>
+                    <a href="#home" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Home</a>
+                    <a href="#features" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Features</a>
                     <div class="flex gap-4 ml-4">
-                        <a href="/verifyuid" class="border border-kps-border bg-kps-panel px-5 py-2 text-sm font-bold rounded hover:border-kps-cyan hover:text-kps-cyan transition">
+                        <a href="/verifyuid" class="border border-kps-border bg-kps-panel px-5 py-2 text-sm font-bold rounded hover:border-kps-orange hover:text-kps-orange transition">
                             VERIFY ID
                         </a>
-                        <a href="/panel" class="bg-white text-kps-main px-5 py-2 text-sm font-bold rounded hover:bg-kps-cyan hover:text-white transition">
+                        <a href="/panel" class="bg-white text-kps-main px-5 py-2 text-sm font-bold rounded hover:bg-kps-orange hover:text-white transition">
                             PANEL
                         </a>
                     </div>
                 </div>
-
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white hover:text-kps-cyan" aria-label="Open Menu">
+                    <button id="mobile-menu-btn" class="text-white hover:text-kps-orange" aria-label="Open Menu">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -164,16 +176,18 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-kps-panel border-b border-kps-border">
             <div class="px-4 py-4 space-y-3">
-                <a href="/verifyuid" class="block text-slate-300 hover:text-kps-cyan font-bold">VERIFY ID</a>
-                <a href="/panel" class="block text-slate-300 hover:text-kps-cyan font-bold">ACCOUNT PANEL</a>
-                <a href="/download" class="block text-kps-cyan font-bold">DOWNLOAD APK</a>
+                <a href="/verifyuid" class="block text-slate-300 hover:text-kps-orange font-bold">VERIFY ID</a>
+                <a href="/panel" class="block text-slate-300 hover:text-kps-orange font-bold">ACCOUNT PANEL</a>
+                <a href="/download" class="block text-kps-orange font-bold">DOWNLOAD APK</a>
             </div>
         </div>
     </nav>
 
     <!-- Header -->
     <header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+        <!-- Status & Version (dengan Visitor Count di kanan atas) -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8 relative">
+            <!-- Status ONLINE (kiri) -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                 <span class="relative flex h-3 w-3">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -181,39 +195,58 @@
                 </span>
                 <span class="text-xs font-bold text-slate-300 tracking-wider">STATUS: <span class="text-emerald-400">ONLINE</span></span>
             </div>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
-                <i class="fas fa-code-branch text-kps-cyan text-xs"></i>
-                <span class="text-xs font-bold text-slate-300 tracking-wider">VER: <span class="text-white">2.118.12</span></span>
+
+            <!-- Version & Visitor Count (kanan atas, seperti badge) -->
+            <div class="inline-flex items-center gap-4">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
+                    <i class="fas fa-code-branch text-kps-orange text-xs"></i>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">VER: <span class="text-white">2.118.12</span></span>
+                </div>
+
+                <!-- Total Kunjungan (badge kecil seperti VER) -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
+                    <i class="fas fa-eye text-kps-orange text-xs"></i>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN: <span class="text-yellow-500 animate-visitors">0</span></span>
+                </div>
             </div>
         </div>
 
-        <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-6 text-white">
+        <!-- Judul Utama -->
+        <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-4 text-white">
             KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
         </h1>
 
+        <!-- Total Download (tetap di bawah judul) -->
+        <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
+            <div class="text-center">
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">TOTAL DOWNLOAD</div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500 animate-count" data-target="953">0</div>
+            </div>
+        </div>
+
+        <!-- Deskripsi -->
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #kipas-ps
         </p>
 
+        <!-- Tombol Aksi -->
         <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap mb-8">
-            <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
+            <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-download"></i>
                 <span>DOWNLOAD APK</span>
-                <span class="text-xs font-normal opacity-70 ml-1 text-blue-100">(458 MB.)</span>
+                <span class="text-xs font-normal opacity-70 ml-1 text-orange-100">(458 MB.)</span>
             </a>
-
-            <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-cyan hover:text-kps-cyan transition-all w-full md:w-auto flex items-center justify-center gap-2">
+            <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all w-full md:w-auto flex items-center justify-center gap-2">
                 <i class="fas fa-user-circle"></i>
                 <span>SALURAN RESMI</span>
             </a>
-
-            <a href="https://ffkipas.my.id/verifyuid" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-cyan hover:text-kps-cyan transition-all w-full md:w-auto flex items-center justify-center gap-2">
+            <a href="https://ffkipas.my.id/verifyuid" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all w-full md:w-auto flex items-center justify-center gap-2">
                 <i class="fas fa-id-badge"></i>
                 <span>VERIFY ID (BUAT LOGIN)</span>
             </a>
         </div>
 
-        <!-- Running Text - CENTER + JARAK LEBIH BANYAK -->
+        <!-- Running Text -->
         <div class="running-text">
             <marquee behavior="scroll" direction="left" scrollamount="5">
                  BELI VIP? PENCET SALURAN RESMI!
@@ -237,7 +270,7 @@
                 </div>
                 <div class="text-center px-4 py-4 md:py-0">
                     <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">TOTAL DOWNLOAD</div>
-                    <div class="font-tech text-5xl font-bold text-kps-cyan">953</div>
+                    <div class="font-tech text-5xl font-bold text-yellow-500 animate-count" data-target="953">0</div>
                 </div>
             </div>
         </div>
@@ -247,59 +280,86 @@
     <section id="features" class="py-20 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-left mb-12">
-                <h2 class="font-tech text-4xl font-bold text-white mb-2">SERVER <span class="text-kps-cyan">FEATURES</span></h2>
+                <h2 class="font-tech text-4xl font-bold text-white mb-2">SERVER <span class="text-kps-orange">FEATURES</span></h2>
                 <div class="h-1 w-20 bg-gradient-kps"></div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-blue-500 transition duration-300 rounded-sm">
+                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-orange-500 transition duration-300 rounded-sm">
                     <i class="fab fa-facebook text-4xl text-blue-500 mb-6"></i>
                     <h3 class="text-xl font-bold text-white mb-3">Social Login</h3>
                     <p class="text-slate-400">Log in seamlessly using your social accounts on our Private Server.</p>
                 </div>
-
-                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-kps-cyan transition duration-300 rounded-sm">
-                    <i class="fas fa-globe text-4xl text-kps-cyan mb-6"></i>
+                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-kps-orange transition duration-300 rounded-sm">
+                    <i class="fas fa-globe text-4xl text-kps-orange mb-6"></i>
                     <h3 class="text-xl font-bold text-white mb-3">Global Visibility</h3>
                     <p class="text-slate-400">Your custom outfits and effects are visible to other players globally.</p>
                 </div>
-
                 <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-red-500 transition duration-300 rounded-sm">
                     <i class="fas fa-trophy text-4xl text-red-500 mb-6"></i>
                     <h3 class="text-xl font-bold text-white mb-3">Competitive Ranked</h3>
                     <p class="text-slate-400">Play competitive ranked matches and push to the highest tier easily.</p>
                 </div>
             </div>
-
             <div class="bg-kps-panel border border-kps-border rounded-sm p-8">
                 <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider border-b border-kps-border pb-4">Full Capabilities</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8">
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Currency Works in Shop</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Buy Premium Pass</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom Store & Gifts</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Edit Account Stats</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom ID & Nickname</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom Like Count</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Customize Created Date</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Unlock Ultimate Weapons</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Share Exclusive Sets</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Social System</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Custom Mail System</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-cyan text-sm"></i> Fast, Anti-Lag Server</div>
-                    <div class="flex
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Currency Works in Shop</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Buy Premium Pass</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Store & Gifts</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Edit Account Stats</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom ID & Nickname</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Like Count</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Customize Created Date</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Unlock Ultimate Weapons</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Share Exclusive Sets</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Social System</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Mail System</div>
+                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Fast, Anti-Lag Server</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Script -->
+    <script>
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        }
 
+        // Fungsi animasi count-up
+        function animateCountUp(element, target) {
+            let count = 0;
+            const increment = target / 100;
+            const interval = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    count = target;
+                    clearInterval(interval);
+                }
+                element.textContent = Math.floor(count).toLocaleString();
+            }, 20);
+        }
 
+        // Jalankan animasi setelah halaman load
+        window.addEventListener('load', () => {
+            // Total Download
+            const downloadElement = document.querySelector('.animate-count');
+            if (downloadElement) {
+                animateCountUp(downloadElement, 953);
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
+            // Total Kunjungan (real-time per browser)
+            const visitorElement = document.querySelector('.animate-visitors');
+            if (visitorElement) {
+                let visitorCount = localStorage.getItem('visitorCount') || 0;
+                visitorCount = parseInt(visitorCount) + 1;
+                localStorage.setItem('visitorCount', visitorCount);
+                animateCountUp(visitorElement, visitorCount);
+            }
+        });
+    </script>
+</body>
+</html>
