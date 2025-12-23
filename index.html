@@ -183,7 +183,7 @@
             box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
         }
 
-        /* Animasi floating untuk gambar di login */
+        /* Animasi floating untuk gambar login (transparan tanpa kotak) */
         @keyframes float-login {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -191,9 +191,22 @@
         }
         .login-image {
             animation: float-login 6s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
-            border-radius: 12px;
-            margin: 20px 0;
+            margin: 30px 0;
+            max-width: 80%;
+        }
+
+        /* Pesan error & warning */
+        #error-message {
+            color: #ef4444;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        #warning-message {
+            color: #3b82f6;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
@@ -212,11 +225,15 @@
                 ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
             </h2>
 
-            <!-- GAMBAR BARU DI BAWAH ADEN KIPAS -->
-            <img src="image.png" alt="Aden Kipas Character" class="login-image w-64 md:w-80 mx-auto">
+            <!-- Gambar transparan tanpa kotak apapun -->
+            <img src="robot.png" alt="Aden Kipas Character" class="login-image mx-auto">
 
-            <p class="text-slate-400 mb-8 text-lg">Masukkan nama kamu untuk masuk</p>
-            <input type="text" id="username-input" placeholder="Nama kamu..." class="w-full px-6 py-4 bg-kps-panel border border-kps-border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange mb-6 text-lg">
+            <p class="text-slate-400 mb-8 text-lg">Masukkan nama kamu untuk Download FFKIPAS. Bebas juga gapapa!</p>
+            <input type="text" id="username-input" placeholder="Nama kamu bebas..." class="w-full px-6 py-4 bg-kps-panel border border-kps-border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange mb-4 text-lg">
+            
+            <div id="error-message">Nama tidak diperbolehkan! Gunakan kata yang sopan.</div>
+            <div id="warning-message">Jangan masukin angka mas/mbak. Login pake nama mu!</div>
+            
             <button id="login-btn" class="w-full bg-gradient-kps text-white font-bold py-4 rounded-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition text-lg">
                 LOGIN
             </button>
@@ -405,12 +422,21 @@
     <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // === SISTEM LOGIN ===
+            // === SISTEM LOGIN + FILTER ===
             const loginOverlay = document.getElementById('login-overlay');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
             const logoutBtn = document.getElementById('logout-btn');
+            const errorMessage = document.getElementById('error-message');
+            const warningMessage = document.getElementById('warning-message');
+
+            // DAFTAR KATA KASAR
+            const badWords = [
+                'kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 
+                'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 
+                'fuck', 'shit', 'bitch'
+            ];
 
             const savedUsername = localStorage.getItem('kipasUsername');
             if (savedUsername) {
@@ -419,9 +445,46 @@
                 loginOverlay.classList.add('hidden');
             }
 
+            function checkBadWord(name) {
+                const lowerName = name.toLowerCase();
+                return badWords.some(word => lowerName.includes(word));
+            }
+
+            function checkNumber(name) {
+                return /\d/.test(name);
+            }
+
+            // Real-time check saat mengetik
+            usernameInput.addEventListener('input', () => {
+                const name = usernameInput.value.trim();
+                errorMessage.style.display = 'none';
+                warningMessage.style.display = 'none';
+
+                if (name && checkNumber(name)) {
+                    warningMessage.style.display = 'block';
+                }
+            });
+
             loginBtn.addEventListener('click', () => {
                 let name = usernameInput.value.trim();
+                errorMessage.style.display = 'none';
+                warningMessage.style.display = 'none';
+
                 if (name === '') name = 'Player';
+
+                if (checkBadWord(name)) {
+                    errorMessage.style.display = 'block';
+                    usernameInput.value = '';
+                    usernameInput.focus();
+                    return;
+                }
+
+                if (checkNumber(name)) {
+                    warningMessage.style.display = 'block';
+                    usernameInput.focus();
+                    return;
+                }
+
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
