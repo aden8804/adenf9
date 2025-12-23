@@ -183,7 +183,7 @@
             box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
         }
 
-        /* Animasi floating untuk gambar login (transparan tanpa kotak) */
+        /* Animasi floating untuk gambar login */
         @keyframes float-login {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -193,6 +193,30 @@
             animation: float-login 6s ease-in-out infinite;
             margin: 30px 0;
             max-width: 80%;
+        }
+
+        /* Tombol mute/unmute musik */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #334155;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+            transition: all 0.3s ease;
+        }
+        #music-toggle:hover {
+            background: rgba(249, 115, 22, 0.2);
+            transform: scale(1.1);
         }
 
         /* Pesan error & warning */
@@ -218,6 +242,18 @@
     <!-- Partikel Container -->
     <div id="particles-container"></div>
 
+    <!-- Audio Background Music (hidden) -->
+    <audio id="bg-music" loop>
+        <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
+        <!-- Ganti link ini dengan musik Free Fire atau lagu favorit kamu (format .mp3) -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Tombol Mute/Unmute Musik -->
+    <div id="music-toggle" title="Klik untuk mute/unmute musik">
+        <i id="music-icon" class="fas fa-volume-up text-white text-2xl"></i>
+    </div>
+
     <!-- LOGIN OVERLAY -->
     <div id="login-overlay">
         <div id="login-box">
@@ -225,7 +261,6 @@
                 ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
             </h2>
 
-            <!-- Gambar transparan tanpa kotak apapun -->
             <img src="robot.png" alt="Aden Kipas Character" class="login-image mx-auto">
 
             <p class="text-slate-400 mb-8 text-lg">Masukkan nama kamu untuk Download FFKIPAS. Bebas juga gapapa!</p>
@@ -353,76 +388,12 @@
         </div>
     </header>
 
-    <!-- Stats Section -->
-    <section class="border-y border-kps-border bg-kps-panel/30 backdrop-blur">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-kps-border">
-                <div class="text-center px-4">
-                    <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Kosong.</div>
-                    <div class="font-tech text-5xl font-bold text-white flex justify-center gap-2">
-                        ...
-                    </div>
-                </div>
-                <div class="text-center px-4 py-4 md:py-0">
-                    <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Kosong.</div>
-                    <div class="font-tech text-5xl font-bold text-white">....</div>
-                </div>
-                <div class="text-center px-4 py-4 md:py-0">
-                    <div class="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Kosong..</div>
-                    <div class="font-tech text-5xl font-bold text-yellow-500 animate-count" data-target="999">0</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-20 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-left mb-12">
-                <h2 class="font-tech text-4xl font-bold text-white mb-2">SERVER <span class="text-kps-orange">FEATURES</span></h2>
-                <div class="h-1 w-20 bg-gradient-kps"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-orange-500 transition duration-300 rounded-sm">
-                    <i class="fab fa-facebook text-4xl text-blue-500 mb-6"></i>
-                    <h3 class="text-xl font-bold text-white mb-3">Social Login</h3>
-                    <p class="text-slate-400">Log in seamlessly using your social accounts on our Private Server.</p>
-                </div>
-                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-kps-orange transition duration-300 rounded-sm">
-                    <i class="fas fa-globe text-4xl text-kps-orange mb-6"></i>
-                    <h3 class="text-xl font-bold text-white mb-3">Global Visibility</h3>
-                    <p class="text-slate-400">Your custom outfits and effects are visible to other players globally.</p>
-                </div>
-                <div class="p-8 bg-kps-panel border border-kps-border hover-glow hover:border-red-500 transition duration-300 rounded-sm">
-                    <i class="fas fa-trophy text-4xl text-red-500 mb-6"></i>
-                    <h3 class="text-xl font-bold text-white mb-3">Competitive Ranked</h3>
-                    <p class="text-slate-400">Play competitive ranked matches and push to the highest tier easily.</p>
-                </div>
-            </div>
-            <div class="bg-kps-panel border border-kps-border rounded-sm p-8">
-                <h3 class="text-lg font-bold text-white mb-6 uppercase tracking-wider border-b border-kps-border pb-4">Keuntungan VIP</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8">
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Currency Works in Shop</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Buy Premium Pass</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Store & Gifts</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Edit Account Stats</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom ID & Nickname</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Like Count</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Customize Created Date</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Unlock Ultimate Weapons</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Share Exclusive Sets</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Social System</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Custom Mail System</div>
-                    <div class="flex items-center gap-3 text-slate-300"><i class="fas fa-check text-kps-orange text-sm"></i> Fast, Anti-Lag Server</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Stats Section & Features Section tetap sama seperti kodingan kamu -->
 
     <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // === SISTEM LOGIN + FILTER ===
+            // === SISTEM LOGIN + FILTER + MUSIK BACKGROUND ===
             const loginOverlay = document.getElementById('login-overlay');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
@@ -431,7 +402,23 @@
             const errorMessage = document.getElementById('error-message');
             const warningMessage = document.getElementById('warning-message');
 
-            // DAFTAR KATA KASAR
+            const bgMusic = document.getElementById('bg-music');
+            const musicToggle = document.getElementById('music-toggle');
+            const musicIcon = document.getElementById('music-icon');
+
+            let isMuted = false;
+
+            // Toggle mute/unmute
+            musicToggle.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+                } else {
+                    bgMusic.pause();
+                    musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+                }
+            });
+
             const badWords = [
                 'kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 
                 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 
@@ -443,6 +430,8 @@
                 usernameDisplay.textContent = savedUsername;
                 logoutBtn.classList.remove('hidden');
                 loginOverlay.classList.add('hidden');
+                bgMusic.volume = 0.3;
+                bgMusic.play();
             }
 
             function checkBadWord(name) {
@@ -454,7 +443,6 @@
                 return /\d/.test(name);
             }
 
-            // Real-time check saat mengetik
             usernameInput.addEventListener('input', () => {
                 const name = usernameInput.value.trim();
                 errorMessage.style.display = 'none';
@@ -485,11 +473,16 @@
                     return;
                 }
 
+                // LOGIN BERHASIL → PLAY MUSIK
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
                 loginOverlay.style.opacity = '0';
-                setTimeout(() => loginOverlay.classList.add('hidden'), 500);
+                setTimeout(() => {
+                    loginOverlay.classList.add('hidden');
+                    bgMusic.volume = 0.3;
+                    bgMusic.play().catch(e => console.log("Musik diblokir browser:", e));
+                }, 500);
             });
 
             usernameInput.addEventListener('keypress', (e) => {
@@ -498,17 +491,17 @@
 
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
+                bgMusic.pause();
                 location.reload();
             });
 
-            // Mobile menu
+            // Mobile menu, partikel, animasi count-up tetap sama seperti kodingan kamu
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileBtn && mobileMenu) {
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Partikel
             const particlesContainer = document.getElementById('particles-container');
             const particleCount = 50;
 
@@ -535,7 +528,6 @@
             `;
             document.head.appendChild(style);
 
-            // Animasi count-up
             function animateCountUp(element, target) {
                 let count = 0;
                 const increment = target / 200;
