@@ -59,7 +59,6 @@
 
     <!-- Custom Styles -->
     <style>
-        /* Font Inter (fallback ke sistem font) */
         @font-face {
             font-family: 'Inter';
             font-style: normal;
@@ -103,7 +102,6 @@
             box-shadow: 0 0 25px rgba(249, 115, 22, 0.3);
         }
 
-        /* Running text style - ORANGE THEME */
         .running-text {
             background: rgba(249, 115, 22, 0.1);
             padding: 12px 20px;
@@ -129,7 +127,6 @@
             padding: 0;
         }
 
-        /* Animasi untuk angka count-up */
         .animate-count {
             display: inline-block;
             min-width: 80px;
@@ -185,9 +182,7 @@
 
     <!-- Header -->
     <header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center max-w-7xl mx-auto">
-        <!-- Status & Version (dengan Visitor Count di kanan atas) -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8 relative">
-            <!-- Status ONLINE (kiri) -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                 <span class="relative flex h-3 w-3">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -196,27 +191,23 @@
                 <span class="text-xs font-bold text-slate-300 tracking-wider">STATUS: <span class="text-emerald-400">ONLINE</span></span>
             </div>
 
-            <!-- Version & Visitor Count (kanan atas, seperti badge) -->
             <div class="inline-flex items-center gap-4">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-code-branch text-kps-orange text-xs"></i>
                     <span class="text-xs font-bold text-slate-300 tracking-wider">VER: <span class="text-white">2.118.12</span></span>
                 </div>
 
-                <!-- Total Kunjungan (badge kecil seperti VER) -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN: <span class="animate-visitors">0</span></span>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">KUNJUNGAN MU : <span class="animate-visitors">0</span></span>
                 </div>
             </div>
         </div>
 
-        <!-- Judul Utama -->
         <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-4 text-white">
             KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
         </h1>
 
-        <!-- Total Download -->
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">TOTAL DOWNLOAD</div>
@@ -224,12 +215,10 @@
             </div>
         </div>
 
-        <!-- Deskripsi -->
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #kipas-ps
         </p>
 
-        <!-- Tombol Aksi -->
         <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap mb-8">
             <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-download"></i>
@@ -246,7 +235,6 @@
             </a>
         </div>
 
-        <!-- Running Text -->
         <div class="running-text">
             <marquee behavior="scroll" direction="left" scrollamount="5">
                  BELI VIP? PENCET SALURAN RESMI!
@@ -320,53 +308,46 @@
         </div>
     </section>
 
-    <!-- Script -->
+    <!-- Script (di akhir body agar aman) -->
     <script>
-        // Mobile menu toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        if (btn && menu) {
-            btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if (btn && menu) {
+                btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            }
 
-        // Fungsi animasi count-up
-        function animateCountUp(element, target) {
-            let count = 0;
-            const increment = target / 100;
-            const interval = setInterval(() => {
-                count += increment;
-                if (count >= target) {
-                    count = target;
-                    clearInterval(interval);
-                }
-                element.textContent = Math.floor(count).toLocaleString();
-            }, 20);
-        }
+            // Fungsi animasi count-up
+            function animateCountUp(element, target) {
+                let count = 0;
+                const increment = target / 100;
+                const interval = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    element.textContent = Math.floor(count).toLocaleString('en-US');
+                }, 20);
+            }
 
-        // Jalankan animasi untuk Total Download setelah halaman load
-        window.addEventListener('load', () => {
-            const downloadElement = document.querySelector('.animate-count');
-            if (downloadElement) {
-                animateCountUp(downloadElement, 953);
+            // Animasi semua elemen .animate-count
+            const downloadElements = document.querySelectorAll('.animate-count');
+            downloadElements.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target')) || 953;
+                animateCountUp(el, target);
+            });
+
+            // === VISITOR COUNT: +1 setiap kunjungan (pakai localStorage) ===
+            const visitorElement = document.querySelector('.animate-visitors');
+            if (visitorElement) {
+                let visitorCount = parseInt(localStorage.getItem('kipasVisitorCount') || '0');
+                visitorCount += 1; // Tambah 1 untuk kunjungan kali ini
+                localStorage.setItem('kipasVisitorCount', visitorCount);
+                visitorElement.textContent = visitorCount.toLocaleString('en-US');
             }
         });
-
-        // Total Kunjungan: Bertambah +1 setiap 2 menit (real-time simulasi global)
-        let visitorCount = 0;
-        const visitorElement = document.querySelector('.animate-visitors');
-
-        // Update tampilan awal (opsional, bisa dari nilai awal)
-        if (visitorElement) {
-            visitorElement.textContent = visitorCount.toLocaleString();
-        }
-
-        // Tambah +1 setiap 2 menit (12000 ms = 2 menit)
-        setInterval(() => {
-            visitorCount += 1;
-            if (visitorElement) {
-                visitorElement.textContent = visitorCount.toLocaleString();
-            }
-        }, 12000); // 2 menit
     </script>
 </body>
 </html>
