@@ -24,74 +24,66 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <!-- Google Fonts (fix 404) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (compat version, minimal) -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
     <script>
-        // Config Firebase
+        // Config Firebase kamu
         const firebaseConfig = {
-            apiKey: "AIzaSyDd8eU4tFlDWsElnA0Msf3u6vAtA6LTKmI",
-            authDomain: "adenfirebase.firebaseapp.com",
-            projectId: "adenfirebase",
-            storageBucket: "adenfirebase.firebasestorage.app",
-            messagingSenderId: "3332717924",
-            appId: "1:3332717924:web:6960f41e56ab27978d0e71",
-            measurementId: "G-JY3WEPN00P"
+            apiKey: "AIzaSyCkpe6J6blmceyEDkP_QTv2iHTk7uusiEc",
+            authDomain: "ffkipas-counter.firebaseapp.com",
+            databaseURL: "https://ffkipas-counter-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ffkipas-counter",
+            storageBucket: "ffkipas-counter.firebasestorage.app",
+            messagingSenderId: "236761349948",
+            appId: "1:236761349948:web:e9c7b82c12c2595041e839",
+            measurementId: "G-JK6RKV22JT"
         };
-
+        // Inisialisasi Firebase
         firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
         const db = firebase.database();
-
         const clickRef = db.ref('clicks/total');
         const downloadRef = db.ref('downloads/total');
-        const channelRef = db.ref('channel_clicks/total');
+        const channelRef = db.ref('channel_clicks/total'); // Counter klik saluran
 
-        // Update tampilan real-time (tanpa fallback nilai awal)
+        // Update tampilan real-time
         function updateClickCount() {
             clickRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.visitor-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 0;
+                document.querySelectorAll('.visitor-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
         function updateDownloadCount() {
             downloadRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.download-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 6067;
+                document.querySelectorAll('.download-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
         function updateChannelCount() {
             channelRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.channel-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 0;
+                document.querySelectorAll('.channel-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
 
-        // Increment dengan retry jika gagal
-        function incrementWithRetry(ref, initial = 0, retries = 3) {
-            ref.transaction((current) => {
-                return (current || initial) + 1;
-            }, (error, committed) => {
-                if (error) {
-                    console.error("Transaction gagal:", error);
-                    if (retries > 0) {
-                        console.log(`Coba lagi... sisa ${retries} kali`);
-                        setTimeout(() => incrementWithRetry(ref, initial, retries - 1), 1500);
-                    } else {
-                        console.error("Gagal setelah 3 kali coba.");
-                    }
-                } else if (committed) {
-                    console.log("Counter berhasil diupdate!");
-                }
-            });
+        // Tambah 1
+        function incrementClick() {
+            clickRef.transaction((current) => (current || 0) + 1);
         }
-
-        function incrementClick() { incrementWithRetry(clickRef, 2850); }
-        function incrementDownload() { incrementWithRetry(downloadRef, 6528); }
-        function incrementChannel() { incrementWithRetry(channelRef, 36); }
+        function incrementDownload() {
+            downloadRef.transaction((current) => (current || 6067) + 1);
+        }
+        function incrementChannel() {
+            channelRef.transaction((current) => (current || 0) + 1);
+        }
 
         // Jalankan update saat halaman dimuat
         document.addEventListener('DOMContentLoaded', () => {
@@ -256,22 +248,6 @@
                 width: 140px;
             }
         }
-        @keyframes float-name {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(1deg); }
-            50% { transform: translateY(2px) rotate(-1deg); }
-            75% { transform: translateY(-3px) rotate(1.5deg); }
-        }
-        .animate-float-name {
-            animation: float-name 6s ease-in-out infinite;
-            display: inline-block;
-        }
-        #welcome-section {
-            display: none;
-        }
-        #welcome-section.show {
-            display: block;
-        }
     </style>
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
@@ -298,7 +274,7 @@
                 </h2>
                 <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
             </div>
-            <!-- DIKUNJUNGI & SALURAN -->
+            <!-- DIKUNJUNGI & SALURAN dalam satu baris kecil -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
@@ -333,7 +309,7 @@
                 </div>
                 <button id="login-btn" class="w-full mt-6 bg-gradient-kps text-white font-bold py-3.5 rounded-xl hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transform hover:scale-102 transition-all duration-300 text-base">
                     <i class="fas fa-arrow-right mr-2"></i>
-                    MASUK & DOWNLOAD
+                    MASUK & DOWNLOAD SEKARANG
                 </button>
                 <div class="running-text mt-5">
                     <marquee behavior="scroll" direction="left" scrollamount="4">
@@ -407,38 +383,15 @@
         <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-4 text-white">
             KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
         </h1>
-
-        <!-- BERHASIL DOWNLOAD -->
-        <div class="bg-kps-panel border border-kps-border rounded-lg px-5 py-3 mb-8 max-w-xs mx-auto shadow-md">
+        <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
-                <div class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-3xl md:text-4xl font-bold text-yellow-500">
-                    <span class="download-count">6528</span>
-                </div>
-                <div class="text-slate-400 text-2xs mt-1">orang telah download</div>
+                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count">6067</span></div>
             </div>
         </div>
-
-        <!-- Welcome Section -->
-        <div id="welcome-section" class="bg-kps-panel border border-kps-border rounded-lg px-5 py-3 mb-8 max-w-xs mx-auto shadow-md">
-            <div class="text-center">
-                <div class="text-white text-xs font-bold uppercase tracking-wider mb-2">SELAMAT DATANG</div>
-                <div class="mb-2">
-                    <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/Icon_face_female_head_sc_Awakening.png" 
-                         alt="Profile" 
-                         class="w-16 h-16 mx-auto rounded-full object-cover border-2 border-kps-orange shadow-md">
-                </div>
-                <div class="font-tech text-3xl md:text-4xl font-bold text-yellow-500">
-                    <span id="welcome-username" class="animate-float-name">Guest</span>
-                </div>
-                <div class="text-slate-400 text-2xs mt-1">semoga booyah terus</div>
-            </div>
-        </div>
-
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #ffkipas
         </p>
-
         <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap mb-8">
             <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" onclick="incrementDownload()" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-download"></i>
@@ -460,7 +413,6 @@
             </marquee>
         </div>
     </header>
-
     <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -469,15 +421,12 @@
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
-            const welcomeUsername = document.getElementById('welcome-username');
-            const welcomeSection = document.getElementById('welcome-section');
             const logoutBtn = document.getElementById('logout-btn');
             const errorMessage = document.getElementById('error-message');
             const warningMessage = document.getElementById('warning-message');
             const bgMusic = document.getElementById('bg-music');
             const musicToggle = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
-
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
                     bgMusic.play();
@@ -487,21 +436,15 @@
                     musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
                 }
             });
-
             const badWords = ['kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 'fuck', 'shit', 'bitch'];
-
             const savedUsername = localStorage.getItem('kipasUsername');
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
-                welcomeUsername.textContent = savedUsername;
-                welcomeUsername.classList.add('animate-float-name');
-                welcomeSection.classList.add('show');
                 logoutBtn.classList.remove('hidden');
                 loginOverlay.classList.add('hidden');
                 bgMusic.volume = 0.3;
                 bgMusic.play();
             }
-
             function checkBadWord(name) {
                 const lowerName = name.toLowerCase();
                 return badWords.some(word => lowerName.includes(word));
@@ -509,7 +452,6 @@
             function checkNumber(name) {
                 return /\d/.test(name);
             }
-
             usernameInput.addEventListener('input', () => {
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
@@ -517,12 +459,10 @@
                     warningMessage.style.display = 'block';
                 }
             });
-
             loginBtn.addEventListener('click', () => {
                 let name = usernameInput.value.trim() || 'Player';
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
-
                 if (checkBadWord(name)) {
                     errorMessage.style.display = 'block';
                     usernameInput.value = '';
@@ -534,13 +474,9 @@
                     usernameInput.focus();
                     return;
                 }
-
-                incrementClick(); // +1 pengunjung
+                incrementClick();
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
-                welcomeUsername.textContent = name;
-                welcomeUsername.classList.add('animate-float-name');
-                welcomeSection.classList.add('show');
                 logoutBtn.classList.remove('hidden');
                 loginOverlay.style.opacity = '0';
                 setTimeout(() => {
@@ -549,18 +485,15 @@
                     bgMusic.play().catch(e => console.log("Musik diblokir:", e));
                 }, 500);
             });
-
             usernameInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') loginBtn.click();
             });
-
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 bgMusic.pause();
                 location.reload();
             });
-
-            // Partikel
+            // Partikel halaman utama
             const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -574,7 +507,6 @@
                 particle.style.animationDelay = `${Math.random() * 10}s`;
                 particlesContainer.appendChild(particle);
             }
-
             const style = document.createElement('style');
             style.innerHTML = `
                 @keyframes fall {
