@@ -112,15 +112,6 @@
         .icon input {
             padding-left: 50px;
         }
-        .password-eye {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #ff6600;
-            font-size: 18px;
-        }
         button {
             width: 100%;
             padding: 16px;
@@ -191,7 +182,6 @@
                 <div class="icon">
                     <i class="fas fa-lock"></i>
                     <input type="password" name="password" id="password" placeholder="Enter your Password" required autocomplete="current-password">
-                    <i class="fas fa-eye password-eye" onclick="togglePassword()"></i>
                 </div>
             </div>
             
@@ -202,19 +192,7 @@
     </div>
 
     <script>
-        function togglePassword() {
-            const pass = document.getElementById('password');
-            const eye = document.querySelector('.password-eye');
-            if (pass.type === 'password') {
-                pass.type = 'text';
-                eye.classList.replace('fa-eye', 'fa-eye-slash');
-            } else {
-                pass.type = 'password';
-                eye.classList.replace('fa-eye-slash', 'fa-eye');
-            }
-        }
-
-        // Proses login langsung pakai JavaScript
+        // Proses login langsung pakai JavaScript (tanpa show/hide password)
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault(); // cegah reload halaman
 
@@ -222,10 +200,10 @@
             const password = document.querySelector('input[name="password"]').value;
 
             if (username === 'aden' && password === 'konyil88') {
-                // Login benar → langsung pindah ke dashboard.html
+                // Login benar → pindah ke dashboard.html
                 window.location.href = 'dashboard.html';
             } else {
-                // Salah → tampil alert sederhana
+                // Salah → tampil alert
                 alert('Username atau Password salah! Coba lagi.');
             }
         });
