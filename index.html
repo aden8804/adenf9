@@ -26,89 +26,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
-    <script>
-        // Config Firebase kamu
-        const firebaseConfig = {
-            apiKey: "AIzaSyCkpe6J6blmceyEDkP_QTv2iHTk7uusiEc",
-            authDomain: "ffkipas-counter.firebaseapp.com",
-            databaseURL: "https://ffkipas-counter-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "ffkipas-counter",
-            storageBucket: "ffkipas-counter.firebasestorage.app",
-            messagingSenderId: "236761349948",
-            appId: "1:236761349948:web:e9c7b82c12c2595041e839",
-            measurementId: "G-JK6RKV22JT"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        const clickRef = db.ref('clicks/total');
-        const downloadRef = db.ref('downloads/total');
-        const channelRef = db.ref('channel_clicks/total');
-
-        // Update tampilan real-time
-        function updateClickCount() {
-            clickRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.visitor-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
-            });
-        }
-        function updateDownloadCount() {
-            downloadRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.download-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
-            });
-        }
-        function updateChannelCount() {
-            channelRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.channel-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
-            });
-        }
-
-        // Increment dengan retry dan validasi aman
-        function incrementWithRetry(ref, initial = 0, increment = 1, retries = 5) {
-            ref.transaction((current) => {
-                const newVal = (current || initial) + increment;
-                if (current !== null && newVal <= current) {
-                    return current; // cegah penurunan
-                }
-                return newVal;
-            }, (error, committed) => {
-                if (error) {
-                    console.error("Transaction gagal:", error);
-                    if (retries > 0) {
-                        console.log(`Coba lagi... sisa ${retries} kali`);
-                        setTimeout(() => incrementWithRetry(ref, initial, increment, retries - 1), 2000);
-                    } else {
-                        console.error("Gagal setelah 5 kali coba.");
-                    }
-                } else if (committed) {
-                    console.log("Counter berhasil diupdate!");
-                }
-            });
-        }
-
-        function incrementClick() {
-            incrementWithRetry(clickRef, 0, 12); // +12 setiap login
-        }
-        function incrementDownload() {
-            incrementWithRetry(downloadRef, 6067, 5); // +5 setiap klik download
-        }
-        function incrementChannel() {
-            incrementWithRetry(channelRef, 0, 2); // +2 setiap klik saluran
-        }
-
-        // Jalankan update saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            updateClickCount();
-            updateDownloadCount();
-            updateChannelCount();
-        });
-    </script>
     <!-- Tailwind Custom Config -->
     <script>
         tailwind.config = {
@@ -291,18 +208,18 @@
                 </h2>
                 <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
             </div>
-            <!-- DIKUNJUNGI & SALURAN -->
+            <!-- DIKUNJUNGI & SALURAN (statis) -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
                     <span class="font-bold text-slate-300 text-2xs">DIKUNJUNGI:</span>
-                    <span class="visitor-count text-kps-orange font-bold">0</span>
+                    <span class="text-kps-orange font-bold">12.345</span>
                 </div>
                 <div class="w-px h-5 bg-kps-orange/50"></div>
                 <div class="flex items-center gap-1.5">
                     <i class="fab fa-whatsapp text-kps-orange text-xs"></i>
                     <span class="font-bold text-slate-300 text-2xs">SALURAN :</span>
-                    <span class="channel-count text-kps-orange font-bold">0</span>
+                    <span class="text-kps-orange font-bold">5.678</span>
                 </div>
             </div>
             <img src="robot.png" alt="Aden Kipas Character" class="login-image">
@@ -392,7 +309,7 @@
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
                     <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI:
-                        <span class="visitor-count">0</span>
+                        <span>12.345</span>
                     </span>
                 </div>
             </div>
@@ -403,19 +320,19 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count">6067</span></div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500">8.942</div>
             </div>
         </div>
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #ffkipas
         </p>
         <div class="flex flex-col md:flex-row justify-center gap-4 w-full md:w-auto flex-wrap mb-8">
-            <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" onclick="incrementDownload()" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
+            <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX+WAJIB+DIHAPUS+YA+!!+-+ADEN.zip/file" class="group relative bg-gradient-kps text-white px-8 py-4 rounded font-bold text-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all w-full md:w-auto flex items-center justify-center gap-2 shadow-lg">
                 <i class="fas fa-download"></i>
                 <span>DOWNLOAD APK</span>
                 <span class="text-xs font-normal opacity-70 ml-1 text-orange-100">(458 MB.)</span>
             </a>
-            <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" onclick="incrementChannel()" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all w-full md:w-auto flex items-center justify-center gap-2">
+            <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-8 py-4 rounded font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all w-full md:w-auto flex items-center justify-center gap-2">
                 <i class="fas fa-user-circle"></i>
                 <span>SALURAN RESMI</span>
             </a>
@@ -431,7 +348,7 @@
         </div>
     </header>
 
-    <!-- Script Utama -->
+    <!-- Script Utama (tanpa Firebase) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
@@ -500,7 +417,6 @@
                     return;
                 }
 
-                incrementClick(); // +12 kunjungan
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
