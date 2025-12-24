@@ -329,7 +329,7 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count animate-count">0</span></div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span id="download-count" class="animate-count">0</span></div>
             </div>
         </div>
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -357,26 +357,22 @@
         </div>
     </header>
 
-    <!-- Script Utama -->
+    <!-- Script Utama + Firebase Realtime Counter -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Fungsi generate angka random dalam range
+            // Fungsi generate angka random awal (untuk VISIT & ON saja)
             function getRandomInRange(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
-
-            // Generate angka awal
             let visitorCount = getRandomInRange(55000, 540000);
             let onlineCount = getRandomInRange(2500, 5000);
-            let downloadCount = getRandomInRange(11000, 45000);
 
-            // Fungsi animasi hitungan awal (saat load)
+            // Animasi hitungan awal
             function animateCount(el, target, duration = 1500) {
                 let start = 0;
                 const stepTime = 10;
                 const steps = duration / stepTime;
                 const increment = target / steps;
-
                 const timer = setInterval(() => {
                     start += increment;
                     if (start >= target) {
@@ -387,56 +383,28 @@
                 }, stepTime);
             }
 
-            // Update awal dengan animasi
-            document.querySelectorAll('.visitor-count').forEach(el => {
-                animateCount(el, visitorCount);
-            });
+            // Update VISIT & ON dengan animasi awal
+            document.querySelectorAll('.visitor-count').forEach(el => animateCount(el, visitorCount));
+            document.querySelectorAll('.channel-count').forEach(el => animateCount(el, onlineCount));
 
-            document.querySelectorAll('.channel-count').forEach(el => {
-                animateCount(el, onlineCount);
-            });
-
-            const downloadEl = document.querySelector('.download-count');
-            if (downloadEl) {
-                animateCount(downloadEl, downloadCount);
-            }
-
-            // Fungsi animasi bertambah (smooth transition)
-            function animateIncrement(el, newValue) {
-                el.classList.remove('count-up');
-                void el.offsetWidth; // trigger reflow
-                el.classList.add('count-up');
-                el.textContent = newValue.toLocaleString('id-ID');
-            }
-
-            // Update real-time untuk VISIT (+1 setiap 5 detik)
+            // Update real-time VISIT & ON (fake, tetap +1 periodik)
             setInterval(() => {
                 visitorCount += 1;
-
                 document.querySelectorAll('.visitor-count').forEach(el => {
-                    animateIncrement(el, visitorCount);
+                    el.classList.add('count-up');
+                    setTimeout(() => el.textContent = visitorCount.toLocaleString('id-ID'), 100);
                 });
             }, 5000);
 
-            // Update real-time untuk ON (+1 setiap 4 detik)
             setInterval(() => {
                 onlineCount += 1;
-
                 document.querySelectorAll('.channel-count').forEach(el => {
-                    animateIncrement(el, onlineCount);
+                    el.classList.add('count-up');
+                    setTimeout(() => el.textContent = onlineCount.toLocaleString('id-ID'), 100);
                 });
             }, 4000);
 
-            // Update real-time untuk BERHASIL DOWNLOAD (+1 setiap 7 detik)
-            setInterval(() => {
-                downloadCount += 1;
-
-                if (downloadEl) {
-                    animateIncrement(downloadEl, downloadCount);
-                }
-            }, 7000);
-
-            // --- Fungsi login, musik, partikel (tetap) ---
+            // Login, musik, partikel (tetap sama)
             const loginOverlay = document.getElementById('login-overlay');
             const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
@@ -460,7 +428,6 @@
             });
 
             const badWords = ['kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 'fuck', 'shit', 'bitch'];
-
             const savedUsername = localStorage.getItem('kipasUsername');
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
@@ -474,6 +441,7 @@
                 const lowerName = name.toLowerCase();
                 return badWords.some(word => lowerName.includes(word));
             }
+
             function checkNumber(name) {
                 return /\d/.test(name);
             }
@@ -490,7 +458,6 @@
                 let name = usernameInput.value.trim() || 'Player';
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
-
                 if (checkBadWord(name)) {
                     errorMessage.style.display = 'block';
                     usernameInput.value = '';
@@ -502,7 +469,6 @@
                     usernameInput.focus();
                     return;
                 }
-
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
@@ -547,6 +513,47 @@
                 }
             `;
             document.head.appendChild(style);
+        });
+    </script>
+
+    <!-- Firebase Realtime Counter (BERHASIL DOWNLOAD + TOTAL KUNJUNGAN saat klik MASUK) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQvmYGP8c93BqLBlvQ7xsaiaXy7HIRM5c",
+            authDomain: "hitungan-admin.firebaseapp.com",
+            databaseURL: "https://hitungan-admin-default-rtdb.firebaseio.com",
+            projectId: "hitungan-admin",
+            storageBucket: "hitungan-admin.firebasestorage.app",
+            messagingSenderId: "1041471299780",
+            appId: "1:1041471299780:web:2ed0a350235911cb6ce991",
+            measurementId: "G-BENXNW4SB2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const downloadRef = ref(db, 'downloadCount');
+        const visitorRef = ref(db, 'visitorCount');
+
+        // Update realtime BERHASIL DOWNLOAD di halaman utama
+        onValue(downloadRef, (snapshot) => {
+            const count = snapshot.val() || 0;
+            const el = document.getElementById('download-count');
+            if (el) {
+                el.classList.add('count-up');
+                setTimeout(() => {
+                    el.textContent = count.toLocaleString('id-ID');
+                }, 100);
+            }
+        });
+
+        // Increment +1 kedua counter saat klik tombol MASUK
+        document.getElementById('login-btn').addEventListener('click', () => {
+            runTransaction(downloadRef, (current) => (current || 0) + 1);
+            runTransaction(visitorRef, (current) => (current || 0) + 1);
+            console.log('%c +1 DOWNLOAD & +1 KUNJUNGAN (klik MASUK)', 'color: lime; font-weight: bold;');
         });
     </script>
 </body>
