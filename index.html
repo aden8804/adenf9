@@ -125,8 +125,8 @@
             color: #F59E0B;
         }
 
-        /* Partikel hanya di halaman utama (setelah login) */
-        #particles-container {
+        /* Partikel Global */
+        #particles-container, #login-particles {
             position: fixed;
             top: 0;
             left: 0;
@@ -136,14 +136,15 @@
             z-index: 1;
             overflow: hidden;
         }
-        .particle {
+        .particle, .login-particle {
             position: absolute;
             background: #F97316;
             border-radius: 50%;
             box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
             pointer-events: none;
-            opacity: 0.5;
         }
+        .particle { opacity: 0.5; }
+        .login-particle { opacity: 0.6; width: 4px !important; height: 4px !important; }
 
         /* Tombol mute/unmute musik */
         #music-toggle {
@@ -169,7 +170,7 @@
             transform: scale(1.1);
         }
 
-        /* Login Overlay - RINGKAS & RESPONSIF (tanpa partikel) */
+        /* Login Overlay - RINGKAS & RESPONSIF */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -244,7 +245,7 @@
     <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
-    <!-- Partikel hanya di halaman utama -->
+    <!-- Partikel Global (kurangi jumlah agar ringan) -->
     <div id="particles-container"></div>
 
     <!-- Audio Background Music -->
@@ -258,8 +259,10 @@
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
 
-    <!-- LOGIN OVERLAY - TANPA PARTIKEL -->
+    <!-- LOGIN OVERLAY - VERSI RINGKAS -->
     <div id="login-overlay">
+        <div id="login-particles"></div>
+
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
 
@@ -267,7 +270,7 @@
                 <h2 class="font-tech text-3xl font-bold text-white leading-tight">
                     ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
                 </h2>
-                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">PRIVATE SERVER TERBAIK 2025</p>
+                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER </p>
             </div>
 
             <!-- Kunjungan -->
@@ -423,7 +426,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
-            const particlesContainer = document.getElementById('particles-container');
+            const loginParticles = document.getElementById('login-particles');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
@@ -516,8 +519,9 @@
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Partikel hanya di halaman utama (setelah login) - jumlah dikurangi agar ringan
-            const particleCount = 30;
+            // Partikel Global (jumlah dikurangi)
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 30; // Lebih sedikit untuk performa
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -528,8 +532,28 @@
                 const duration = Math.random() * 12 + 8;
                 particle.style.animation = `fall ${duration}s linear infinite`;
                 particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
                 particlesContainer.appendChild(particle);
             }
+
+            // Partikel Login (juga dikurangi)
+            function createLoginParticles() {
+                if (!loginParticles) return;
+                for (let i = 0; i < 30; i++) {
+                    const p = document.createElement('div');
+                    p.classList.add('login-particle');
+                    const size = Math.random() * 4 + 2;
+                    p.style.width = `${size}px`;
+                    p.style.height = `${size}px`;
+                    p.style.left = `${Math.random() * 100}%`;
+                    p.style.top = `-10px`;
+                    const duration = Math.random() * 12 + 8;
+                    p.style.animation = `fall ${duration}s linear infinite`;
+                    p.style.animationDelay = `${Math.random() * 10}s`;
+                    loginParticles.appendChild(p);
+                }
+            }
+            createLoginParticles();
 
             const style = document.createElement('style');
             style.innerHTML = `
