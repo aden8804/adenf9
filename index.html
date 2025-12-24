@@ -356,7 +356,6 @@
             </marquee>
         </div>
     </header>
-
     <!-- Script Utama (Fake Counter + Login + Musik + Partikel) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -368,7 +367,6 @@
             let visitorCount = getRandomInRange(55000, 540000);
             let onlineCount = getRandomInRange(2500, 5000);
             let downloadCount = getRandomInRange(25000, 45000); // mulai dari ~25.xxx seperti semula
-
             // Fungsi animasi hitungan awal (saat load)
             function animateCount(el, target, duration = 1500) {
                 let start = 0;
@@ -421,9 +419,8 @@
                 downloadCount += 1;
                 if (downloadEl) {
                     animateIncrement(downloadEl, downloadCount);
-                };
+                }
             }, 7000);
-
             // --- Fungsi login, musik, partikel (tetap) ---
             const loginOverlay = document.getElementById('login-overlay');
             const particlesContainer = document.getElementById('particles-container');
@@ -525,7 +522,6 @@
             document.head.appendChild(style);
         });
     </script>
-
     <!-- Firebase Realtime untuk TOTAL KUNJUNGAN WEBSITE (bertambah saat klik MASUK) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
