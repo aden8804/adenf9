@@ -208,18 +208,18 @@
                 </h2>
                 <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
             </div>
-            <!-- DIKUNJUNGI & SALURAN (statis) -->
+            <!-- VISIT & ON (akan diisi random + animasi) -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs">DIKUNJUNGI:</span>
-                    <span class="text-kps-orange font-bold">12.345</span>
+                    <span class="font-bold text-slate-300 text-2xs">VISIT:</span>
+                    <span class="visitor-count text-kps-orange font-bold animate-count">0</span>
                 </div>
                 <div class="w-px h-5 bg-kps-orange/50"></div>
                 <div class="flex items-center gap-1.5">
-                    <i class="fab fa-whatsapp text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs">SALURAN :</span>
-                    <span class="text-kps-orange font-bold">5.678</span>
+                    <i class="fas fa-users text-kps-orange text-xs"></i>
+                    <span class="font-bold text-slate-300 text-2xs">ON :</span>
+                    <span class="channel-count text-kps-orange font-bold animate-count">0</span>
                 </div>
             </div>
             <img src="robot.png" alt="Aden Kipas Character" class="login-image">
@@ -308,8 +308,8 @@
                 </div>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI:
-                        <span>12.345</span>
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">VISIT:
+                        <span class="visitor-count animate-count">0</span>
                     </span>
                 </div>
             </div>
@@ -320,7 +320,7 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500">8.942</div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count animate-count">0</span></div>
             </div>
         </div>
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -348,9 +348,51 @@
         </div>
     </header>
 
-    <!-- Script Utama (tanpa Firebase) -->
+    <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Fungsi generate angka random dalam range
+            function getRandomInRange(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            // Generate angka random lokal (berubah setiap refresh)
+            const visitorCount = getRandomInRange(55000, 540000);    // VISIT: 55k - 540k
+            const onlineCount = getRandomInRange(500, 2500);         // ON: 500 - 2.5k
+            const downloadCount = getRandomInRange(11000, 45000);    // BERHASIL DOWNLOAD: 11k - 45k
+
+            // Fungsi animasi hitungan (count-up)
+            function animateCount(el, target, duration = 2000) {
+                let start = 0;
+                const stepTime = 20; // update setiap 20ms
+                const steps = duration / stepTime;
+                const increment = target / steps;
+
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= target) {
+                        start = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = Math.floor(start).toLocaleString('id-ID');
+                }, stepTime);
+            }
+
+            // Update dan animasi semua elemen
+            document.querySelectorAll('.visitor-count').forEach(el => {
+                animateCount(el, visitorCount);
+            });
+
+            document.querySelectorAll('.channel-count').forEach(el => {
+                animateCount(el, onlineCount);
+            });
+
+            const downloadEl = document.querySelector('.download-count');
+            if (downloadEl) {
+                animateCount(downloadEl, downloadCount);
+            }
+
+            // --- Fungsi login, musik, partikel (tetap) ---
             const loginOverlay = document.getElementById('login-overlay');
             const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
