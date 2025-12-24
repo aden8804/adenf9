@@ -125,27 +125,6 @@
             color: #F59E0B;
         }
 
-        /* Partikel Global */
-        #particles-container, #login-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .particle, .login-particle {
-            position: absolute;
-            background: #F97316;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
-            pointer-events: none;
-        }
-        .particle { opacity: 0.5; }
-        .login-particle { opacity: 0.6; width: 4px !important; height: 4px !important; }
-
         /* Tombol mute/unmute musik */
         #music-toggle {
             position: fixed;
@@ -245,9 +224,6 @@
     <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
-    <!-- Partikel Global (kurangi jumlah agar ringan) -->
-    <div id="particles-container"></div>
-
     <!-- Audio Background Music -->
     <audio id="bg-music" loop>
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
@@ -261,8 +237,6 @@
 
     <!-- LOGIN OVERLAY - VERSI RINGKAS -->
     <div id="login-overlay">
-        <div id="login-particles"></div>
-
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
 
@@ -426,7 +400,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
-            const loginParticles = document.getElementById('login-particles');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
@@ -518,51 +491,6 @@
             if (mobileBtn && mobileMenu) {
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
-
-            // Partikel Global (jumlah dikurangi)
-            const particlesContainer = document.getElementById('particles-container');
-            const particleCount = 30; // Lebih sedikit untuk performa
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}vw`;
-                const duration = Math.random() * 12 + 8;
-                particle.style.animation = `fall ${duration}s linear infinite`;
-                particle.style.animationDelay = `${Math.random() * 10}s`;
-                particle.style.opacity = Math.random() * 0.5 + 0.3;
-                particlesContainer.appendChild(particle);
-            }
-
-            // Partikel Login (juga dikurangi)
-            function createLoginParticles() {
-                if (!loginParticles) return;
-                for (let i = 0; i < 30; i++) {
-                    const p = document.createElement('div');
-                    p.classList.add('login-particle');
-                    const size = Math.random() * 4 + 2;
-                    p.style.width = `${size}px`;
-                    p.style.height = `${size}px`;
-                    p.style.left = `${Math.random() * 100}%`;
-                    p.style.top = `-10px`;
-                    const duration = Math.random() * 12 + 8;
-                    p.style.animation = `fall ${duration}s linear infinite`;
-                    p.style.animationDelay = `${Math.random() * 10}s`;
-                    loginParticles.appendChild(p);
-                }
-            }
-            createLoginParticles();
-
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes fall {
-                    0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
-                    100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(style);
 
             function animateCountUp(element, target) {
                 let count = 0;
