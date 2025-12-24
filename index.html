@@ -49,7 +49,7 @@
         const downloadRef = db.ref('downloads/total');
         const channelRef = db.ref('channel_clicks/total');
 
-        // Update tampilan real-time (tanpa fallback nilai awal agar tidak reset)
+        // Update tampilan real-time
         function updateClickCount() {
             clickRef.on('value', (snapshot) => {
                 const count = snapshot.val() !== null ? snapshot.val() : 0;
@@ -69,13 +69,12 @@
             });
         }
 
-        // Increment dengan retry dan validasi aman (tidak bisa turun)
+        // Increment dengan retry dan validasi aman
         function incrementWithRetry(ref, initial = 0, increment = 1, retries = 5) {
             ref.transaction((current) => {
                 const newVal = (current || initial) + increment;
-                // Cegah nilai turun atau tidak berubah (race condition)
                 if (current !== null && newVal <= current) {
-                    return current;
+                    return current; // cegah penurunan
                 }
                 return newVal;
             }, (error, committed) => {
@@ -94,13 +93,13 @@
         }
 
         function incrementClick() {
-            incrementWithRetry(clickRef, 0, 1); // +1 kunjungan (bisa ubah ke 12 jika mau)
+            incrementWithRetry(clickRef, 0, 12); // +12 setiap login
         }
         function incrementDownload() {
-            incrementWithRetry(downloadRef, 6067, 1);
+            incrementWithRetry(downloadRef, 6067, 5); // +5 setiap klik download
         }
         function incrementChannel() {
-            incrementWithRetry(channelRef, 0, 1);
+            incrementWithRetry(channelRef, 0, 2); // +2 setiap klik saluran
         }
 
         // Jalankan update saat halaman dimuat
@@ -432,7 +431,7 @@
         </div>
     </header>
 
-    <!-- Script Utama (login, musik, partikel, dll.) -->
+    <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
@@ -501,7 +500,7 @@
                     return;
                 }
 
-                incrementClick();
+                incrementClick(); // +12 kunjungan
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
