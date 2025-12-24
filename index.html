@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-    <!-- Meta Tags Dasar -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ADEN KIPAS | DOWNLOAD KIPAS-PS</title>
@@ -28,6 +27,60 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Firebase SDK (modular v10) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getDatabase, ref, onValue, transaction } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+        // Config Firebase kamu
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkpe6J6blmceyEDkP_QTv2iHTk7uusiEc",
+            authDomain: "ffkipas-counter.firebaseapp.com",
+            databaseURL: "https://ffkipas-counter-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "ffkipas-counter",
+            storageBucket: "ffkipas-counter.firebasestorage.app",
+            messagingSenderId: "236761349948",
+            appId: "1:236761349948:web:e9c7b82c12c2595041e839",
+            measurementId: "G-JK6RKV22JT"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Fungsi visitor count
+        const visitsRef = ref(db, 'visits');
+
+        function incrementVisit() {
+            const visitorId = localStorage.getItem('visitorId') || Math.random().toString(36).substring(2, 10);
+            localStorage.setItem('visitorId', visitorId);
+
+            const today = new Date().toISOString().split('T')[0];
+            const key = `${today}_${visitorId}`;
+
+            transaction(visitsRef.child(key), (current) => {
+                if (current === null) {
+                    transaction(visitsRef.child('total'), (total) => (total || 0) + 1);
+                    return true;
+                }
+                return current;
+            });
+        }
+
+        function updateVisitorCount() {
+            onValue(ref(db, 'visits/total'), (snapshot) => {
+                const count = snapshot.val() || 0;
+                document.querySelectorAll('.visitor-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            incrementVisit();
+            updateVisitorCount();
+        });
+    </script>
 
     <!-- Tailwind Custom Config -->
     <script>
@@ -118,15 +171,8 @@
             padding: 0;
         }
 
-        .animate-count {
-            display: inline-block;
-            min-width: 80px;
-            font-weight: bold;
-            color: #F59E0B;
-        }
-
-        /* Partikel Global */
-        #particles-container, #login-particles {
+        /* Partikel hanya di halaman utama */
+        #particles-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -136,17 +182,16 @@
             z-index: 1;
             overflow: hidden;
         }
-        .particle, .login-particle {
+        .particle {
             position: absolute;
             background: #F97316;
             border-radius: 50%;
             box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
             pointer-events: none;
+            opacity: 0.5;
         }
-        .particle { opacity: 0.5; }
-        .login-particle { opacity: 0.6; width: 4px !important; height: 4px !important; }
 
-        /* Tombol mute/unmute musik */
+        /* Tombol musik */
         #music-toggle {
             position: fixed;
             bottom: 20px;
@@ -170,7 +215,7 @@
             transform: scale(1.1);
         }
 
-        /* Login Overlay - RINGKAS & RESPONSIF */
+        /* Login Overlay */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -218,7 +263,6 @@
             margin: 16px auto;
         }
 
-        /* Pesan error & warning */
         #error-message, #warning-message {
             display: none;
             margin-top: 8px;
@@ -228,7 +272,6 @@
         #error-message { color: #fca5a5; }
         #warning-message { color: #fde047; }
 
-        /* Responsif khusus login */
         @media (min-width: 641px) {
             #login-box {
                 max-width: 380px;
@@ -242,27 +285,25 @@
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
 
-    <!-- Background Grid Overlay -->
+    <!-- Background Grid -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
-    <!-- Partikel Global (kurangi jumlah agar ringan) -->
+    <!-- Partikel halaman utama -->
     <div id="particles-container"></div>
 
-    <!-- Audio Background Music -->
+    <!-- Audio Musik -->
     <audio id="bg-music" loop>
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Tombol Mute/Unmute Musik -->
+    <!-- Tombol Mute/Unmute -->
     <div id="music-toggle" title="Klik untuk mute/unmute musik">
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
 
-    <!-- LOGIN OVERLAY - VERSI RINGKAS -->
+    <!-- Login Overlay -->
     <div id="login-overlay">
-        <div id="login-particles"></div>
-
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
 
@@ -270,14 +311,14 @@
                 <h2 class="font-tech text-3xl font-bold text-white leading-tight">
                     ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
                 </h2>
-                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER </p>
+                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">PRIVATE SERVER TERBAIK 2025</p>
             </div>
 
-            <!-- Kunjungan -->
+            <!-- Kunjungan live -->
             <div class="mb-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <i class="fas fa-eye text-kps-orange"></i>
                 <span class="font-bold text-slate-300">DIKUNJUNGI: 
-                    <span class="animate-count text-kps-orange" data-target="95212">0</span>
+                    <span class="visitor-count text-kps-orange">0</span>
                 </span>
             </div>
 
@@ -309,7 +350,6 @@
                     MASUK & DOWNLOAD SEKARANG
                 </button>
 
-                <!-- Running text -->
                 <div class="running-text mt-5">
                     <marquee behavior="scroll" direction="left" scrollamount="4">
                         FREE FIRE PRIVATE SERVER BUNDLE GA KEBAWA. (INI BUKAN FFORI)
@@ -378,7 +418,7 @@
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
                     <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI: 
-                        <span class="animate-count" data-target="95212">0</span>
+                        <span class="visitor-count">0</span>
                     </span>
                 </div>
             </div>
@@ -391,7 +431,7 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500 animate-count" data-target="5299">0</div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500">5299</div>
             </div>
         </div>
 
@@ -422,11 +462,11 @@
         </div>
     </header>
 
-    <!-- Script -->
+    <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
-            const loginParticles = document.getElementById('login-particles');
+            const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
@@ -519,9 +559,8 @@
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Partikel Global (jumlah dikurangi)
-            const particlesContainer = document.getElementById('particles-container');
-            const particleCount = 30; // Lebih sedikit untuk performa
+            // Partikel halaman utama (30 buah, ringan)
+            const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -532,28 +571,8 @@
                 const duration = Math.random() * 12 + 8;
                 particle.style.animation = `fall ${duration}s linear infinite`;
                 particle.style.animationDelay = `${Math.random() * 10}s`;
-                particle.style.opacity = Math.random() * 0.5 + 0.3;
                 particlesContainer.appendChild(particle);
             }
-
-            // Partikel Login (juga dikurangi)
-            function createLoginParticles() {
-                if (!loginParticles) return;
-                for (let i = 0; i < 30; i++) {
-                    const p = document.createElement('div');
-                    p.classList.add('login-particle');
-                    const size = Math.random() * 4 + 2;
-                    p.style.width = `${size}px`;
-                    p.style.height = `${size}px`;
-                    p.style.left = `${Math.random() * 100}%`;
-                    p.style.top = `-10px`;
-                    const duration = Math.random() * 12 + 8;
-                    p.style.animation = `fall ${duration}s linear infinite`;
-                    p.style.animationDelay = `${Math.random() * 10}s`;
-                    loginParticles.appendChild(p);
-                }
-            }
-            createLoginParticles();
 
             const style = document.createElement('style');
             style.innerHTML = `
@@ -563,25 +582,6 @@
                 }
             `;
             document.head.appendChild(style);
-
-            function animateCountUp(element, target) {
-                let count = 0;
-                const increment = target / 200;
-                const interval = setInterval(() => {
-                    count += increment;
-                    if (count >= target) {
-                        count = target;
-                        clearInterval(interval);
-                    }
-                    element.textContent = Math.floor(count).toLocaleString('en-US');
-                }, 20);
-            }
-
-            const countElements = document.querySelectorAll('.animate-count');
-            countElements.forEach(el => {
-                const target = parseInt(el.getAttribute('data-target')) || 0;
-                animateCountUp(el, target);
-            });
         });
     </script>
 </body>
