@@ -31,7 +31,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
     <script>
-        // Config Firebase baru
+        // Config Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDd8eU4tFlDWsElnA0Msf3u6vAtA6LTKmI",
             authDomain: "adenfirebase.firebaseapp.com",
@@ -50,22 +50,22 @@
         const downloadRef = db.ref('downloads/total');
         const channelRef = db.ref('channel_clicks/total');
 
-        // Update tampilan real-time dengan nilai awal
+        // Update tampilan real-time (tanpa fallback nilai awal)
         function updateClickCount() {
             clickRef.on('value', (snapshot) => {
-                const count = snapshot.val() || 2850;
+                const count = snapshot.val() !== null ? snapshot.val() : 0;
                 document.querySelectorAll('.visitor-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
             });
         }
         function updateDownloadCount() {
             downloadRef.on('value', (snapshot) => {
-                const count = snapshot.val() || 6528;
+                const count = snapshot.val() !== null ? snapshot.val() : 0;
                 document.querySelectorAll('.download-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
             });
         }
         function updateChannelCount() {
             channelRef.on('value', (snapshot) => {
-                const count = snapshot.val() || 36;
+                const count = snapshot.val() !== null ? snapshot.val() : 0;
                 document.querySelectorAll('.channel-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
             });
         }
@@ -89,15 +89,9 @@
             });
         }
 
-        function incrementClick() {
-            incrementWithRetry(clickRef, 2850);
-        }
-        function incrementDownload() {
-            incrementWithRetry(downloadRef, 6528);
-        }
-        function incrementChannel() {
-            incrementWithRetry(channelRef, 36);
-        }
+        function incrementClick() { incrementWithRetry(clickRef, 2850); }
+        function incrementDownload() { incrementWithRetry(downloadRef, 6528); }
+        function incrementChannel() { incrementWithRetry(channelRef, 36); }
 
         // Jalankan update saat halaman dimuat
         document.addEventListener('DOMContentLoaded', () => {
@@ -467,7 +461,7 @@
         </div>
     </header>
 
-    <!-- Script Utama (Login, Musik, Partikel, dll.) -->
+    <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
@@ -541,7 +535,7 @@
                     return;
                 }
 
-                incrementClick(); // +1 pengunjung saat login
+                incrementClick(); // +1 pengunjung
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 welcomeUsername.textContent = name;
