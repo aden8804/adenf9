@@ -24,9 +24,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <!-- Google Fonts (fix 404) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (compat version, minimal) -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
     <script>
@@ -41,63 +41,48 @@
             appId: "1:236761349948:web:e9c7b82c12c2595041e839",
             measurementId: "G-JK6RKV22JT"
         };
-
+        // Inisialisasi Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-
         const clickRef = db.ref('clicks/total');
         const downloadRef = db.ref('downloads/total');
-        const channelRef = db.ref('channel_clicks/total');
+        const channelRef = db.ref('channel_clicks/total'); // Counter klik saluran
 
         // Update tampilan real-time
         function updateClickCount() {
             clickRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.visitor-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 0;
+                document.querySelectorAll('.visitor-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
         function updateDownloadCount() {
             downloadRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.download-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 6067;
+                document.querySelectorAll('.download-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
         function updateChannelCount() {
             channelRef.on('value', (snapshot) => {
-                const count = snapshot.val() !== null ? snapshot.val() : 0;
-                document.querySelectorAll('.channel-count').forEach(el => el.textContent = count.toLocaleString('id-ID'));
+                const count = snapshot.val() || 0;
+                document.querySelectorAll('.channel-count').forEach(el => {
+                    el.textContent = count.toLocaleString('id-ID');
+                });
             });
         }
 
-        // Increment dengan retry - custom increment amount
-        function incrementWithRetry(ref, initial = 0, increment = 1, retries = 5) {
-            ref.transaction((current) => {
-                const newVal = (current || initial) + increment;
-                if (current !== null && newVal <= current) {
-                    return current; // cegah penurunan
-                }
-                return newVal;
-            }, (error, committed) => {
-                if (error) {
-                    console.error("Transaction gagal:", error);
-                    if (retries > 0) {
-                        console.log(`Coba lagi... sisa ${retries} kali`);
-                        setTimeout(() => incrementWithRetry(ref, initial, increment, retries - 1), 2000);
-                    }
-                } else if (committed) {
-                    console.log("Counter berhasil diupdate!");
-                }
-            });
-        }
-
+        // Tambah 1
         function incrementClick() {
-            incrementWithRetry(clickRef, 0, 12); // +12 setiap login
+            clickRef.transaction((current) => (current || 0) + 1);
         }
         function incrementDownload() {
-            incrementWithRetry(downloadRef, 6067, 6); // +6 setiap klik download
+            downloadRef.transaction((current) => (current || 6067) + 1);
         }
         function incrementChannel() {
-            incrementWithRetry(channelRef, 0, 1); // +1 setiap klik saluran
+            channelRef.transaction((current) => (current || 0) + 1);
         }
 
         // Jalankan update saat halaman dimuat
@@ -289,7 +274,7 @@
                 </h2>
                 <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
             </div>
-            <!-- DIKUNJUNGI & SALURAN -->
+            <!-- DIKUNJUNGI & SALURAN dalam satu baris kecil -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
@@ -428,8 +413,7 @@
             </marquee>
         </div>
     </header>
-
-    <!-- Script Utama (login, musik, partikel, dll.) -->
+    <!-- Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
@@ -443,7 +427,6 @@
             const bgMusic = document.getElementById('bg-music');
             const musicToggle = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
-
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
                     bgMusic.play();
@@ -453,9 +436,7 @@
                     musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
                 }
             });
-
             const badWords = ['kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 'fuck', 'shit', 'bitch'];
-
             const savedUsername = localStorage.getItem('kipasUsername');
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
@@ -464,7 +445,6 @@
                 bgMusic.volume = 0.3;
                 bgMusic.play();
             }
-
             function checkBadWord(name) {
                 const lowerName = name.toLowerCase();
                 return badWords.some(word => lowerName.includes(word));
@@ -472,7 +452,6 @@
             function checkNumber(name) {
                 return /\d/.test(name);
             }
-
             usernameInput.addEventListener('input', () => {
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
@@ -480,12 +459,10 @@
                     warningMessage.style.display = 'block';
                 }
             });
-
             loginBtn.addEventListener('click', () => {
                 let name = usernameInput.value.trim() || 'Player';
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
-
                 if (checkBadWord(name)) {
                     errorMessage.style.display = 'block';
                     usernameInput.value = '';
@@ -497,8 +474,7 @@
                     usernameInput.focus();
                     return;
                 }
-
-                incrementClick(); // +12 kunjungan
+                incrementClick();
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
@@ -509,18 +485,15 @@
                     bgMusic.play().catch(e => console.log("Musik diblokir:", e));
                 }, 500);
             });
-
             usernameInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') loginBtn.click();
             });
-
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 bgMusic.pause();
                 location.reload();
             });
-
-            // Partikel
+            // Partikel halaman utama
             const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -534,7 +507,6 @@
                 particle.style.animationDelay = `${Math.random() * 10}s`;
                 particlesContainer.appendChild(particle);
             }
-
             const style = document.createElement('style');
             style.innerHTML = `
                 @keyframes fall {
