@@ -182,6 +182,15 @@
                 width: 140px;
             }
         }
+        /* Animasi bertambah lebih smooth */
+        @keyframes countUp {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-10px); opacity: 0.7; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .count-up {
+            animation: countUp 0.6s ease-out;
+        }
     </style>
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
@@ -208,11 +217,11 @@
                 </h2>
                 <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
             </div>
-            <!-- VISIT & ON (akan diisi random + animasi) -->
+            <!-- VISIT & ON -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs">VISIT:</span>
+                    <span class="font-bold text-slate-300 text-2xs">VISIT :</span>
                     <span class="visitor-count text-kps-orange font-bold animate-count">0</span>
                 </div>
                 <div class="w-px h-5 bg-kps-orange/50"></div>
@@ -308,7 +317,7 @@
                 </div>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">VISIT:
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">VISIT :
                         <span class="visitor-count animate-count">0</span>
                     </span>
                 </div>
@@ -356,15 +365,15 @@
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
 
-            // Generate angka random lokal (berubah setiap refresh)
-            const visitorCount = getRandomInRange(55000, 540000);    // VISIT: 55k - 540k
-            const onlineCount = getRandomInRange(2500, 5000);        // ON: 2.5k - 5k
-            const downloadCount = getRandomInRange(11000, 45000);    // BERHASIL DOWNLOAD: 11k - 45k
+            // Generate angka awal
+            let visitorCount = getRandomInRange(55000, 540000);
+            let onlineCount = getRandomInRange(2500, 5000);
+            let downloadCount = getRandomInRange(11000, 45000);
 
-            // Fungsi animasi hitungan (count-up)
-            function animateCount(el, target, duration = 2000) {
+            // Fungsi animasi hitungan awal (saat load)
+            function animateCount(el, target, duration = 1500) {
                 let start = 0;
-                const stepTime = 20; // update setiap 20ms
+                const stepTime = 10;
                 const steps = duration / stepTime;
                 const increment = target / steps;
 
@@ -374,11 +383,11 @@
                         start = target;
                         clearInterval(timer);
                     }
-                    el.textContent = Math.floor(start).toLocaleString('id-ID');
+                    el.textContent = Math.ceil(start).toLocaleString('id-ID');
                 }, stepTime);
             }
 
-            // Update dan animasi semua elemen
+            // Update awal dengan animasi
             document.querySelectorAll('.visitor-count').forEach(el => {
                 animateCount(el, visitorCount);
             });
@@ -391,6 +400,41 @@
             if (downloadEl) {
                 animateCount(downloadEl, downloadCount);
             }
+
+            // Fungsi animasi bertambah (smooth transition)
+            function animateIncrement(el, newValue) {
+                el.classList.remove('count-up');
+                void el.offsetWidth; // trigger reflow
+                el.classList.add('count-up');
+                el.textContent = newValue.toLocaleString('id-ID');
+            }
+
+            // Update real-time untuk VISIT (+1 setiap 5 detik)
+            setInterval(() => {
+                visitorCount += 1;
+
+                document.querySelectorAll('.visitor-count').forEach(el => {
+                    animateIncrement(el, visitorCount);
+                });
+            }, 5000);
+
+            // Update real-time untuk ON (+1 setiap 4 detik)
+            setInterval(() => {
+                onlineCount += 1;
+
+                document.querySelectorAll('.channel-count').forEach(el => {
+                    animateIncrement(el, onlineCount);
+                });
+            }, 4000);
+
+            // Update real-time untuk BERHASIL DOWNLOAD (+1 setiap 7 detik)
+            setInterval(() => {
+                downloadCount += 1;
+
+                if (downloadEl) {
+                    animateIncrement(downloadEl, downloadCount);
+                }
+            }, 7000);
 
             // --- Fungsi login, musik, partikel (tetap) ---
             const loginOverlay = document.getElementById('login-overlay');
