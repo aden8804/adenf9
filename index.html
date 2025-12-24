@@ -125,6 +125,26 @@
             color: #F59E0B;
         }
 
+        /* Partikel hanya di halaman utama (setelah login) */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: #F97316;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
         /* Tombol mute/unmute musik */
         #music-toggle {
             position: fixed;
@@ -149,7 +169,7 @@
             transform: scale(1.1);
         }
 
-        /* Login Overlay - RINGKAS & RESPONSIF */
+        /* Login Overlay - RINGKAS & RESPONSIF (tanpa partikel) */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -224,6 +244,9 @@
     <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
+    <!-- Partikel hanya di halaman utama -->
+    <div id="particles-container"></div>
+
     <!-- Audio Background Music -->
     <audio id="bg-music" loop>
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
@@ -235,7 +258,7 @@
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
 
-    <!-- LOGIN OVERLAY - VERSI RINGKAS -->
+    <!-- LOGIN OVERLAY - TANPA PARTIKEL -->
     <div id="login-overlay">
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
@@ -400,6 +423,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
+            const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
@@ -491,6 +515,30 @@
             if (mobileBtn && mobileMenu) {
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
+
+            // Partikel hanya di halaman utama (setelah login) - jumlah dikurangi agar ringan
+            const particleCount = 30;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                const duration = Math.random() * 12 + 8;
+                particle.style.animation = `fall ${duration}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fall {
+                    0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
+                    100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
 
             function animateCountUp(element, target) {
                 let count = 0;
