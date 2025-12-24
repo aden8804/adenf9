@@ -28,12 +28,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Firebase SDK (modular v10) -->
+    <!-- Google Fonts (fix 404) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK (modular v10) dengan runTransaction -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getDatabase, ref, onValue, transaction } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-        // Config Firebase kamu
         const firebaseConfig = {
             apiKey: "AIzaSyCkpe6J6blmceyEDkP_QTv2iHTk7uusiEc",
             authDomain: "ffkipas-counter.firebaseapp.com",
@@ -48,7 +50,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Fungsi visitor count
         const visitsRef = ref(db, 'visits');
 
         function incrementVisit() {
@@ -58,9 +59,9 @@
             const today = new Date().toISOString().split('T')[0];
             const key = `${today}_${visitorId}`;
 
-            transaction(visitsRef.child(key), (current) => {
+            runTransaction(visitsRef.child(key), (current) => {
                 if (current === null) {
-                    transaction(visitsRef.child('total'), (total) => (total || 0) + 1);
+                    runTransaction(visitsRef.child('total'), (total) => (total || 0) + 1);
                     return true;
                 }
                 return current;
@@ -112,37 +113,6 @@
 
     <!-- Custom Styles -->
     <style>
-        @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 600;
-            src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuF6AZ9hiA.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 800;
-            src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGfAZ9hiA.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Rajdhani';
-            font-style: normal;
-            font-weight: 500;
-            src: url('https://fonts.gstatic.com/s/rajdhani/v11/LDIxapCSOBg7S-QT4q7c0v2g.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Rajdhani';
-            font-style: normal;
-            font-weight: 700;
-            src: url('https://fonts.gstatic.com/s/rajdhani/v11/LDIxapCSOBg7S-QT4q7c0v2g.woff2') format('woff2');
-        }
-
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
@@ -171,7 +141,6 @@
             padding: 0;
         }
 
-        /* Partikel hanya di halaman utama */
         #particles-container {
             position: fixed;
             top: 0;
@@ -191,7 +160,6 @@
             opacity: 0.5;
         }
 
-        /* Tombol musik */
         #music-toggle {
             position: fixed;
             bottom: 20px;
@@ -215,7 +183,6 @@
             transform: scale(1.1);
         }
 
-        /* Login Overlay */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -291,13 +258,12 @@
     <!-- Partikel halaman utama -->
     <div id="particles-container"></div>
 
-    <!-- Audio Musik -->
+    <!-- Audio -->
     <audio id="bg-music" loop>
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- Tombol Mute/Unmute -->
+    <!-- Tombol Musik -->
     <div id="music-toggle" title="Klik untuk mute/unmute musik">
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
@@ -559,7 +525,7 @@
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Partikel halaman utama (30 buah, ringan)
+            // Partikel halaman utama
             const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
