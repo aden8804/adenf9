@@ -46,7 +46,7 @@
                             orange: '#F97316',
                             orangeDark: '#EA580C',
                             glow: 'rgba(249, 115, 22, 0.25)'
-                            }
+                        }
                     },
                     backgroundImage: {
                         'gradient-kps': 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
@@ -98,16 +98,15 @@
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
         }
 
-        /* Running text */
- essencial        .running-text {
+        .running-text {
             background: rgba(249, 115, 22, 0.1);
-            padding: 10px 16px;
-            margin: 1.5rem auto;
+            padding: 8px 12px;
+            margin: 1rem auto;
             border: 1px solid rgba(249, 115, 22, 0.3);
             border-radius: 12px;
             font-weight: 600;
             color: #F97316;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             text-align: center;
             box-shadow: 0 4px 15px rgba(249, 115, 22, 0.15);
             max-width: 90%;
@@ -141,11 +140,11 @@
             position: absolute;
             background: #F97316;
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(249, 115, 22, 0.8);
+            box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
             pointer-events: none;
         }
-        .particle { opacity: 0.6; }
-        .login-particle { opacity: 0.7; }
+        .particle { opacity: 0.5; }
+        .login-particle { opacity: 0.6; width: 4px !important; height: 4px !important; }
 
         /* Tombol mute/unmute musik */
         #music-toggle {
@@ -157,8 +156,8 @@
             backdrop-filter: blur(10px);
             border: 1px solid #334155;
             border-radius: 50%;
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -171,16 +170,16 @@
             transform: scale(1.1);
         }
 
-        /* Login Overlay - Super Responsive */
+        /* Login Overlay - RINGKAS & RESPONSIF */
         #login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), 
                         url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/0b8cb561ac88828c2d09bb7d86158255.jpg') center/cover no-repeat;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -196,71 +195,49 @@
 
         #login-box {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-            border: 2px solid rgba(249, 115, 22, 0.5);
-            border-radius: 24px;
-            padding: 32px 24px;
+            border: 2px solid rgba(249, 115, 22, 0.4);
+            border-radius: 20px;
+            padding: 24px 18px;
             width: 100%;
-            max-width: 420px;
+            max-width: 340px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 70px rgba(249, 115, 22, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 40px rgba(249, 115, 22, 0.2);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-        }
-
-        /* Responsif khusus login */
-        @media (max-width: 480px) {
-            #login-box {
-                padding: 28px 20px;
-                border-radius: 20px;
-                max-width: 380px;
-            }
-            .login-image {
-                width: 140px !important;
-                margin: 20px auto;
-            }
-            #login-box h2 {
-                font-size: 2.5rem !important;
-            }
-            #login-box p {
-                font-size: 1rem;
-            }
-            .running-text {
-                font-size: 0.8rem;
-                padding: 10px 14px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            #login-box {
-                padding: 40px 32px;
-                max-width: 450px;
-            }
-            .login-image {
-                width: 180px;
-            }
+            backdrop-filter: blur(10px);
         }
 
         @keyframes float-login {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
         }
         .login-image {
-            animation: float-login 7s ease-in-out infinite;
-            filter: drop-shadow(0 15px 30px rgba(249, 115, 22, 0.5));
-            width: 180px;
-            margin: 24px auto;
+            animation: float-login 8s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(249, 115, 22, 0.4));
+            width: 120px;
+            margin: 16px auto;
         }
 
         /* Pesan error & warning */
         #error-message, #warning-message {
             display: none;
-            margin-top: 10px;
+            margin-top: 8px;
             font-weight: bold;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
         }
         #error-message { color: #fca5a5; }
         #warning-message { color: #fde047; }
+
+        /* Responsif khusus login */
+        @media (min-width: 641px) {
+            #login-box {
+                max-width: 380px;
+                padding: 28px 24px;
+            }
+            .login-image {
+                width: 140px;
+            }
+        }
     </style>
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
@@ -268,7 +245,7 @@
     <!-- Background Grid Overlay -->
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
 
-    <!-- Partikel Global -->
+    <!-- Partikel Global (kurangi jumlah agar ringan) -->
     <div id="particles-container"></div>
 
     <!-- Audio Background Music -->
@@ -279,62 +256,61 @@
 
     <!-- Tombol Mute/Unmute Musik -->
     <div id="music-toggle" title="Klik untuk mute/unmute musik">
-        <i id="music-icon" class="fas fa-volume-up text-white text-2xl"></i>
+        <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
 
-    <!-- LOGIN OVERLAY - FULL RESPONSIVE -->
+    <!-- LOGIN OVERLAY - VERSI RINGKAS -->
     <div id="login-overlay">
-        <!-- Partikel khusus login -->
         <div id="login-particles"></div>
 
         <div id="login-box" class="relative">
-            <div class="absolute inset-0 -inset-4 bg-kps-orange/30 rounded-3xl blur-3xl -z-10 animate-pulse"></div>
+            <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
 
-            <div class="text-center mb-6">
-                <h2 class="font-tech text-5xl font-bold text-white leading-tight">
+            <div class="text-center mb-5">
+                <h2 class="font-tech text-3xl font-bold text-white leading-tight">
                     ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
                 </h2>
-                <p class="text-orange-300 text-sm mt-2 tracking-wider font-bold">PRIVATE SERVER TERBAIK 2025</p>
+                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">PRIVATE SERVER TERBAIK 2025</p>
             </div>
 
             <!-- Kunjungan -->
-            <div class="mb-6 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-kps-panel/80 border border-kps-orange/50 backdrop-blur-sm text-sm">
+            <div class="mb-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <i class="fas fa-eye text-kps-orange"></i>
-                <span class="font-bold text-slate-300 tracking-wider">DIKUNJUNGI : 
-                    <span class="animate-count text-kps-orange font-bold" data-target="95212">0</span>
+                <span class="font-bold text-slate-300">DIKUNJUNGI: 
+                    <span class="animate-count text-kps-orange" data-target="95212">0</span>
                 </span>
             </div>
 
             <img src="robot.png" alt="Aden Kipas Character" class="login-image">
 
-            <div class="mt-8">
-                <p class="text-orange-200 text-base mb-5 leading-relaxed font-medium">
-                    Masukkan nama kamu untuk melanjutkan ke download <strong class="text-kps-orange">FF KIPAS</strong>.<br>
-                    <span class="text-sm text-orange-300">Bebas • Tanpa password • Hanya identitas player</span>
+            <div class="mt-6">
+                <p class="text-orange-200 text-sm mb-4 leading-relaxed">
+                    Masukkan nama kamu untuk lanjut ke download <strong class="text-kps-orange">FF KIPAS</strong>.<br>
+                    <span class="text-xs text-orange-300">Bebas • Tanpa password</span>
                 </p>
 
                 <div class="relative">
                     <input type="text" id="username-input" placeholder="Nama kamu di sini..." 
-                           class="w-full px-5 py-4 bg-kps-panel/80 border border-kps-orange/60 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange focus:ring-4 focus:ring-kps-orange/40 transition-all text-base backdrop-blur-sm">
-                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                        <i class="fas fa-user text-kps-orange"></i>
+                           class="w-full px-4 py-3 bg-kps-panel/80 border border-kps-orange/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange focus:ring-2 focus:ring-kps-orange/40 transition-all text-base">
+                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-kps-orange text-sm"></i>
                     </div>
                 </div>
 
-                <div id="error-message" class="text-red-300 font-semibold mt-3 text-sm">
+                <div id="error-message" class="text-red-300 font-semibold mt-2 text-xs">
                     Nama mengandung kata tidak sopan! Gunakan nama yang baik ya.
                 </div>
-                <div id="warning-message" class="text-yellow-400 font-semibold mt-3 text-sm">
+                <div id="warning-message" class="text-yellow-400 font-semibold mt-2 text-xs">
                     Hindari angka di nama, biar lebih keren!
                 </div>
 
-                <button id="login-btn" class="w-full mt-7 bg-gradient-kps text-white font-bold py-4 rounded-xl hover:shadow-[0_0_50px_rgba(249,115,22,0.6)] transform hover:scale-105 transition-all duration-300 text-lg shadow-2xl">
+                <button id="login-btn" class="w-full mt-6 bg-gradient-kps text-white font-bold py-3.5 rounded-xl hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transform hover:scale-102 transition-all duration-300 text-base">
                     <i class="fas fa-arrow-right mr-2"></i>
                     MASUK & DOWNLOAD SEKARANG
                 </button>
 
-                <!-- Running text di footer login -->
-                <div class="running-text mt-7">
+                <!-- Running text -->
+                <div class="running-text mt-5">
                     <marquee behavior="scroll" direction="left" scrollamount="4">
                         FREE FIRE PRIVATE SERVER BUNDLE GA KEBAWA. (INI BUKAN FFORI)
                     </marquee>
@@ -342,9 +318,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Navbar, Header, dan bagian lainnya tetap sama seperti sebelumnya -->
-    <!-- (Saya sisipkan kembali agar file lengkap) -->
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 top-0 bg-kps-main/90 backdrop-blur-md border-b border-kps-border/50">
@@ -385,11 +358,8 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu & Header tetap sama seperti kode asli kamu -->
-
     <!-- Header -->
     <header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center max-w-7xl mx-auto">
-        <!-- ... (sama seperti sebelumnya) ... -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8 relative">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                 <span class="relative flex h-3 w-3">
@@ -407,7 +377,7 @@
 
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI : 
+                    <span class="text-xs font-bold text-slate-300 tracking-wider">DIKUNJUNGI: 
                         <span class="animate-count" data-target="95212">0</span>
                     </span>
                 </div>
@@ -452,7 +422,7 @@
         </div>
     </header>
 
-    <!-- Script tetap sama -->
+    <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginOverlay = document.getElementById('login-overlay');
@@ -549,30 +519,30 @@
                 mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Partikel Global
+            // Partikel Global (jumlah dikurangi)
             const particlesContainer = document.getElementById('particles-container');
-            const particleCount = 50;
+            const particleCount = 30; // Lebih sedikit untuk performa
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-                const size = Math.random() * 5 + 3;
+                const size = Math.random() * 4 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${Math.random() * 100}vw`;
-                const duration = Math.random() * 10 + 10;
+                const duration = Math.random() * 12 + 8;
                 particle.style.animation = `fall ${duration}s linear infinite`;
                 particle.style.animationDelay = `${Math.random() * 10}s`;
-                particle.style.opacity = Math.random() * 0.6 + 0.3;
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
                 particlesContainer.appendChild(particle);
             }
 
-            // Partikel Login
+            // Partikel Login (juga dikurangi)
             function createLoginParticles() {
                 if (!loginParticles) return;
-                for (let i = 0; i < 60; i++) {
+                for (let i = 0; i < 30; i++) {
                     const p = document.createElement('div');
                     p.classList.add('login-particle');
-                    const size = Math.random() * 6 + 4;
+                    const size = Math.random() * 4 + 2;
                     p.style.width = `${size}px`;
                     p.style.height = `${size}px`;
                     p.style.left = `${Math.random() * 100}%`;
@@ -580,7 +550,6 @@
                     const duration = Math.random() * 12 + 8;
                     p.style.animation = `fall ${duration}s linear infinite`;
                     p.style.animationDelay = `${Math.random() * 10}s`;
-                    p.style.opacity = Math.random() * 0.8 + 0.4;
                     loginParticles.appendChild(p);
                 }
             }
@@ -590,7 +559,7 @@
             style.innerHTML = `
                 @keyframes fall {
                     0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
-                    100% { transform: translateY(100vh) translateX(80px) rotate(360deg); }
+                    100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
                 }
             `;
             document.head.appendChild(style);
