@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download - Kipas Private Server</title>
+        <link rel="icon" type="image/png" href="image.png">
+        
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8c00',
+                        accent: '#ffa500',
+                        active: '#FBBF24',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/css">
+        @font-face {font-family:'Nunito Sans';font-style:normal;font-weight:900;src:url(/cf-fonts/v/nunito-sans/5.0.11/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+        @font-face {font-family:'Poppins';font-style:normal;font-weight:400;src:url(/cf-fonts/s/poppins/5.0.11/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+        @font-face {font-family:'Poppins';font-style:normal;font-weight:500;src:url(/cf-fonts/s/poppins/5.0.11/latin/500/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+        @font-face {font-family:'Poppins';font-style:normal;font-weight:600;src:url(/cf-fonts/s/poppins/5.0.11/latin/600/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+        @font-face {font-family:'Poppins';font-style:normal;font-weight:700;src:url(/cf-fonts/s/poppins/5.0.11/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+        @font-face {font-family:'Poppins';font-style:normal;font-weight:800;src:url(/cf-fonts/s/poppins/5.0.11/latin/800/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden;
+            background-color: #000000;
+        }
+        #page-content { display: none; }
+        .active-btn {
+            background-color: #FBBF24 !important;
+            color: #000000 !important;
+        }
+        .device-btn:hover {
+            background-color: #ffa500 !important;
+            color: #000000 !important;
+        }
+        .download-btn {
+            background-color: #ff8c00 !important;
+        }
+        .download-btn:hover {
+            background-color: #ffa500 !important;
+        }
+        .border-t {
+            border-color: #ffa50030 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+    <noscript>
+        <div class="bg-black text-white w-full h-screen flex flex-col items-center justify-center text-center p-4">
+            <h1 class="text-3xl font-bold text-orange-500 mb-4">JavaScript is Required</h1>
+            <p class="text-lg">Please enable JavaScript in your browser settings to use this website.</p>
+        </div>
+    </noscript>
+
+    <div id="page-content">
+        <main>
+            <section id="download" class="py-20 bg-gray-900 min-h-screen">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12" data-aos="fade-up">
+                        <h2 class="text-4xl font-bold">Download <span class="text-orange-500">KPS</span></h2>
+                        <p class="text-gray-400 mt-2 text-2xl font-bold">Ayo main dan JedagJedug</p>
+                    </div>
+
+                    <!-- Tab Platform (hanya Android & iOS) -->
+                    <div id="device-selector" class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
+                        <button data-target="android-content" class="device-btn bg-gray-700 font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center gap-2 active-btn">
+                            <i class="fa-brands fa-android"></i> Android
+                        </button>
+                        <button data-target="ios-content" class="device-btn bg-gray-700 font-bold py-3 px-8 rounded-lg text-lg transition duration-300 flex items-center gap-2">
+                            <i class="fa-brands fa-apple"></i> iOS
+                        </button>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- Android -->
+                        <div id="android-content" class="download-content" data-aos="fade-up">
+                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                                <h3 class="text-3xl font-bold mb-6 flex items-center gap-4"><i class="fa-brands fa-android text-orange-500"></i> Android</h3>
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-4 text-orange-500">Required Files:</h4>
+                                        <div class="flex flex-col space-y-4">
+                                            <a href="https://www.mediafire.com/file/sc24bthmehcb2u7/FFMAX_WAJIB_DIHAPUS_YA_%2521%2521_-_ADEN.zip/file" target="_blank" class="download-btn text-white font-bold py-3 px-6 rounded-lg text-center transition duration-300 flex items-center justify-center gap-2">
+                                                <i class="fa-solid fa-file-apk"></i> Download KIPAS_PRIVATE_SERVER.apk
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-4 text-orange-500">Panduan Instal:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-gray-300">
+                                            <li>Ikutin <strong>Tutorial</strong> aja. udah ada di dalem Folder nya.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- iOS -->
+                        <div id="ios-content" class="download-content hidden" data-aos="fade-up">
+                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                                <h3 class="text-3xl font-bold mb-6 flex items-center gap-4"><i class="fa-brands fa-apple"></i> iOS</h3>
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-4 text-orange-500">Required Files:</h4>
+                                        <div class="flex flex-col space-y-4">
+                                            <a href="https://apps.apple.com/id/app/proxypin-open-source-capture/id6450932949" target="_blank" rel="noopener noreferrer" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-3 px-6 rounded-lg text-center transition duration-300 flex items-center justify-center gap-2">
+                                                <i class="fa-brands fa-app-store-ios"></i> Get Proxypin (AppStore)
+                                            </a>
+                                            <a href="https://www.youtube.com/shorts/BTRVjTczKIM" target="_blank" class="download-btn text-white font-bold py-3 px-6 rounded-lg text-center transition duration-300 flex items-center justify-center gap-2">
+                                                <i class="fa-brands fa-youtube"></i> Tutorial Video
+                                            </a>
+                                            <a href="https://www.mediafire.com/file/jsj7lx048c1a60w/FREE_FFKIPAS+IOS+MAS+ADEN.config/file" target="_blank" class="download-btn text-white font-bold py-3 px-6 rounded-lg text-center transition duration-300 flex items-center justify-center gap-2">
+                                                <i class="fa-solid fa-file-code"></i> Download Config
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold mb-4 text-orange-500">Panduan Instal:</h4>
+                                        <ol class="list-decimal list-inside space-y-2 text-gray-300">
+                                            <li>Ikutin<strong>Tutorial</strong>aja. gampang itu.</li>
+                                            <li>Dah. tinggal Login deh.....</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="bg-black border-t border-orange-500/20 py-8">
+            <div class="container mx-auto px-6 text-center text-gray-400">
+                <div class="flex justify-center mb-4">
+                    <a href="https://dsc.gg/sikipas" target="_blank" rel="noopener noreferrer" title="Join our Discord" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                        <i class="fa-brands fa-discord fa-2x"></i>
+                    </a>
+                </div>
+                <p>Kipas Private Server &copy; 2025. All rights reserved.</p>
+                <p class="text-sm mt-2">This is a private server and is not affiliated with the official developers.</p>
+            </div>
+        </footer>
+    </div>
+
+    <audio id="click-sound" src="https://dl.dir.freefiremobile.com/common/web_event/magicarrow/audios/FF_SFX_WebEvent_UI_Click.mp3" preload="auto"></audio>
+
+    <script>
+        document.getElementById('page-content').style.display = 'block';
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+
+    <script>
+        const clickSound = document.getElementById('click-sound');
+        const clickableElements = document.querySelectorAll('a, button');
+        const deviceButtons = document.querySelectorAll('.device-btn');
+        const contentDivs = document.querySelectorAll('.download-content');
+
+        const playSound = (soundElement) => {
+            soundElement.currentTime = 0;
+            soundElement.play().catch(() => {});
+        };
+
+        clickableElements.forEach(el => el.addEventListener('click', () => playSound(clickSound)));
+
+        deviceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                deviceButtons.forEach(btn => btn.classList.remove('active-btn'));
+                button.classList.add('active-btn');
+                contentDivs.forEach(div => div.classList.add('hidden'));
+                document.getElementById(targetId)?.classList.remove('hidden');
+                AOS.refresh();
+            });
+        });
+    </script>
+</body>
+</html>
