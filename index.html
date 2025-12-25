@@ -234,13 +234,23 @@
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
     <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
     <div id="particles-container"></div>
+
+    <!-- Background Music -->
     <audio id="bg-music" loop>
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <!-- Click Sound Effect -->
+    <audio id="click-sound" preload="auto">
+        <source src="https://dl.dir.freefiremobile.com/common/web_event/magicarrow/audios/FF_SFX_WebEvent_UI_Click.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div id="music-toggle" title="Klik untuk mute/unmute musik">
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
+
     <div id="login-overlay">
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
@@ -294,6 +304,7 @@
             </div>
         </div>
     </div>
+
     <nav class="fixed w-full z-50 top-0 bg-kps-main/90 backdrop-blur-md border-b border-kps-border/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -378,9 +389,7 @@
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #ffkipas
         </p>
 
-        <!-- Tata letak tombol yang sudah diperbaiki dan dirapikan -->
         <div class="flex flex-col items-center gap-6">
-            <!-- Tombol Download besar di atas -->
             <a href="download.html" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
                 <i class="fas fa-download text-2xl"></i>
                 <div class="text-left">
@@ -389,37 +398,29 @@
                 </div>
             </a>
 
-                      <!-- Verify ID -->
-                <a href="https://ffkipas.my.id/verifyuid" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
-                    <i class="fas fa-id-badge"></i>
-                    <span>VERIF ID</span>
-                    <div class="text-sm font-normal opacity-80">(BUAT LOGIN)</div>
-                </a>
+            <a href="https://ffkipas.my.id/verifyuid" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
+                <i class="fas fa-id-badge"></i>
+                <span>VERIF ID</span>
+                <div class="text-sm font-normal opacity-80">(BUAT LOGIN)</div>
+            </a>
 
-            <!-- Baris tombol bawah - jarak dikurangi (gap-3) agar lebih rapat -->
             <div class="flex flex-wrap justify-center gap-3 w-full">
-                <!-- Panel (orange) -->
                 <a href="panel.html" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fa-brands fa-cpanel"></i>
                     <span>PANEL (NGEUBAH)</span>
                 </a>
 
-                <!-- Saluran Resmi -->
                 <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fas fa-users"></i>
                     <span>SALURAN RESMI</span>
                 </a>
 
-            
-
-                <!-- Reseller Resmi (TikTok) -->
                 <a href="https://www.tiktok.com/@adenf9" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fa-brands fa-get-pocket"></i>
                     <span>LAGI PERBAIKAN</span>
                 </a>
             </div>
 
-            <!-- Marquee -->
             <div class="running-text mt-6 max-w-2xl">
                 <marquee behavior="scroll" direction="left" scrollamount="5">
                     PRIVATE SERVER BUNDLE NYA GABAKAL KELIHATAN.
@@ -436,6 +437,7 @@
             let visitorCount = getRandomInRange(55000, 540000);
             let onlineCount = getRandomInRange(2500, 5000);
             let downloadCount = getRandomInRange(25000, 45000);
+
             function animateCount(el, target, duration = 1500) {
                 let start = 0;
                 const stepTime = 10;
@@ -450,16 +452,19 @@
                     el.textContent = Math.ceil(start).toLocaleString('id-ID');
                 }, stepTime);
             }
+
             document.querySelectorAll('.visitor-count').forEach(el => animateCount(el, visitorCount));
             document.querySelectorAll('.channel-count').forEach(el => animateCount(el, onlineCount));
             const downloadEl = document.querySelector('.download-count');
             if (downloadEl) animateCount(downloadEl, downloadCount);
+
             function animateIncrement(el, newValue) {
                 el.classList.remove('count-up');
                 void el.offsetWidth;
                 el.classList.add('count-up');
                 el.textContent = newValue.toLocaleString('id-ID');
             }
+
             setInterval(() => {
                 visitorCount += 1;
                 document.querySelectorAll('.visitor-count').forEach(el => animateIncrement(el, visitorCount));
@@ -472,6 +477,7 @@
                 downloadCount += 1;
                 if (downloadEl) animateIncrement(downloadEl, downloadCount);
             }, 7000);
+
             const loginOverlay = document.getElementById('login-overlay');
             const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
@@ -483,6 +489,7 @@
             const bgMusic = document.getElementById('bg-music');
             const musicToggle = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
+
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
                     bgMusic.play();
@@ -492,15 +499,19 @@
                     musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
                 }
             });
+
             const badWords = ['kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 'fuck', 'shit', 'bitch'];
             const savedUsername = localStorage.getItem('kipasUsername');
+
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
                 logoutBtn.classList.remove('hidden');
+                document.getElementById('mobile-logout-btn').classList.remove('hidden');
                 loginOverlay.classList.add('hidden');
                 bgMusic.volume = 0.3;
                 bgMusic.play();
             }
+
             function checkBadWord(name) {
                 const lowerName = name.toLowerCase();
                 return badWords.some(word => lowerName.includes(word));
@@ -508,6 +519,7 @@
             function checkNumber(name) {
                 return /\d/.test(name);
             }
+
             usernameInput.addEventListener('input', () => {
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
@@ -515,10 +527,12 @@
                     warningMessage.style.display = 'block';
                 }
             });
+
             loginBtn.addEventListener('click', () => {
                 let name = usernameInput.value.trim() || 'Player';
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
+
                 if (checkBadWord(name)) {
                     errorMessage.style.display = 'block';
                     usernameInput.value = '';
@@ -530,9 +544,11 @@
                     usernameInput.focus();
                     return;
                 }
+
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
+                document.getElementById('mobile-logout-btn').classList.remove('hidden');
                 loginOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginOverlay.classList.add('hidden');
@@ -540,14 +556,18 @@
                     bgMusic.play().catch(e => console.log("Musik diblokir:", e));
                 }, 500);
             });
+
             usernameInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') loginBtn.click();
             });
+
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 bgMusic.pause();
                 location.reload();
             });
+
+            // Efek partikel jatuh
             const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -570,20 +590,58 @@
             `;
             document.head.appendChild(style);
 
+            // Mobile menu
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuClose = document.getElementById('mobile-menu-close');
             const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+
             mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
             mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
             mobileMenu.addEventListener('click', (e) => {
                 if (e.target === mobileMenu) mobileMenu.classList.remove('open');
             });
-            if (localStorage.getItem('kipasUsername')) mobileLogoutBtn.classList.remove('hidden');
             mobileLogoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 location.reload();
             });
+
+            // === EFEK SUARA KLIK ===
+            function playClickSound() {
+                const clickAudio = document.getElementById('click-sound');
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(e => console.log("Suara klik gagal:", e));
+            }
+
+            // Semua elemen yang perlu suara klik
+            const clickableElements = [
+                // Header utama
+                document.querySelector('a[href="download.html"]'),
+                document.querySelector('header a[href="https://ffkipas.my.id/verifyuid"]'),
+                document.querySelector('a[href="panel.html"]'),
+                document.querySelector('a[href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02"]'),
+                document.querySelector('a[href="https://www.tiktok.com/@adenf9"]'),
+
+                // Navbar desktop
+                document.querySelector('nav a[href="#home"]'),
+                document.querySelector('nav a[href="#features"]'),
+                document.querySelector('nav a[href="https://ffkipas.my.id/verifyuid"]'),
+                document.querySelector('nav a[href="login admin.html"]'),
+
+                // Mobile menu
+                document.querySelector('#mobile-menu a[href="#home"]'),
+                document.querySelector('#mobile-menu a[href="#features"]'),
+                document.querySelector('#mobile-menu a[href="https://ffkipas.my.id/verifyuid"]'),
+                document.querySelector('#mobile-menu a[href="login admin.html"]'),
+                mobileLogoutBtn
+            ];
+
+            clickableElements.forEach(el => {
+                if (el) el.addEventListener('click', playClickSound);
+            });
+
+            // Logout desktop juga
+            logoutBtn.addEventListener('click', playClickSound);
         });
     </script>
 
