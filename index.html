@@ -128,7 +128,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)),
-                        url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/0b8cb561ac88828c2d09bb7d86158255.jpg') center/cover no-repeat;
+                        url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/c9ef03a17ce2b8ee250ea9a46aa2976e.jpg') center/cover no-repeat;
             backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
@@ -229,6 +229,54 @@
             color: white;
             cursor: pointer;
         }
+
+        /* Countdown Overlay Styles */
+        #countdown-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)),
+                        url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/c9ef03a17ce2b8ee250ea9a46aa2976e.jpg') center/cover no-repeat;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease;
+        }
+        #countdown-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #countdown-overlay .inner-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+            border: 2px solid rgba(249, 115, 22, 0.5);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
+        }
+        #continue-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid #334155;
+            color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        #continue-btn.enabled {
+            background: linear-gradient(135deg, #F97316, #EA580C);
+            border-color: #F97316;
+            color: white;
+            cursor: pointer;
+            opacity: 1;
+        }
+        #continue-btn.enabled:hover {
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
@@ -251,6 +299,7 @@
         <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
     </div>
 
+    <!-- Login Overlay -->
     <div id="login-overlay">
         <div id="login-box" class="relative">
             <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
@@ -258,7 +307,7 @@
                 <h2 class="font-tech text-3xl font-bold text-white leading-tight">
                     ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
                 </h2>
-                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold">KIPAS PRIVATE SERVER</p>
+                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold"></p>
             </div>
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
@@ -302,6 +351,28 @@
                     </marquee>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Countdown Overlay setelah Login -->
+    <div id="countdown-overlay">
+        <div class="inner-box">
+            <h3 class="font-tech text-3xl font-bold text-white mb-6">
+                SEDANG MEMUAT<span class="text-kps-orange">...</span>
+            </h3>
+            <div class="text-6xl font-tech font-bold text-kps-orange mb-8" id="countdown-timer">8</div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-kps-border rounded-full h-4 overflow-hidden mb-6">
+                <div id="progress-bar" class="h-full bg-gradient-kps transition-all duration-1000 ease-linear" style="width: 0%"></div>
+            </div>
+            
+            <p class="text-slate-400 text-sm mb-8">Tunggu sebentar, server sedang menyiapkan akses Anda</p>
+            
+            <button id="continue-btn" class="w-full py-4 rounded-xl font-bold text-lg transition-all" disabled>
+                <i class="fas fa-lock mr-2"></i>
+                LANJUT KE HALAMAN UTAMA
+            </button>
         </div>
     </div>
 
@@ -479,6 +550,10 @@
             }, 7000);
 
             const loginOverlay = document.getElementById('login-overlay');
+            const countdownOverlay = document.getElementById('countdown-overlay');
+            const countdownTimer = document.getElementById('countdown-timer');
+            const progressBar = document.getElementById('progress-bar');
+            const continueBtn = document.getElementById('continue-btn');
             const particlesContainer = document.getElementById('particles-container');
             const usernameInput = document.getElementById('username-input');
             const loginBtn = document.getElementById('login-btn');
@@ -489,6 +564,13 @@
             const bgMusic = document.getElementById('bg-music');
             const musicToggle = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
+
+            // Fungsi suara klik
+            function playClickSound() {
+                const clickAudio = document.getElementById('click-sound');
+                clickAudio.currentTime = 0;
+                clickAudio.play().catch(e => console.log("Suara klik gagal:", e));
+            }
 
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
@@ -528,6 +610,9 @@
                 }
             });
 
+            // Suara klik pada tombol login
+            loginBtn.addEventListener('click', playClickSound);
+
             loginBtn.addEventListener('click', () => {
                 let name = usernameInput.value.trim() || 'Player';
                 errorMessage.style.display = 'none';
@@ -549,11 +634,46 @@
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
                 document.getElementById('mobile-logout-btn').classList.remove('hidden');
+
                 loginOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginOverlay.classList.add('hidden');
-                    bgMusic.volume = 0.3;
-                    bgMusic.play().catch(e => console.log("Musik diblokir:", e));
+
+                    countdownOverlay.classList.add('show');
+
+                    let timeLeft = 8;
+                    countdownTimer.textContent = timeLeft;
+                    progressBar.style.width = '0%';
+
+                    const interval = setInterval(() => {
+                        timeLeft--;
+                        countdownTimer.textContent = timeLeft;
+                        const percentage = ((8 - timeLeft) / 8) * 100;
+                        progressBar.style.width = percentage + '%';
+
+                        if (timeLeft <= 0) {
+                            clearInterval(interval);
+                            countdownTimer.textContent = 'SIAP!';
+                            continueBtn.classList.add('enabled');
+                            continueBtn.disabled = false;
+                            continueBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i> LANJUT KE HALAMAN UTAMA';
+
+                            // Suara klik pada tombol continue setelah aktif
+                            continueBtn.addEventListener('click', playClickSound);
+                        }
+                    }, 1000);
+
+                    // Aksi klik continue
+                    continueBtn.onclick = function(e) {
+                        playClickSound();
+                        countdownOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            countdownOverlay.classList.remove('show');
+                            bgMusic.volume = 0.3;
+                            bgMusic.play().catch(e => console.log("Musik diblokir:", e));
+                        }, 600);
+                    };
+
                 }, 500);
             });
 
@@ -567,7 +687,7 @@
                 location.reload();
             });
 
-            // Efek partikel jatuh
+            // Partikel jatuh
             const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -606,42 +726,28 @@
                 location.reload();
             });
 
-            // === EFEK SUARA KLIK ===
-            function playClickSound() {
-                const clickAudio = document.getElementById('click-sound');
-                clickAudio.currentTime = 0;
-                clickAudio.play().catch(e => console.log("Suara klik gagal:", e));
-            }
-
-            // Semua elemen yang perlu suara klik
+            // Suara klik untuk tombol lainnya
             const clickableElements = [
-                // Header utama
                 document.querySelector('a[href="download.html"]'),
                 document.querySelector('header a[href="https://ffkipas.my.id/verifyuid"]'),
                 document.querySelector('a[href="panel.html"]'),
                 document.querySelector('a[href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02"]'),
                 document.querySelector('a[href="https://www.tiktok.com/@adenf9"]'),
-
-                // Navbar desktop
                 document.querySelector('nav a[href="#home"]'),
                 document.querySelector('nav a[href="#features"]'),
                 document.querySelector('nav a[href="https://ffkipas.my.id/verifyuid"]'),
                 document.querySelector('nav a[href="login admin.html"]'),
-
-                // Mobile menu
                 document.querySelector('#mobile-menu a[href="#home"]'),
                 document.querySelector('#mobile-menu a[href="#features"]'),
                 document.querySelector('#mobile-menu a[href="https://ffkipas.my.id/verifyuid"]'),
                 document.querySelector('#mobile-menu a[href="login admin.html"]'),
-                mobileLogoutBtn
+                mobileLogoutBtn,
+                logoutBtn
             ];
 
             clickableElements.forEach(el => {
                 if (el) el.addEventListener('click', playClickSound);
             });
-
-            // Logout desktop juga
-            logoutBtn.addEventListener('click', playClickSound);
         });
     </script>
 
