@@ -284,7 +284,7 @@
             document.querySelectorAll('.channel-count').forEach(el => el.textContent = onlineCount.toLocaleString('id-ID'));
 
             // === AUTO VISITOR +1 SETIAP DETIK MENGGUNAKAN LOCALSTORAGE ===
-            let visitorCount = parseInt(localStorage.getItem('kipasVisitorCount') || '100000'); // Mulai dari 100.000 (ubah sesuka hati)
+            let visitorCount = parseInt(localStorage.getItem('kipasVisitorCount') || '0'); // Mulai dari 100.000 (ubah sesuka hati)
             const updateVisitorDisplay = () => {
                 document.querySelectorAll('.visitor-count').forEach(el => {
                     el.textContent = visitorCount.toLocaleString('id-ID');
