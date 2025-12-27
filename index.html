@@ -183,8 +183,7 @@
             }
         }
         @keyframes countUp {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-10px); opacity: 0.7; }
+            0% { transform: translateY(10px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
         .count-up {
@@ -229,8 +228,6 @@
             color: white;
             cursor: pointer;
         }
-
-        /* Countdown Overlay Styles */
         #countdown-overlay {
             position: fixed;
             inset: 0;
@@ -313,13 +310,13 @@
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
                     <span class="font-bold text-slate-300 text-2xs">VISIT :</span>
-                    <span class="visitor-count text-kps-orange font-bold animate-count">0</span>
+                    <span class="visitor-count text-kps-orange font-bold">0</span>
                 </div>
                 <div class="w-px h-5 bg-kps-orange/50"></div>
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-users text-kps-orange text-xs"></i>
                     <span class="font-bold text-slate-300 text-2xs">ON :</span>
-                    <span class="channel-count text-kps-orange font-bold animate-count">0</span>
+                    <span class="channel-count text-kps-orange font-bold">0</span>
                 </div>
             </div>
             <img src="robot.png" alt="Aden Kipas Character" class="login-image">
@@ -345,27 +342,21 @@
                     <i class="fas fa-arrow-right mr-2"></i>
                     MASUK & DOWNLOAD SEKARANG
                 </button>
-                
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Countdown Overlay setelah Login -->
+    <!-- Countdown Overlay -->
     <div id="countdown-overlay">
         <div class="inner-box">
             <h3 class="font-tech text-3xl font-bold text-white mb-6">
                 SEDANG MEMUAT<span class="text-kps-orange">...</span>
             </h3>
             <div class="text-6xl font-tech font-bold text-kps-orange mb-8" id="countdown-timer">2</div>
-            
-            <!-- Progress Bar -->
             <div class="w-full bg-kps-border rounded-full h-4 overflow-hidden mb-6">
                 <div id="progress-bar" class="h-full bg-gradient-kps transition-all duration-1000 ease-linear" style="width: 0%"></div>
             </div>
-            
             <p class="text-slate-400 text-sm mb-8">Tunggu sebentar, server sedang menyiapkan akses Anda</p>
-            
             <button id="continue-btn" class="w-full py-4 rounded-xl font-bold text-lg transition-all" disabled>
                 <i class="fas fa-lock mr-2"></i>
                 LANJUT KE HALAMAN UTAMA
@@ -439,7 +430,7 @@
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
                     <span class="text-xs font-bold text-slate-300 tracking-wider">VISIT :
-                        <span class="visitor-count animate-count">0</span>
+                        <span class="visitor-count">0</span>
                     </span>
                 </div>
             </div>
@@ -450,7 +441,7 @@
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count animate-count">0</span></div>
+                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count">0</span></div>
             </div>
         </div>
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -458,7 +449,7 @@
         </p>
 
         <div class="flex flex-col items-center gap-6">
-            <a href="download.html" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
+            <a id="download-btn" href="download.html" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
                 <i class="fas fa-download text-2xl"></i>
                 <div class="text-left">
                     <div>DOWNLOAD</div>
@@ -499,52 +490,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            function getRandomInRange(min, max) {
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
-            let visitorCount = getRandomInRange(55000, 540000);
-            let onlineCount = getRandomInRange(2500, 5000);
-            let downloadCount = getRandomInRange(25000, 45000);
-
-            function animateCount(el, target, duration = 1500) {
-                let start = 0;
-                const stepTime = 10;
-                const steps = duration / stepTime;
-                const increment = target / steps;
-                const timer = setInterval(() => {
-                    start += increment;
-                    if (start >= target) {
-                        start = target;
-                        clearInterval(timer);
-                    }
-                    el.textContent = Math.ceil(start).toLocaleString('id-ID');
-                }, stepTime);
-            }
-
-            document.querySelectorAll('.visitor-count').forEach(el => animateCount(el, visitorCount));
-            document.querySelectorAll('.channel-count').forEach(el => animateCount(el, onlineCount));
-            const downloadEl = document.querySelector('.download-count');
-            if (downloadEl) animateCount(downloadEl, downloadCount);
-
-            function animateIncrement(el, newValue) {
-                el.classList.remove('count-up');
-                void el.offsetWidth;
-                el.classList.add('count-up');
-                el.textContent = newValue.toLocaleString('id-ID');
-            }
-
-            setInterval(() => {
-                visitorCount += 1;
-                document.querySelectorAll('.visitor-count').forEach(el => animateIncrement(el, visitorCount));
-            }, 5000);
-            setInterval(() => {
-                onlineCount += 1;
-                document.querySelectorAll('.channel-count').forEach(el => animateIncrement(el, onlineCount));
-            }, 4000);
-            setInterval(() => {
-                downloadCount += 1;
-                if (downloadEl) animateIncrement(downloadEl, downloadCount);
-            }, 7000);
+            // Channel count fake
+            const onlineCount = Math.floor(Math.random() * 2500) + 2500;
+            document.querySelectorAll('.channel-count').forEach(el => el.textContent = onlineCount.toLocaleString('id-ID'));
 
             const loginOverlay = document.getElementById('login-overlay');
             const countdownOverlay = document.getElementById('countdown-overlay');
@@ -556,13 +504,13 @@
             const loginBtn = document.getElementById('login-btn');
             const usernameDisplay = document.getElementById('username-display');
             const logoutBtn = document.getElementById('logout-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
             const errorMessage = document.getElementById('error-message');
             const warningMessage = document.getElementById('warning-message');
             const bgMusic = document.getElementById('bg-music');
             const musicToggle = document.getElementById('music-toggle');
             const musicIcon = document.getElementById('music-icon');
 
-            // Fungsi suara klik
             function playClickSound() {
                 const clickAudio = document.getElementById('click-sound');
                 clickAudio.currentTime = 0;
@@ -585,7 +533,7 @@
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
                 logoutBtn.classList.remove('hidden');
-                document.getElementById('mobile-logout-btn').classList.remove('hidden');
+                mobileLogoutBtn.classList.remove('hidden');
                 loginOverlay.classList.add('hidden');
                 bgMusic.volume = 0.3;
                 bgMusic.play();
@@ -607,7 +555,6 @@
                 }
             });
 
-            // Suara klik pada tombol login
             loginBtn.addEventListener('click', playClickSound);
 
             loginBtn.addEventListener('click', () => {
@@ -630,12 +577,11 @@
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
-                document.getElementById('mobile-logout-btn').classList.remove('hidden');
+                mobileLogoutBtn.classList.remove('hidden');
 
                 loginOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginOverlay.classList.add('hidden');
-
                     countdownOverlay.classList.add('show');
 
                     let timeLeft = 2;
@@ -645,7 +591,7 @@
                     const interval = setInterval(() => {
                         timeLeft--;
                         countdownTimer.textContent = timeLeft;
-                        const percentage = ((8 - timeLeft) / 8) * 100;
+                        const percentage = ((2 - timeLeft) / 2) * 100;
                         progressBar.style.width = percentage + '%';
 
                         if (timeLeft <= 0) {
@@ -654,23 +600,23 @@
                             continueBtn.classList.add('enabled');
                             continueBtn.disabled = false;
                             continueBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i> LANJUT KE HALAMAN UTAMA';
-
-                            // Suara klik pada tombol continue setelah aktif
                             continueBtn.addEventListener('click', playClickSound);
                         }
                     }, 1000);
 
-                    // Aksi klik continue
-                    continueBtn.onclick = function(e) {
+                    continueBtn.onclick = function() {
                         playClickSound();
                         countdownOverlay.style.opacity = '0';
                         setTimeout(() => {
                             countdownOverlay.classList.remove('show');
                             bgMusic.volume = 0.3;
-                            bgMusic.play().catch(e => console.log("Musik diblokir:", e));
+                            bgMusic.play().catch(e => {});
+
+                            if (typeof window.recordVisit === 'function') {
+                                window.recordVisit();
+                            }
                         }, 600);
                     };
-
                 }, 500);
             });
 
@@ -679,6 +625,11 @@
             });
 
             logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('kipasUsername');
+                bgMusic.pause();
+                location.reload();
+            });
+            mobileLogoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 bgMusic.pause();
                 location.reload();
@@ -711,46 +662,34 @@
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuClose = document.getElementById('mobile-menu-close');
-            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
 
             mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
             mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
             mobileMenu.addEventListener('click', (e) => {
                 if (e.target === mobileMenu) mobileMenu.classList.remove('open');
             });
-            mobileLogoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('kipasUsername');
-                location.reload();
+
+            // Suara klik semua elemen
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('click', playClickSound);
             });
 
-            // Suara klik untuk tombol lainnya
-            const clickableElements = [
-                document.querySelector('a[href="download.html"]'),
-                document.querySelector('header a[href="https://ffkipas.my.id/verifyuid"]'),
-                document.querySelector('a[href="panel.html"]'),
-                document.querySelector('a[href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02"]'),
-                document.querySelector('a[href="https://www.tiktok.com/@adenf9"]'),
-                document.querySelector('nav a[href="#home"]'),
-                document.querySelector('nav a[href="#features"]'),
-                document.querySelector('nav a[href="https://ffkipas.my.id/verifyuid"]'),
-                document.querySelector('nav a[href="login admin.html"]'),
-                document.querySelector('#mobile-menu a[href="#home"]'),
-                document.querySelector('#mobile-menu a[href="#features"]'),
-                document.querySelector('#mobile-menu a[href="https://ffkipas.my.id/verifyuid"]'),
-                document.querySelector('#mobile-menu a[href="login admin.html"]'),
-                mobileLogoutBtn,
-                logoutBtn
-            ];
-
-            clickableElements.forEach(el => {
-                if (el) el.addEventListener('click', playClickSound);
-            });
+            // +1 download saat klik tombol download
+            const downloadBtn = document.getElementById('download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    if (typeof window.recordDownload === 'function') {
+                        window.recordDownload();
+                    }
+                });
+            }
         });
     </script>
 
+    <!-- Firebase Real Visitor & Download Count -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBQvmYGP8c93BqLBlvQ7xsaiaXy7HIRM5c",
@@ -766,12 +705,47 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const visitorRef = ref(db, 'visitorCount');
+        const downloadRef = ref(db, 'downloadCount');
 
-        document.getElementById('login-btn').addEventListener('click', () => {
-            runTransaction(visitorRef, (current) => (current || 0) + 1)
-                .then(() => console.log('%c +1 TOTAL KUNJUNGAN BERHASIL!', 'color: lime; font-weight: bold;'))
-                .catch((error) => console.error('Gagal +1 kunjungan:', error));
+        // Realtime visitor
+        onValue(visitorRef, (snapshot) => {
+            const count = snapshot.val() || 0;
+            document.querySelectorAll('.visitor-count').forEach(el => {
+                el.textContent = count.toLocaleString('id-ID');
+                el.classList.add('count-up');
+                setTimeout(() => el.classList.remove('count-up'), 600);
+            });
         });
+
+        // Realtime download
+        onValue(downloadRef, (snapshot) => {
+            const count = snapshot.val() || 0;
+            document.querySelectorAll('.download-count').forEach(el => {
+                el.textContent = count.toLocaleString('id-ID');
+                el.classList.add('count-up');
+                setTimeout(() => el.classList.remove('count-up'), 600);
+            });
+        });
+
+        // +1 visitor
+        window.recordVisit = function() {
+            const last = localStorage.getItem('lastVisit');
+            const now = Date.now();
+            if (last && (now - parseInt(last) < 3600000)) return;
+            localStorage.setItem('lastVisit', now.toString());
+
+            runTransaction(visitorRef, (current) => (current || 0) + 1);
+        };
+
+        // +1 download
+        window.recordDownload = function() {
+            const last = localStorage.getItem('lastDownload');
+            const now = Date.now();
+            if (last && (now - parseInt(last) < 3600000)) return;
+            localStorage.setItem('lastDownload', now.toString());
+
+            runTransaction(downloadRef, (current) => (current || 0) + 1);
+        };
     </script>
 </body>
 </html>
