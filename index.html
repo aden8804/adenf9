@@ -281,15 +281,12 @@
     <div id="particles-container"></div>
 
     <!-- Background Music -->
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="v4.www-y2mate.blog - Garena Free Fire La Casa De Papel - My Life Is Going On Song (320 KBps).mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
-
-    <!-- Click Sound Effect -->
+    <!-- Click Sound -->
     <audio id="click-sound" preload="auto">
         <source src="https://dl.dir.freefiremobile.com/common/web_event/magicarrow/audios/FF_SFX_WebEvent_UI_Click.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
     <div id="music-toggle" title="Klik untuk mute/unmute musik">
@@ -304,8 +301,9 @@
                 <h2 class="font-tech text-3xl font-bold text-white leading-tight">
                     ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
                 </h2>
-                <p class="text-orange-300 text-xs mt-1 tracking-wider font-bold"></p>
             </div>
+
+            <!-- Stats di Login Overlay -->
             <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-eye text-kps-orange text-xs"></i>
@@ -315,16 +313,13 @@
                 <div class="w-px h-5 bg-kps-orange/50"></div>
                 <div class="flex items-center gap-1.5">
                     <i class="fas fa-users text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs">ON :</span>
-                    <span class="channel-count text-kps-orange font-bold">0</span>
+                    <span class="font-bold text-slate-300 text-2xs">TERDAFTAR :</span>
+                    <span class="registered-count text-kps-orange font-bold">0</span>
                 </div>
             </div>
+
             <img src="robot.png" alt="Aden Kipas Character" class="login-image">
             <div class="mt-6">
-                <p class="text-orange-200 text-sm mb-4 leading-relaxed">
-                  <strong class="text-kps-orange"></strong>.<br>
-                    <span class="text-xs text-orange-300"></span>
-                </p>
                 <div class="relative">
                     <input type="text" id="username-input" placeholder="Nama kamu di sini..."
                            class="w-full px-4 py-3 bg-kps-panel/80 border border-kps-orange/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange focus:ring-2 focus:ring-kps-orange/40 transition-all text-base">
@@ -364,6 +359,7 @@
         </div>
     </div>
 
+    <!-- Navbar & Konten Utama (sama seperti sebelumnya) -->
     <nav class="fixed w-full z-50 top-0 bg-kps-main/90 backdrop-blur-md border-b border-kps-border/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -403,9 +399,7 @@
     </nav>
 
     <div id="mobile-menu">
-        <div class="close-btn" id="mobile-menu-close">
-            <i class="fas fa-times"></i>
-        </div>
+        <div class="close-btn" id="mobile-menu-close"><i class="fas fa-times"></i></div>
         <a href="#home">Home</a>
         <a href="#features">Features</a>
         <a href="https://ffkipas.my.id/verifyuid">VERIFY ID</a>
@@ -435,15 +429,18 @@
                 </div>
             </div>
         </div>
+
         <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-4 text-white">
             KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
         </h1>
+
         <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
             <div class="text-center">
                 <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
                 <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count">0</span></div>
             </div>
         </div>
+
         <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #ffkipas
         </p>
@@ -456,30 +453,25 @@
                     <div class="text-sm font-normal opacity-80">(458 MB.)</div>
                 </div>
             </a>
-
             <a href="https://ffkipas.my.id/verifyuid" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
                 <i class="fas fa-id-badge"></i>
                 <span>VERIF ID</span>
                 <div class="text-sm font-normal opacity-80">(BUAT LOGIN)</div>
             </a>
-
             <div class="flex flex-wrap justify-center gap-3 w-full">
                 <a href="panel.html" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fa-brands fa-cpanel"></i>
                     <span>PANEL (NGEUBAH)</span>
                 </a>
-
                 <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fas fa-users"></i>
                     <span>SALURAN RESMI</span>
                 </a>
-
                 <a href="https://www.tiktok.com/@adenf9" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
                     <i class="fa-brands fa-get-pocket"></i>
                     <span>LAGI PERBAIKAN</span>
                 </a>
             </div>
-
             <div class="running-text mt-6 max-w-2xl">
                 <marquee behavior="scroll" direction="left" scrollamount="5">
                     PRIVATE SERVER BUNDLE NYA GABAKAL KELIHATAN.
@@ -488,12 +480,9 @@
         </div>
     </header>
 
+    <!-- Semua Script Utama -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Channel count fake
-            const onlineCount = Math.floor(Math.random() * 2500) + 2500;
-            document.querySelectorAll('.channel-count').forEach(el => el.textContent = onlineCount.toLocaleString('id-ID'));
-
             const loginOverlay = document.getElementById('login-overlay');
             const countdownOverlay = document.getElementById('countdown-overlay');
             const countdownTimer = document.getElementById('countdown-timer');
@@ -514,9 +503,10 @@
             function playClickSound() {
                 const clickAudio = document.getElementById('click-sound');
                 clickAudio.currentTime = 0;
-                clickAudio.play().catch(e => console.log("Suara klik gagal:", e));
+                clickAudio.play().catch(() => {});
             }
 
+            // Music toggle
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
                     bgMusic.play();
@@ -527,26 +517,30 @@
                 }
             });
 
-            const badWords = ['kontol', 'memek', 'puki', 'pepek', 'anjing', 'asu', 'bangsat', 'babi', 'bajingan', 'brengsek', 'jancuk', 'tai', 'goblok', 'tolol', 'ngentot', 'fuck', 'shit', 'bitch'];
-            const savedUsername = localStorage.getItem('kipasUsername');
+            // Bad words filter
+            const badWords = ['kontol','memek','puki','pepek','anjing','asu','bangsat','babi','bajingan','brengsek','jancuk','tai','goblok','tolol','ngentot','fuck','shit','bitch'];
 
+            function checkBadWord(name) {
+                const lower = name.toLowerCase();
+                return badWords.some(word => lower.includes(word));
+            }
+
+            function checkNumber(name) {
+                return /\d/.test(name);
+            }
+
+            // Cek apakah sudah pernah login sebelumnya
+            const savedUsername = localStorage.getItem('kipasUsername');
             if (savedUsername) {
                 usernameDisplay.textContent = savedUsername;
                 logoutBtn.classList.remove('hidden');
                 mobileLogoutBtn.classList.remove('hidden');
                 loginOverlay.classList.add('hidden');
                 bgMusic.volume = 0.3;
-                bgMusic.play();
+                bgMusic.play().catch(() => {});
             }
 
-            function checkBadWord(name) {
-                const lowerName = name.toLowerCase();
-                return badWords.some(word => lowerName.includes(word));
-            }
-            function checkNumber(name) {
-                return /\d/.test(name);
-            }
-
+            // Input validation
             usernameInput.addEventListener('input', () => {
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
@@ -555,10 +549,11 @@
                 }
             });
 
-            loginBtn.addEventListener('click', playClickSound);
-
+            // Login process
             loginBtn.addEventListener('click', () => {
+                playClickSound();
                 let name = usernameInput.value.trim() || 'Player';
+
                 errorMessage.style.display = 'none';
                 warningMessage.style.display = 'none';
 
@@ -568,17 +563,25 @@
                     usernameInput.focus();
                     return;
                 }
+
                 if (checkNumber(name)) {
                     warningMessage.style.display = 'block';
                     usernameInput.focus();
                     return;
                 }
 
+                // Simpan username
                 localStorage.setItem('kipasUsername', name);
                 usernameDisplay.textContent = name;
                 logoutBtn.classList.remove('hidden');
                 mobileLogoutBtn.classList.remove('hidden');
 
+                // *** INCREMENT REGISTERED PLAYER COUNT (hanya sekali per device) ***
+                if (typeof window.recordRegistered === 'function') {
+                    window.recordRegistered();
+                }
+
+                // Fade out login → countdown
                 loginOverlay.style.opacity = '0';
                 setTimeout(() => {
                     loginOverlay.classList.add('hidden');
@@ -600,18 +603,18 @@
                             continueBtn.classList.add('enabled');
                             continueBtn.disabled = false;
                             continueBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i> LANJUT KE HALAMAN UTAMA';
-                            continueBtn.addEventListener('click', playClickSound);
                         }
                     }, 1000);
 
-                    continueBtn.onclick = function() {
+                    continueBtn.onclick = () => {
                         playClickSound();
                         countdownOverlay.style.opacity = '0';
                         setTimeout(() => {
                             countdownOverlay.classList.remove('show');
                             bgMusic.volume = 0.3;
-                            bgMusic.play().catch(e => {});
+                            bgMusic.play().catch(() => {});
 
+                            // Record visit setelah masuk halaman utama
                             if (typeof window.recordVisit === 'function') {
                                 window.recordVisit();
                             }
@@ -624,6 +627,7 @@
                 if (e.key === 'Enter') loginBtn.click();
             });
 
+            // Logout
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('kipasUsername');
                 bgMusic.pause();
@@ -635,58 +639,49 @@
                 location.reload();
             });
 
-            // Partikel jatuh
-            const particleCount = 30;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            // Particles
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
                 const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}vw`;
+                p.style.width = p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}vw`;
                 const duration = Math.random() * 12 + 8;
-                particle.style.animation = `fall ${duration}s linear infinite`;
-                particle.style.animationDelay = `${Math.random() * 10}s`;
-                particlesContainer.appendChild(particle);
+                p.style.animation = `fall ${duration}s linear infinite`;
+                p.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(p);
             }
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes fall {
-                    0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
-                    100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(style);
 
             // Mobile menu
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuClose = document.getElementById('mobile-menu-close');
-
-            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-            mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-            mobileMenu.addEventListener('click', (e) => {
-                if (e.target === mobileMenu) mobileMenu.classList.remove('open');
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('open');
+            });
+            document.getElementById('mobile-menu-close').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('open');
             });
 
-            // Suara klik semua elemen
+            // Click sound untuk semua link & button
             document.querySelectorAll('a, button').forEach(el => {
                 el.addEventListener('click', playClickSound);
             });
 
-            // +1 download saat klik tombol download
-            const downloadBtn = document.getElementById('download-btn');
-            if (downloadBtn) {
-                downloadBtn.addEventListener('click', () => {
-                    if (typeof window.recordDownload === 'function') {
-                        window.recordDownload();
-                    }
-                });
-            }
+            // Record download
+            document.getElementById('download-btn')?.addEventListener('click', () => {
+                if (typeof window.recordDownload === 'function') {
+                    window.recordDownload();
+                }
+            });
         });
     </script>
 
-    <!-- Firebase Real Visitor & Download Count -->
+    <style>
+        @keyframes fall {
+            0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
+        }
+    </style>
+
+    <!-- Firebase Counter (Visitor, Download, RegisteredPlayerCount) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
         import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
@@ -704,49 +699,49 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
         const visitorRef = ref(db, 'visitorCount');
         const downloadRef = ref(db, 'downloadCount');
+        const registeredRef = ref(db, 'registeredPlayerCount'); // ← Sesuai permintaanmu
 
-        // Realtime visitor
-        onValue(visitorRef, (snapshot) => {
-            const count = snapshot.val() || 0;
-            document.querySelectorAll('.visitor-count').forEach(el => {
+        // Update semua counter realtime
+        onValue(visitorRef, (snap) => updateCount('.visitor-count', snap.val()));
+        onValue(downloadRef, (snap) => updateCount('.download-count', snap.val()));
+        onValue(registeredRef, (snap) => updateCount('.registered-count', snap.val()));
+
+        function updateCount(selector, value) {
+            const count = value || 0;
+            document.querySelectorAll(selector).forEach(el => {
                 el.textContent = count.toLocaleString('id-ID');
                 el.classList.add('count-up');
                 setTimeout(() => el.classList.remove('count-up'), 600);
             });
-        });
+        }
 
-        // Realtime download
-        onValue(downloadRef, (snapshot) => {
-            const count = snapshot.val() || 0;
-            document.querySelectorAll('.download-count').forEach(el => {
-                el.textContent = count.toLocaleString('id-ID');
-                el.classList.add('count-up');
-                setTimeout(() => el.classList.remove('count-up'), 600);
-            });
-        });
-
-        // +1 visitor
+        // +1 Visitor (maksimal 1x per jam per device)
         window.recordVisit = function() {
             const last = localStorage.getItem('lastVisit');
             const now = Date.now();
             if (last && (now - parseInt(last) < 3600000)) return;
             localStorage.setItem('lastVisit', now.toString());
-
             runTransaction(visitorRef, (current) => (current || 0) + 1);
         };
 
-        // +1 download
+        // +1 Download (maksimal 1x per jam per device)
         window.recordDownload = function() {
             const last = localStorage.getItem('lastDownload');
             const now = Date.now();
             if (last && (now - parseInt(last) < 3600000)) return;
             localStorage.setItem('lastDownload', now.toString());
-
             runTransaction(downloadRef, (current) => (current || 0) + 1);
+        };
+
+        // +1 Registered Player (HANYA SEKALI seumur hidup per device)
+        window.recordRegistered = function() {
+            if (localStorage.getItem('kipasEverRegistered')) return;
+            localStorage.setItem('kipasEverRegistered', 'true');
+            runTransaction(registeredRef, (current) => (current || 0) + 1);
         };
     </script>
 </body>
 </html>
-
