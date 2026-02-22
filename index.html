@@ -1,762 +1,767 @@
+
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ADEN KIPAS | DOWNLOAD KIPAS-PS</title>
-    <meta name="description" content="Download Kipas Private Server latest version v2.118.12. Unlock all premium items, unlimited currency, rank support, and custom features.">
-    <meta name="keywords" content="kipas server, private server, unlimited money, mod menu">
-    <meta name="author" content="Kipas Team">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://ffkipas.my.id/">
-    <!-- Open Graph & Twitter Card -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ffkipas.my.id/">
-    <meta property="og:title" content="Kipas Private Server - Download Ultimate MOD">
-    <meta property="og:description" content="Join Kipas Private Server now! Get unlimited resources, unlock all collectibles, and play competitive matches.">
-    <meta property="og:image" content="assets/images/ffkipas.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kipas Private Server - Go Go Go!">
-    <meta name="twitter:description" content="Download the best Private Server. Unlimited resources and full access to all features.">
-    <meta name="twitter:image" content="assets/images/ffkipas.png">
-    <link rel="icon" type="image/png" href="image.png">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Tailwind Custom Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        tech: ['Rajdhani', 'sans-serif'],
-                    },
-                    colors: {
-                        kps: {
-                            main: '#0f172a',
-                            panel: '#1e293b',
-                            border: '#334155',
-                            orange: '#F97316',
-                            orangeDark: '#EA580C',
-                            glow: 'rgba(249, 115, 22, 0.25)'
-                        }
-                    },
-                    backgroundImage: {
-                        'gradient-kps': 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
-                        'gradient-text': 'linear-gradient(to right, #FB923C, #EA580C)',
-                    }
-                }
-            }
+  <meta charset="UTF-8" />
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Top Up Free Fire - ADEN PEDIA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#fdfd34',
+            success: '#22c55e',
+            danger: '#ef4444',
+            darkbg: '#403b4a',
+            card: '#28242d',
+            muted: '#756c89',
+          },
+          animation: {
+            'watermark-float': 'float 14s ease-in-out infinite',
+            'watermark-pulse': 'pulse 10s ease-in-out infinite',
+          },
+          keyframes: {
+            float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            pulse: { '0%, 100%': { opacity: '0.10' }, '50%': { opacity: '0.18' } }
+          }
         }
-    </script>
-    <!-- Custom Styles -->
-    <style>
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
-                              linear-gradient(to bottom, #1e293b 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-        }
-        .running-text {
-            background: rgba(249, 115, 22, 0.1);
-            padding: 8px 12px;
-            margin: 1rem auto;
-            border: 1px solid rgba(249, 115, 22, 0.3);
-            border-radius: 12px;
-            font-weight: 600;
-            color: #F97316;
-            font-size: 0.75rem;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.15);
-            max-width: 90%;
-        }
-        marquee {
-            width: 100%;
-            height: auto;
-            margin: 0;
-            padding: 0;
-        }
-        #particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            background: #F97316;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
-            pointer-events: none;
-            opacity: 0.5;
-        }
-        #music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid #334155;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
-            transition: all 0.3s ease;
-        }
-        #music-toggle:hover {
-            background: rgba(249, 115, 22, 0.2);
-            transform: scale(1.1);
-        }
-        #login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)),
-                        url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/c9ef03a17ce2b8ee250ea9a46aa2976e.jpg') center/cover no-repeat;
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            box-sizing: border-box;
-            z-index: 9999;
-            transition: opacity 0.6s ease;
-        }
-        #login-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        #login-box {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-            border: 2px solid rgba(249, 115, 22, 0.4);
-            border-radius: 20px;
-            padding: 24px 18px;
-            width: 100%;
-            max-width: 340px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 40px rgba(249, 115, 22, 0.2);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        @keyframes float-login {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-        }
-        .login-image {
-            animation: float-login 8s ease-in-out infinite;
-            filter: drop-shadow(0 10px 20px rgba(249, 115, 22, 0.4));
-            width: 120px;
-            margin: 16px auto;
-        }
-        #error-message, #warning-message {
-            display: none;
-            margin-top: 8px;
-            font-weight: bold;
-            font-size: 0.75rem;
-        }
-        #error-message { color: #fca5a5; }
-        #warning-message { color: #fde047; }
-        @media (min-width: 641px) {
-            #login-box {
-                max-width: 380px;
-                padding: 28px 24px;
-            }
-            .login-image {
-                width: 140px;
-            }
-        }
-        @keyframes countUp {
-            0% { transform: translateY(10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        .count-up {
-            animation: countUp 0.6s ease-out;
-        }
-        #mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 9998;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-            padding: 20px;
-        }
-        #mobile-menu.open {
-            transform: translateY(0);
-        }
-        #mobile-menu a, #mobile-menu button {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 15px 0;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        #mobile-menu a:hover, #mobile-menu button:hover {
-            color: #F97316;
-        }
-        #mobile-menu .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-        }
-        #countdown-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)),
-                        url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/202210/c9ef03a17ce2b8ee250ea9a46aa2976e.jpg') center/cover no-repeat;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.6s ease;
-        }
-        #countdown-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        #countdown-overlay .inner-box {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-            border: 2px solid rgba(249, 115, 22, 0.5);
-            border-radius: 24px;
-            padding: 32px 24px;
-            max-width: 380px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
-        }
-        #continue-btn {
-            background: rgba(30, 41, 59, 0.8);
-            border: 2px solid #334155;
-            color: #94a3b8;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        #continue-btn.enabled {
-            background: linear-gradient(135deg, #F97316, #EA580C);
-            border-color: #F97316;
-            color: white;
-            cursor: pointer;
-            opacity: 1;
-        }
-        #continue-btn.enabled:hover {
-            box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
-            transform: scale(1.02);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; touch-action: manipulation; }
+    body { background: linear-gradient(to bottom right, #1a1625, #0f0b18); color: #f0eef5; min-height: 100vh; font-family: system-ui, sans-serif; }
+    .container { width: 100%; max-width: 100vw !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+    @media (min-width: 768px) { .container { padding-left: 1.5rem !important; padding-right: 1.5rem !important; } }
+    img { max-width: 100%; height: auto; display: block; }
+    .grid, .flex { min-width: 0; }
+    .nominal-btn.selected { border-color: #fdfd34 !important; background-color: rgba(253, 253, 52, 0.15) !important; transform: scale(1.03); }
+    input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .diamond-icon { width: 22px; height: 22px; object-fit: contain; }
+    #pesan-btn.loading::after, #pesan-btn-mobile.loading::after { content: ''; display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #topup-section { display: block; }
+    #invoice-section { display: none; }
+    .membership-tag { position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #fdfd34, #facc15); color: #000; font-size: 9px; padding: 1px 6px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transform: rotate(12deg); z-index: 10; }
+    .summary-watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; user-select: none; z-index: 0; animation: watermark-pulse 12s ease-in-out infinite; }
+    .summary-watermark img { height: 45px; opacity: 0.12; margin-right: 8px; }
+    .summary-watermark span { font-size: 2rem; opacity: 0.12; letter-spacing: 3px; }
+    @media (max-width: 640px) { .summary-watermark img { height: 35px; } .summary-watermark span { font-size: 1.6rem; } }
+    .logo-text { letter-spacing: 1.2px; color: white; }
+    #nominal-list { -ms-overflow-style: none; scrollbar-width: none; }
+    #nominal-list::-webkit-scrollbar { display: none; }
+    #pesan-btn-mobile-container { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: rgba(30, 27, 46, 0.35); backdrop-filter: blur(10px); border-top: 1px solid rgba(253, 253, 52, 0.25); padding: 0.6rem 0.8rem; box-shadow: 0 -3px 10px rgba(0,0,0,0.4); }
+    @supports (padding-bottom: env(safe-area-inset-bottom)) { #pesan-btn-mobile-container { padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); } }
+    #pesan-btn-mobile { background: transparent; color: white; border: 1.5px solid #fdfd34; padding: 0.8rem; font-size: 0.95rem; border-radius: 0.75rem; box-shadow: 0 3px 10px rgba(253, 253, 52, 0.3); }
+    header { background: rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
+  </style>
 </head>
-<body class="bg-kps-main text-slate-300 font-sans selection:bg-kps-orange selection:text-white">
-    <div class="fixed inset-0 bg-grid -z-10 pointer-events-none opacity-30"></div>
-    <div id="particles-container"></div>
+<body class="overflow-x-hidden">
 
-    <!-- Background Music -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="music.mp3">
-    </audio>
-    <!-- Click Sound -->
-    <audio id="click-sound" preload="auto">
-        <source src="https://dl.dir.freefiremobile.com/common/web_event/magicarrow/audios/FF_SFX_WebEvent_UI_Click.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="music-toggle" title="Klik untuk mute/unmute musik">
-        <i id="music-icon" class="fas fa-volume-up text-white text-xl"></i>
-    </div>
-
-    <!-- Login Overlay -->
-    <div id="login-overlay">
-        <div id="login-box" class="relative">
-            <div class="absolute inset-0 bg-kps-orange/20 rounded-2xl blur-xl -z-10 opacity-70"></div>
-            <div class="text-center mb-5">
-                <h2 class="font-tech text-3xl font-bold text-white leading-tight">
-                    ADEN <span class="text-transparent bg-clip-text bg-gradient-kps">KIPAS</span>
-                </h2>
-            </div>
-
-            <!-- Stats di Login Overlay -->
-            <div class="mb-5 flex flex-row justify-center items-center gap-4 px-4 py-2 rounded-full bg-kps-panel/80 border border-kps-orange/40 text-xs">
-                <div class="flex items-center gap-1.5">
-                    <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs"></span>
-                    <span class="visitor-count text-kps-orange font-bold">0</span>
-                </div>
-                <div class="w-px h-5 bg-kps-orange/50"></div>
-                <div class="flex items-center gap-1.5">
-                    <i class="fas fa-users text-kps-orange text-xs"></i>
-                    <span class="font-bold text-slate-300 text-2xs">ANGGOTA FFKIPAS :</span>
-                    <span class="registered-count text-kps-orange font-bold">0</span>
-                </div>
-            </div>
-
-            <img src="robot.png" alt="Aden Kipas Character" class="login-image">
-            <div class="mt-6">
-                <div class="relative">
-                    <input type="text" id="username-input" placeholder="Nama kamu di sini..."
-                           class="w-full px-4 py-3 bg-kps-panel/80 border border-kps-orange/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-kps-orange focus:ring-2 focus:ring-kps-orange/40 transition-all text-base">
-                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                        <i class="fas fa-user text-kps-orange text-sm"></i>
-                    </div>
-                </div>
-                <div id="error-message" class="text-red-300 font-semibold mt-2 text-xs">
-                    Nama mengandung kata tidak sopan! Gunakan nama yang baik ya.
-                </div>
-                <div id="warning-message" class="text-yellow-400 font-semibold mt-2 text-xs">
-                    Hindari angka di nama, biar lebih keren!
-                </div>
-                <button id="login-btn" class="w-full mt-6 bg-gradient-kps text-white font-bold py-3.5 rounded-xl hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transform hover:scale-102 transition-all duration-300 text-base">
-                    <i class="fas fa-arrow-right mr-2"></i>
-                    MASUK & DOWNLOAD SEKARANG
-                </button>
-            </div>
+  <!-- ====================== TOP UP SECTION ====================== -->
+  <div id="topup-section">
+    <header class="sticky top-0 z-50 border-b border-gray-700/50">
+      <div class="container mx-auto px-4 py-2.5 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+          <img src="aden.png" alt="ADEN PEDIA" class="h-8"/>
+          <span class="text-lg font-bold logo-text">ADEN PEDIA</span>
+        </a>
+        <div class="flex items-center gap-3">
+          <button class="md:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
+          <button class="bg-yellow-400 text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-yellow-300 hidden md:block transition">Masuk / Daftar</button>
         </div>
-    </div>
-
-    <!-- Countdown Overlay -->
-    <div id="countdown-overlay">
-        <div class="inner-box">
-            <h3 class="font-tech text-3xl font-bold text-white mb-6">
-                SEDANG MEMUAT<span class="text-kps-orange">...</span>
-            </h3>
-            <div class="text-6xl font-tech font-bold text-kps-orange mb-8" id="countdown-timer">2</div>
-            <div class="w-full bg-kps-border rounded-full h-4 overflow-hidden mb-6">
-                <div id="progress-bar" class="h-full bg-gradient-kps transition-all duration-1000 ease-linear" style="width: 0%"></div>
-            </div>
-            <p class="text-slate-400 text-sm mb-8">Tunggu sebentar, server sedang menyiapkan akses Anda</p>
-            <button id="continue-btn" class="w-full py-4 rounded-xl font-bold text-lg transition-all" disabled>
-                <i class="fas fa-lock mr-2"></i>
-                LANJUT KE HALAMAN UTAMA
-            </button>
-        </div>
-    </div>
-
-    <!-- Navbar & Konten Utama (sama seperti sebelumnya) -->
-    <nav class="fixed w-full z-50 top-0 bg-kps-main/90 backdrop-blur-md border-b border-kps-border/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <img src="image.png" alt="Server Logo" class="h-10 w-auto rounded" onerror="this.src='https://placehold.co/100x100/F97316/white?text=KPS'">
-                    <span class="font-tech font-bold text-xl md:text-2xl tracking-widest text-white">
-                        ADEN <span class="text-transparent bg-clip-text bg-gradient-text">KIPAS</span>
-                    </span>
-                </div>
-                <div class="flex items-center gap-6">
-                    <span class="text-slate-300 text-sm hidden md:block">
-                        Halo, <span id="username-display" class="text-kps-orange font-bold">Guest</span>!
-                    </span>
-                    <button id="logout-btn" class="text-slate-400 hover:text-kps-orange text-sm font-bold hidden">
-                        <i class="fas fa-sign-out-alt mr-1"></i> LOGOUT
-                    </button>
-                    <div class="hidden md:flex items-center gap-8">
-                        <a href="#home" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Home</a>
-                        <a href="#features" class="text-slate-400 hover:text-kps-orange text-sm font-semibold transition uppercase">Features</a>
-                        <div class="flex gap-4">
-                            <a href="https://ffkipas.my.id/verifyuid" class="border border-kps-border bg-kps-panel px-5 py-2 text-sm font-bold rounded hover:border-kps-orange hover:text-kps-orange transition">
-                                VERIFY ID
-                            </a>
-                            <a href="login admin.html" class="bg-white text-kps-main px-5 py-2 text-sm font-bold rounded hover:bg-kps-orange hover:text-white transition">
-                                ADMIN
-                            </a>
-                        </div>
-                    </div>
-                    <div class="md:hidden">
-                        <button id="mobile-menu-btn" class="text-white hover:text-kps-orange">
-                            <i class="fas fa-bars text-2xl"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <div id="mobile-menu">
-        <div class="close-btn" id="mobile-menu-close"><i class="fas fa-times"></i></div>
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="https://ffkipas.my.id/verifyuid">VERIFY ID</a>
-        <button id="mobile-logout-btn" class="hidden">LOGOUT</button>
-    </div>
-
-    <header id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 text-center max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8 relative">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </span>
-                <span class="text-xs font-bold text-slate-300 tracking-wider">STATUS: <span class="text-emerald-400">ONLINE</span></span>
-            </div>
-            <div class="inline-flex items-center gap-4">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
-                    <i class="fas fa-code-branch text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">VER: <span class="text-white">2.118.12</span></span>
-                </div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kps-panel border border-kps-border">
-                    <i class="fas fa-eye text-kps-orange text-xs"></i>
-                    <span class="text-xs font-bold text-slate-300 tracking-wider">VISIT TODAY :
-                        <span class="visitor-count">0</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <h1 class="font-tech text-4xl md:text-7xl font-bold uppercase leading-none tracking-tighter mb-4 text-white">
-            KIPAS <span class="text-transparent bg-clip-text bg-gradient-kps">PRIVATE SERVER</span>
-        </h1>
-
-        <div class="bg-kps-panel border border-kps-border rounded-lg px-6 py-4 mb-8 max-w-md mx-auto shadow-lg">
-            <div class="text-center">
-                <div class="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">BERHASIL DOWNLOAD</div>
-                <div class="font-tech text-5xl md:text-6xl font-bold text-yellow-500"><span class="download-count">0</span></div>
-            </div>
-        </div>
-
-        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Jalan pintas buat Download <strong>KIPAS PRIVATE SERVER</strong>. Semoga berguna hehe. Ayo Main dan JedagJedug! gunakan #ffkipas
-        </p>
-
- <div class="flex flex-col items-center gap-6">
-            <a id="download-btn" href="https://www.capcut.com/tv2/ZS52BYvn6//" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
-                <i class="fas fa-download text-2xl"></i>
-                <div class="text-left">
-                    <div>VAULT GOIB GRATIS/VERIF/VIP</div>
-                    <div class="text-sm font-normal opacity-80">(SS KIRIM WA YA JANGAN LUPA.)</div>
-                </div>
-            </a>
-        
-        <div class="flex flex-col items-center gap-6">
-            <a id="download-btn" href="download.html" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
-                <i class="fas fa-download text-2xl"></i>
-                <div class="text-left">
-                    <div>DOWNLOAD</div>
-                    <div class="text-sm font-normal opacity-80">(458 MB.)</div>
-                </div>
-            </a>
-            <a href="https://ffkipas.my.id/verifyuid" class="group relative bg-gradient-kps text-white px-12 py-5 rounded-xl font-bold text-xl hover:shadow-[0_0_40px_rgba(249,115,22,0.6)] transition-all flex items-center justify-center gap-3 shadow-2xl w-full max-w-lg">
-                <i class="fas fa-id-badge"></i>
-                <span>VERIF ID</span>
-                <div class="text-sm font-normal opacity-80">(BUAT LOGIN)</div>
-            </a>
-            <div class="flex flex-wrap justify-center gap-3 w-full">
-                <a href="panel.html" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-cpanel"></i>
-                    <span>PANEL (NGEUBAH)</span>
-                </a>
-                <a href="https://whatsapp.com/channel/0029VbBq3jp84OmDTxP2CT02" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-users"></i>
-                    <span>SALURAN RESMI</span>
-                </a>
-                <a href="https://www.tiktok.com/@adenf9" class="bg-kps-panel border border-kps-border text-white px-10 py-4 rounded-xl font-bold text-lg hover:border-kps-orange hover:text-kps-orange transition-all flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-get-pocket"></i>
-                    <span>LAGI PERBAIKAN</span>
-                </a>
-            </div>
-            <div class="running-text mt-6 max-w-2xl">
-                <marquee behavior="scroll" direction="left" scrollamount="5">
-                    PRIVATE SERVER BUNDLE NYA GABAKAL KELIHATAN.
-                </marquee>
-            </div>
-        </div>
+      </div>
     </header>
+    <div class="relative w-full overflow-hidden">
+      <img src="banner.jpg" alt="Banner" class="w-full h-44 sm:h-60 md:h-72 object-cover brightness-75"/>
+    </div>
+    <div class="container mx-auto px-4 -mt-8 relative z-10">
+      <div class="bg-gray-900/90 backdrop-blur-sm p-4 rounded-2xl shadow-2xl flex justify-around text-center text-xs max-w-4xl mx-auto">
+        <div class="flex flex-col items-center gap-1"><i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i><span>Cepat</span></div>
+        <div class="flex flex-col items-center gap-1"><i data-lucide="shield-check" class="w-5 h-5 text-yellow-400"></i><span>Aman</span></div>
+        <div class="flex flex-col items-center gap-1"><i data-lucide="headset" class="w-5 h-5 text-yellow-400"></i><span>24/7</span></div>
+      </div>
+    </div>
+    <main class="container mx-auto px-4 py-6 pb-40 md:pb-8">
+      <div class="grid gap-4 md:grid-cols-3 max-w-7xl mx-auto">
+        <div class="md:col-span-2 space-y-4">
+          <!-- 1. ID Free Fire -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span>
+              ID Free Fire
+            </div>
+            <div class="p-4">
+              <input id="userid" type="text" placeholder="Contoh: 123456789" class="w-full p-3.5 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 outline-none text-sm"/>
+            </div>
+          </section>
 
-    <!-- Semua Script Utama -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginOverlay = document.getElementById('login-overlay');
-            const countdownOverlay = document.getElementById('countdown-overlay');
-            const countdownTimer = document.getElementById('countdown-timer');
-            const progressBar = document.getElementById('progress-bar');
-            const continueBtn = document.getElementById('continue-btn');
-            const particlesContainer = document.getElementById('particles-container');
-            const usernameInput = document.getElementById('username-input');
-            const loginBtn = document.getElementById('login-btn');
-            const usernameDisplay = document.getElementById('username-display');
-            const logoutBtn = document.getElementById('logout-btn');
-            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
-            const errorMessage = document.getElementById('error-message');
-            const warningMessage = document.getElementById('warning-message');
-            const bgMusic = document.getElementById('bg-music');
-            const musicToggle = document.getElementById('music-toggle');
-            const musicIcon = document.getElementById('music-icon');
+          <!-- 2. Pilih Nominal -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden relative">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
+              Pilih Nominal / Paket
+            </div>
+            <div class="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-h-[420px] overflow-y-auto" id="nominal-list">
+              <!-- Membership -->
+              <button class="nominal-btn relative bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition selected" data-price="21500" data-diamond="0" data-type="membership" data-name="Mingguan">
+                <div class="membership-tag">BEST+</div>
+                <i class="fas fa-crown text-yellow-400 text-2xl mx-auto mb-1"></i>
+                <div class="font-bold text-base">Mingguan</div>
+                <div class="text-xs text-gray-400">Membership</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 21.500</div>
+              </button>
+              <button class="nominal-btn relative bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="60000" data-diamond="0" data-type="membership" data-name="Bulanan">
+                <div class="membership-tag">BEST+</div>
+                <i class="fas fa-crown text-yellow-400 text-3xl mx-auto mb-1"></i>
+                <div class="font-bold text-base">Bulanan</div>
+                <div class="text-xs text-gray-400">Membership</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 60.000</div>
+              </button>
+              <!-- Custom Diamond -->
+              <button class="nominal-btn bg-gradient-to-br from-indigo-900/60 to-purple-900/40 p-3 rounded-xl text-center hover:bg-indigo-700/30 border-2 border-indigo-500/40 transition" data-price="198" data-diamond="1" data-type="custom" data-name="Custom Diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">Custom</div>
+                <div class="text-xs text-indigo-300">Isi jumlah sendiri</div>
+                <div class="text-indigo-300 font-bold text-sm">Rp 198 / dm</div>
+              </button>
+              <!-- Diamond Packs -->
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="813" data-diamond="5" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">5</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 813</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="3000" data-diamond="20" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">20</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 3.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="7900" data-diamond="50" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">50</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 7.900</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="15900" data-diamond="100" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">100</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 15.900</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="31700" data-diamond="210" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">210</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 31.700</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="63500" data-diamond="520" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">520</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 63.500</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="95000" data-diamond="845" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">845</div>
+                <div class="text-xs text-gray-400">Diamond</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 95.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="125000" data-diamond="1080" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">1080</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 125.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="245000" data-diamond="2180" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">2180</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 245.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="490000" data-diamond="5600" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">5600</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus Besar</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 490.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="980000" data-diamond="12000" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">12000</div>
+                <div class="text-xs text-gray-400">Diamond + Hadiah Ekstra</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 980.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1450000" data-diamond="18000" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">18000</div>
+                <div class="text-xs text-gray-400">Diamond VIP</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 1.450.000</div>
+              </button>
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="2450000" data-diamond="30000" data-type="diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">30000</div>
+                <div class="text-xs text-gray-400">Diamond + Skin Eksklusif</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 2.450.000</div>
+              </button>
+            </div>
+          </section>
 
-            function playClickSound() {
-                const clickAudio = document.getElementById('click-sound');
-                clickAudio.currentTime = 0;
-                clickAudio.play().catch(() => {});
-            }
+          <!-- Custom Diamond Input -->
+          <section id="custom-diamond-section" class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden hidden">
+            <div class="bg-indigo-600 text-white px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-indigo-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2.5</span>
+              Jumlah Diamond Custom
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-3">
+                <input id="custom-diamond-input" type="number" min="1" max="99999" value="561"
+                       class="flex-1 p-4 bg-gray-800 border border-indigo-600/50 rounded-xl text-white text-2xl font-bold text-center focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/30 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
+                <div class="text-3xl text-indigo-300">💎</div>
+              </div>
+              <p class="text-center mt-4 text-lg">
+                Harga: <span id="custom-price-display" class="text-indigo-400 font-bold">Rp 111.138</span>
+              </p>
+              <p class="text-xs text-center text-gray-400 mt-1">Minimal 1 • Maksimal 99.999 diamond</p>
+            </div>
+          </section>
 
-            // Music toggle
-            musicToggle.addEventListener('click', () => {
-                if (bgMusic.paused) {
-                    bgMusic.play();
-                    musicIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
-                } else {
-                    bgMusic.pause();
-                    musicIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
-                }
-            });
+          <!-- 3. Jumlah Pembelian -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span>
+              Jumlah Pembelian
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-center gap-3">
+                <button id="btn-minus" class="bg-gray-700 hover:bg-gray-600 w-12 h-12 rounded-xl text-2xl font-bold">-</button>
+                <input id="quantity" type="number" value="1" min="1" class="w-16 text-center p-3 bg-gray-800 border border-gray-700 rounded-xl text-xl font-bold focus:border-yellow-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
+                <button id="btn-plus" class="bg-gray-700 hover:bg-gray-600 w-12 h-12 rounded-xl text-2xl font-bold">+</button>
+              </div>
+              <p class="text-center mt-4 text-base flex flex-col items-center gap-1">
+                <span>Total: <span id="total-price" class="text-yellow-400 font-bold">Rp 21.500</span></span>
+                <span class="flex items-center gap-2 text-sm" id="total-item-display">
+                  <span class="font-bold">Mingguan</span> Membership
+                </span>
+              </p>
+            </div>
+          </section>
 
-            // Bad words filter
-            const badWords = ['kontol','memek','puki','pepek','anjing','asu','bangsat','babi','bajingan','brengsek','jancuk','tai','goblok','tolol','ngentot','fuck','shit','bitch'];
+          <!-- 4. Kode Promo -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span>
+              Kode Promo
+            </div>
+            <div class="p-4">
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input id="promo-code" type="text" placeholder="Ketik kode promo jika ada" class="flex-1 p-3.5 bg-gray-800 border border-gray-700 rounded-xl focus:border-yellow-400 text-sm"/>
+                <button id="btn-apply-promo" class="bg-yellow-400 text-black px-5 py-3.5 rounded-xl font-bold hover:bg-yellow-300 mt-2 sm:mt-0 text-sm">Gunakan</button>
+              </div>
+              <p id="promo-message" class="mt-3 text-green-400 text-xs hidden">Kode promo diterapkan! Hemat <span id="discount-amount">Rp 0</span></p>
+            </div>
+          </section>
 
-            function checkBadWord(name) {
-                const lower = name.toLowerCase();
-                return badWords.some(word => lower.includes(word));
-            }
+          <!-- 5. Pilih Pembayaran -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">5</span>
+              Pilih Pembayaran
+            </div>
+            <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="flex items-center gap-3 bg-gray-800 p-3.5 rounded-xl cursor-pointer hover:bg-gray-700 border-2 border-transparent hover:border-yellow-400 transition text-sm">
+                <input type="radio" name="payment" class="w-4 h-4 accent-yellow-400" checked/>
+                <div><div class="font-medium">QRIS</div><div class="text-xs text-gray-400">Semua bank & e-wallet</div></div>
+              </label>
+            </div>
+          </section>
 
-            function checkNumber(name) {
-                return /\d/.test(name);
-            }
+          <!-- 6. Nomor WhatsApp -->
+          <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">6</span>
+              Nomor WhatsApp
+            </div>
+            <div class="p-4">
+              <div class="flex">
+                <span class="bg-gray-800 px-4 py-3.5 border border-r-0 border-gray-700 rounded-l-xl text-white font-medium text-sm">+62</span>
+                <input id="whatsapp" type="tel" placeholder="8123456789" class="flex-1 p-3.5 bg-gray-800 border border-gray-700 rounded-r-xl focus:border-yellow-400 text-sm"/>
+              </div>
+              <p class="text-xs text-gray-400 mt-2 italic">Pastikan nomor aktif, biar bisa dihubungi kalau ada kendala.</p>
+            </div>
+          </section>
+        </div>
 
-            // Cek apakah sudah pernah login sebelumnya
-            const savedUsername = localStorage.getItem('kipasUsername');
-            if (savedUsername) {
-                usernameDisplay.textContent = savedUsername;
-                logoutBtn.classList.remove('hidden');
-                mobileLogoutBtn.classList.remove('hidden');
-                loginOverlay.classList.add('hidden');
-                bgMusic.volume = 0.3;
-                bgMusic.play().catch(() => {});
-            }
+        <!-- Ringkasan Pesanan -->
+        <div class="md:col-span-1">
+          <div class="bg-gray-900/90 p-5 rounded-2xl shadow-xl md:sticky md:top-6 space-y-4 relative overflow-hidden max-w-md md:max-w-none mx-auto md:mx-0">
+            <div class="summary-watermark animate-watermark-float">
+              <img src="aden.png" alt="Aden Pedia">
+              <span>ADEN PEDIA</span>
+            </div>
+            <h3 class="text-lg font-bold text-white flex items-center gap-2 relative z-10">
+              <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon"/>
+              Ringkasan Pesanan
+            </h3>
+            <div class="space-y-2.5 text-sm relative z-10">
+              <div class="flex justify-between items-center"><span>Produk</span><span id="summary-diamond" class="flex items-center gap-1">Mingguan Membership</span></div>
+              <div class="flex justify-between"><span>Jumlah</span><span id="summary-qty">1x</span></div>
+              <div class="flex justify-between"><span>Subtotal</span><span id="summary-subtotal">Rp 21.500</span></div>
+              <div class="flex justify-between"><span>Admin (2%)</span><span id="summary-admin">Rp 430</span></div>
+              <div id="summary-discount-row" class="flex justify-between text-green-400 hidden"><span>Diskon Promo</span><span>-Rp <span id="summary-discount">0</span></span></div>
+              <div class="border-t border-gray-700 pt-3 flex justify-between text-base font-bold text-yellow-400">
+                <span>Total Bayar</span><span id="summary-total">Rp 21.930</span>
+              </div>
+            </div>
+            <button id="pesan-btn" class="w-full bg-yellow-400 text-black py-3.5 rounded-xl font-bold text-base hover:bg-yellow-300 transition flex items-center justify-center gap-2 relative z-10">
+              <i data-lucide="shopping-cart" class="w-5 h-5"></i> PESAN SEKARANG
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="pesan-btn-mobile-container" class="fixed bottom-0 left-0 right-0 z-[9999] md:hidden">
+      <button id="pesan-btn-mobile" class="w-full bg-transparent text-white border border-yellow-400/60 backdrop-blur-lg py-3 rounded-t-xl font-bold text-base flex items-center justify-center gap-2 shadow-xl">
+        <i data-lucide="shopping-cart" class="w-5 h-5"></i> PESAN SEKARANG - <span id="mobile-total">Rp 21.930</span>
+      </button>
+    </div>
+  </div>
 
-            // Input validation
-            usernameInput.addEventListener('input', () => {
-                errorMessage.style.display = 'none';
-                warningMessage.style.display = 'none';
-                if (usernameInput.value.trim() && checkNumber(usernameInput.value.trim())) {
-                    warningMessage.style.display = 'block';
-                }
-            });
+  <!-- ====================== INVOICE SECTION ====================== -->
+  <div id="invoice-section">
+    <header class="sticky top-0 z-50 bg-darkbg/95 backdrop-blur-md border-b border-muted/30">
+      <div class="container mx-auto px-4">
+        <div class="flex h-14 items-center justify-between">
+          <a href="/" class="flex items-center gap-3">
+            <img src="aden.png" alt="ADEN PEDIA" class="h-9 sm:h-10">
+            <span class="text-xl sm:text-2xl font-bold text-white tracking-wide logo-text">ADEN PEDIA</span>
+          </a>
+          <span class="text-gray-400 text-sm sm:text-base font-medium hidden sm:block">Invoice • ADN5902359092305</span>
+        </div>
+      </div>
+    </header>
+    <main class="container mx-auto px-4 py-6 md:py-8 max-w-5xl">
+      <div id="status-banner" class="bg-yellow-600/20 border border-yellow-500/40 rounded-2xl p-5 md:p-6 text-center mb-6 md:mb-8 transition-all duration-500">
+        <h1 id="status-title" class="text-2xl md:text-4xl font-bold text-yellow-300 mb-2 md:mb-3">Memproses Pesanan...</h1>
+        <p id="status-desc" class="text-base md:text-lg text-gray-300">Mohon tunggu sebentar, sedang memverifikasi pembayaran</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div class="space-y-5 md:space-y-6">
+          <div class="bg-card rounded-2xl overflow-hidden border border-muted/30 shadow-xl">
+            <div class="relative h-40 md:h-48">
+              <img src="https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.all/img/20228/296832440ca34c591c176b159e7a8532.jpg" alt="Free Fire Banner" class="w-full h-full object-cover"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-lg md:text-xl font-bold">Free Fire</h3>
+                <p class="text-sm text-gray-300" id="invoice-product-name"></p>
+              </div>
+            </div>
+            <div class="p-4 md:p-6 bg-darkbg/50">
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between"><span class="text-gray-400">ID Player</span><span class="font-medium break-all" id="invoice-user-id"></span></div>
+              </div>
+            </div>
+          </div>
+          <div id="progress-section" class="bg-card/50 rounded-2xl p-5 md:p-6 border border-muted/20">
+            <h3 class="text-lg md:text-xl font-semibold mb-4 md:mb-6 text-center">Progres Pembayaran & Pengiriman</h3>
+            <div class="relative mb-5 md:mb-8 rounded-xl overflow-hidden bg-darkbg/40 py-4 px-2 md:px-4">
+              <div class="absolute inset-x-4 top-1/2 h-1.5 md:h-2 bg-muted/40 rounded-full -translate-y-1/2 z-0"></div>
+              <div id="progress-bar" class="absolute inset-x-4 top-1/2 h-1.5 md:h-2 bg-primary rounded-full transition-all duration-1000 -translate-y-1/2 z-10" style="width: 0%;"></div>
+              <div class="relative z-20 flex justify-between">
+                <div class="text-center flex-1"><div id="step1" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-primary text-darkbg font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">1</div><p class="mt-1 md:mt-2 text-xs text-primary font-medium">Menunggu Bayar</p></div>
+                <div class="text-center flex-1"><div id="step2" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-muted text-gray-400 font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">2</div><p class="mt-1 md:mt-2 text-xs text-gray-400">Pembayaran Diterima</p></div>
+                <div class="text-center flex-1"><div id="step3" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-muted text-gray-400 font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">3</div><p class="mt-1 md:mt-2 text-xs text-gray-400">Verifikasi & Proses</p></div>
+                <div class="text-center flex-1"><div id="step4" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-muted text-gray-400 font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">4</div><p class="mt-1 md:mt-2 text-xs text-gray-400">Diamond Terkirim</p></div>
+              </div>
+            </div>
+            <p id="progress-text" class="text-center text-sm text-gray-300 mt-3">Sedang menunggu konfirmasi pembayaran Anda...</p>
+          </div>
+          <div class="bg-card rounded-2xl p-5 md:p-6 border border-muted/30 relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none animate-watermark-float">
+              <div class="flex items-center gap-2 md:gap-3 text-white font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wider opacity-10 animate-watermark-pulse scale-90 sm:scale-100 md:scale-125">
+                <img src="aden.png" alt="Aden Pedia" class="h-8 sm:h-10 md:h-14 lg:h-16 w-auto opacity-70"/> ADEN PEDIA
+              </div>
+            </div>
+            <h3 class="text-lg md:text-xl font-semibold mb-4 relative z-10">Rincian Pesanan</h3>
+            <div class="space-y-3 text-sm relative z-10">
+              <div class="flex justify-between"><span class="text-gray-400">Produk</span><span class="font-medium" id="invoice-detail-product"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">User ID</span><span class="font-medium break-all" id="invoice-detail-userid"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Jumlah</span><span class="font-bold" id="invoice-detail-qty"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Harga</span><span class="font-bold" id="invoice-detail-harga"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Biaya Admin</span><span class="font-bold" id="invoice-detail-admin"></span></div>
+              <div class="flex justify-between"><span class="text-gray-400">Status Orderan</span><span id="invoice-status" class="text-yellow-300 font-medium">Pending</span></div>
+              <div id="invoice-discount-row" class="flex justify-between text-green-400 hidden"><span>Diskon Promo</span><span>-Rp <span id="invoice-detail-diskon">0</span></span></div>
+              <div class="h-px bg-muted/30 my-3 md:my-4"></div>
+              <div class="flex justify-between text-base md:text-lg font-bold"><span>Total Bayar</span><span class="text-primary" id="invoice-detail-total"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="bg-card rounded-2xl p-5 md:p-6 border border-muted/30">
+            <h3 class="text-lg md:text-xl font-semibold mb-4">Metode Pembayaran</h3>
+            <div class="bg-muted/20 rounded-xl p-4 text-center mb-4">
+              <p class="font-medium text-primary">QRIS (All Payment)</p>
+              <p class="text-xs md:text-sm text-gray-400 mt-1">Scan dengan semua e-wallet & mobile banking</p>
+            </div>
+            <div class="bg-white rounded-xl p-5 md:p-6 flex flex-col items-center justify-center aspect-square mx-auto max-w-[240px] sm:max-w-[260px] md:max-w-[280px] relative">
+              <img src="qris.jpg" alt="QR Code Pembayaran QRIS" class="w-5/6 h-5/6 object-contain"/>
+              <p class="text-xs text-gray-500 mt-2">Scan untuk bayar via QRIS</p>
+            </div>
+            <div class="mt-6 text-center">
+              <button id="konfirmasi-bayar-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                SUDAH BAYAR - KONFIRMASI
+              </button>
+              <p class="text-xs text-gray-400 mt-3">Tekan tombol ini setelah Anda selesai melakukan pembayaran</p>
+            </div>
+            <div class="mt-5 md:mt-6 space-y-3 md:space-y-4 text-sm">
+              <div class="flex items-center justify-between"><span class="text-gray-400">Nomor Invoice</span><div class="flex items-center gap-2"><code class="bg-muted/30 px-3 py-1 rounded font-mono text-primary text-xs md:text-sm">ADN5902359092305</code><button onclick="navigator.clipboard.writeText('ADN5902359092305').then(()=>alert('Copied!'))" class="text-primary hover:text-primary/80"><i class="fas fa-copy"></i></button></div></div>
+              <div class="flex justify-between items-center"><span class="text-gray-400">Status</span><span id="payment-badge" class="bg-yellow-600/30 text-yellow-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm font-medium">Pending</span></div>
+            </div>
+          </div>
+          <div id="success-message" class="hidden bg-green-900/30 border border-green-500/40 rounded-2xl p-5 md:p-6 text-center">
+            <i class="fas fa-check-circle text-5xl md:text-6xl text-success mb-4"></i>
+            <h2 class="text-xl md:text-2xl font-bold text-success mb-2">Pembayaran Berhasil</h2>
+            <p class="text-gray-300 text-sm md:text-base">Telah diterima. Pesanan sedang diproses ke akun Anda.</p>
+            <p class="text-xs md:text-sm text-gray-400 mt-3 md:mt-4">Estimasi: 1-5 menit</p>
+            <p id="refresh-notice" class="text-sm text-gray-400 mt-6">
+              Halaman akan kembali otomatis dalam <span id="countdown-refresh">5</span> detik...
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="instructions" class="mt-8 bg-card/50 rounded-2xl p-5 md:p-6 border border-muted/20">
+        <h3 class="text-lg md:text-xl font-semibold mb-4">Cara Bayar via QRIS</h3>
+        <ol class="list-decimal pl-5 space-y-2 md:space-y-3 text-gray-300 text-sm md:text-base">
+          <li>Screenshot atau unduh kode QR di atas</li>
+          <li>Buka aplikasi e-wallet / mobile banking</li>
+          <li>Pilih menu Scan / Bayar → Upload dari galeri</li>
+          <li>Pilih gambar QR</li>
+          <li>Konfirmasi nominal → Bayar</li>
+        </ol>
+      </div>
+    </main>
+  </div>
 
-            // Login process
-            loginBtn.addEventListener('click', () => {
-                playClickSound();
-                let name = usernameInput.value.trim() || 'Player';
+  <!-- ====================== JAVASCRIPT ====================== -->
+  <script>
+    lucide.createIcons();
 
-                errorMessage.style.display = 'none';
-                warningMessage.style.display = 'none';
+    let selectedPrice = 21500;
+    let selectedDiamond = 0;
+    let selectedType = 'membership';
+    let selectedName = 'Mingguan';
+    let discount = 0;
+    const adminRate = 0.02;
+    const webhookUrl = "https://discord.com/api/webhooks/1472899700230324391/cfbxxwVHxmhiRMm9mdAvFUWtZbOz4-WndIzRCx8-eemo7r1hkEGyJ0AA0LR7aDQC3iyF"; // <-- Ganti atau hapus jika tidak digunakan
+    let isSending = false;
+    let sendQueue = [];
+    let isCustom = false;
+    let customDiamond = 561;
+    let konfirmasiCooldown = false;
 
-                if (checkBadWord(name)) {
-                    errorMessage.style.display = 'block';
-                    usernameInput.value = '';
-                    usernameInput.focus();
-                    return;
-                }
+    function timeAgo(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = Math.floor(seconds / 31536000);
+      if (interval >= 1) return interval + " tahun yang lalu";
+      interval = Math.floor(seconds / 2592000);
+      if (interval >= 1) return interval + " bulan yang lalu";
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) return interval + (interval === 1 ? " hari" : " hari") + " yang lalu";
+      interval = Math.floor(seconds / 3600);
+      if (interval >= 1) return interval + (interval === 1 ? " jam" : " jam") + " yang lalu";
+      interval = Math.floor(seconds / 60);
+      if (interval >= 1) return interval + (interval === 1 ? " menit" : " menit") + " yang lalu";
+      return "beberapa detik yang lalu";
+    }
 
-                if (checkNumber(name)) {
-                    warningMessage.style.display = 'block';
-                    usernameInput.focus();
-                    return;
-                }
+    function updateCustomPriceDisplay() {
+      const price = customDiamond * 198;
+      document.getElementById('custom-price-display').textContent = `Rp ${price.toLocaleString('id-ID')}`;
+    }
 
-                // Simpan username
-                localStorage.setItem('kipasUsername', name);
-                usernameDisplay.textContent = name;
-                logoutBtn.classList.remove('hidden');
-                mobileLogoutBtn.classList.remove('hidden');
+    function updateTotal() {
+      const q = parseInt(document.getElementById('quantity')?.value || 1);
+      let subtotal = isCustom ? (customDiamond * 198 * q) : (selectedPrice * q);
+      const adminFee = Math.round(subtotal * adminRate);
+      const total = subtotal + adminFee - discount;
+      document.getElementById('total-price').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('summary-qty').textContent = `${q}x`;
+      document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('summary-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
+      document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+      document.getElementById('mobile-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
 
-                // *** INCREMENT REGISTERED PLAYER COUNT (hanya sekali per device) ***
-                if (typeof window.recordRegistered === 'function') {
-                    window.recordRegistered();
-                }
+      const displayEl = document.getElementById('total-item-display');
+      const summaryEl = document.getElementById('summary-diamond');
+      if (isCustom || selectedType === 'diamond') {
+        const totalDm = isCustom ? customDiamond * q : selectedDiamond * q;
+        displayEl.innerHTML = `(<span id="total-diamond">${totalDm}</span> <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>)`;
+        summaryEl.innerHTML = `${totalDm} <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>`;
+      } else {
+        displayEl.innerHTML = `<span class="font-bold">${selectedName}</span> Membership`;
+        summaryEl.textContent = `${selectedName} Membership`;
+      }
 
-                // Fade out login → countdown
-                loginOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    loginOverlay.classList.add('hidden');
-                    countdownOverlay.classList.add('show');
+      document.getElementById('summary-discount-row').classList.toggle('hidden', discount <= 0);
+      if (discount > 0) document.getElementById('summary-discount').textContent = discount.toLocaleString('id-ID');
+    }
 
-                    let timeLeft = 2;
-                    countdownTimer.textContent = timeLeft;
-                    progressBar.style.width = '0%';
+    document.querySelectorAll('.nominal-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedPrice = parseInt(btn.dataset.price);
+        selectedDiamond = parseInt(btn.dataset.diamond || 0);
+        selectedType = btn.dataset.type || 'diamond';
+        selectedName = btn.dataset.name || '';
+        isCustom = selectedType === 'custom';
+        document.getElementById('custom-diamond-section').classList.toggle('hidden', !isCustom);
+        if (isCustom) {
+          customDiamond = parseInt(document.getElementById('custom-diamond-input')?.value) || 1;
+          selectedPrice = 198;
+          selectedDiamond = customDiamond;
+          selectedType = 'diamond';
+          selectedName = 'Custom';
+          updateCustomPriceDisplay();
+        }
+        updateTotal();
+      });
+    });
 
-                    const interval = setInterval(() => {
-                        timeLeft--;
-                        countdownTimer.textContent = timeLeft;
-                        const percentage = ((2 - timeLeft) / 2) * 100;
-                        progressBar.style.width = percentage + '%';
+    document.getElementById('custom-diamond-input')?.addEventListener('input', e => {
+      let val = parseInt(e.target.value) || 1;
+      val = Math.max(1, Math.min(99999, val));
+      e.target.value = val;
+      customDiamond = val;
+      selectedDiamond = customDiamond;
+      updateCustomPriceDisplay();
+      updateTotal();
+    });
 
-                        if (timeLeft <= 0) {
-                            clearInterval(interval);
-                            countdownTimer.textContent = 'SIAP!';
-                            continueBtn.classList.add('enabled');
-                            continueBtn.disabled = false;
-                            continueBtn.innerHTML = '<i class="fas fa-arrow-right mr-2"></i> LANJUT KE HALAMAN UTAMA';
-                        }
-                    }, 1000);
+    document.getElementById('btn-minus')?.addEventListener('click', () => {
+      const input = document.getElementById('quantity');
+      if (input.value > 1) { input.value--; updateTotal(); }
+    });
 
-                    continueBtn.onclick = () => {
-                        playClickSound();
-                        countdownOverlay.style.opacity = '0';
-                        setTimeout(() => {
-                            countdownOverlay.classList.remove('show');
-                            bgMusic.volume = 0.3;
-                            bgMusic.play().catch(() => {});
+    document.getElementById('btn-plus')?.addEventListener('click', () => {
+      document.getElementById('quantity').value++;
+      updateTotal();
+    });
 
-                            // Record visit setelah masuk halaman utama
-                            if (typeof window.recordVisit === 'function') {
-                                window.recordVisit();
-                            }
-                        }, 600);
-                    };
-                }, 500);
-            });
+    document.getElementById('quantity')?.addEventListener('input', updateTotal);
 
-            usernameInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') loginBtn.click();
-            });
+    document.getElementById('btn-apply-promo')?.addEventListener('click', () => {
+      const code = document.getElementById('promo-code').value.trim().toUpperCase();
+      if (code) {
+        // Di sini bisa ditambahkan logika promo jika ada
+        // Untuk saat ini hanya contoh pesan
+        document.getElementById('promo-message').classList.remove('hidden');
+        document.getElementById('promo-message').textContent = 'Kode promo sedang tidak aktif atau tidak valid.';
+      } else {
+        alert('Masukkan kode promo terlebih dahulu!');
+      }
+    });
 
-            // Logout
-            logoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('kipasUsername');
-                bgMusic.pause();
-                location.reload();
-            });
-            mobileLogoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('kipasUsername');
-                bgMusic.pause();
-                location.reload();
-            });
+    const pesanBtns = [document.getElementById('pesan-btn'), document.getElementById('pesan-btn-mobile')].filter(Boolean);
+    pesanBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.add('loading');
+        btn.disabled = true;
+        setTimeout(() => {
+          const q = parseInt(document.getElementById('quantity').value) || 1;
+          const subtotal = isCustom ? customDiamond * 198 * q : selectedPrice * q;
+          const adminFee = Math.round(subtotal * adminRate);
+          const total = subtotal + adminFee - discount;
+          const userId = document.getElementById('userid').value.trim() || '(ID belum diisi)';
+          const productName = isCustom || selectedType === 'diamond'
+            ? `${(isCustom ? customDiamond : selectedDiamond) * q} 💎 Diamonds`
+            : `${selectedName} Membership`;
 
-            // Particles
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
-                const size = Math.random() * 4 + 2;
-                p.style.width = p.style.height = `${size}px`;
-                p.style.left = `${Math.random() * 100}vw`;
-                const duration = Math.random() * 12 + 8;
-                p.style.animation = `fall ${duration}s linear infinite`;
-                p.style.animationDelay = `${Math.random() * 10}s`;
-                particlesContainer.appendChild(p);
-            }
+          document.getElementById('invoice-product-name').textContent = productName;
+          document.getElementById('invoice-detail-product').textContent = productName;
+          document.getElementById('invoice-user-id').textContent = userId;
+          document.getElementById('invoice-detail-userid').textContent = userId;
+          document.getElementById('invoice-detail-qty').textContent = `${q}x`;
+          document.getElementById('invoice-detail-harga').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-detail-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-detail-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-status').textContent = 'Pending';
+          document.getElementById('invoice-status').className = 'text-yellow-300 font-medium';
+          document.getElementById('invoice-discount-row').classList.toggle('hidden', discount <= 0);
+          if (discount > 0) document.getElementById('invoice-detail-diskon').textContent = discount.toLocaleString('id-ID');
 
-            // Mobile menu
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('open');
-            });
-            document.getElementById('mobile-menu-close').addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.remove('open');
-            });
+          document.getElementById('progress-bar').style.width = '0%';
+          document.querySelectorAll('#progress-section [id^="step"]').forEach(s => {
+            s.classList.remove('bg-primary', 'text-darkbg');
+            s.classList.add('bg-muted', 'text-gray-400');
+          });
+          document.getElementById('step1').classList.add('bg-primary', 'text-darkbg');
+          document.getElementById('step1').classList.remove('bg-muted', 'text-gray-400');
+          document.getElementById('progress-text').textContent = 'Sedang menunggu konfirmasi pembayaran Anda...';
 
-            // Click sound untuk semua link & button
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('click', playClickSound);
-            });
+          document.getElementById('topup-section').style.display = 'none';
+          document.getElementById('invoice-section').style.display = 'block';
 
-            // Record download
-            document.getElementById('download-btn')?.addEventListener('click', () => {
-                if (typeof window.recordDownload === 'function') {
-                    window.recordDownload();
-                }
-            });
+          btn.classList.remove('loading');
+          btn.disabled = false;
+        }, 1200);
+      });
+    });
+
+    const konfirmasiBtn = document.getElementById('konfirmasi-bayar-btn');
+    if (konfirmasiBtn) {
+      konfirmasiBtn.addEventListener('click', () => {
+        if (konfirmasiCooldown) return;
+        konfirmasiCooldown = true;
+        konfirmasiBtn.disabled = true;
+        konfirmasiBtn.textContent = 'Menunggu 10 detik...';
+        konfirmasiBtn.style.cursor = 'not-allowed';
+
+        setTimeout(() => {
+          konfirmasiCooldown = false;
+          if (!isSending) {
+            konfirmasiBtn.disabled = false;
+            konfirmasiBtn.textContent = 'SUDAH BAYAR - KONFIRMASI';
+            konfirmasiBtn.style.cursor = 'pointer';
+          }
+        }, 10000);
+
+        const productRaw = document.getElementById('invoice-detail-product').textContent.trim();
+        const productDisplay = productRaw.includes('Diamonds') ? `${productRaw} 💎` : productRaw;
+        const data = {
+          product: productDisplay,
+          userId: document.getElementById('invoice-detail-userid').textContent.trim(),
+          qty: document.getElementById('invoice-detail-qty').textContent.trim(),
+          harga: document.getElementById('invoice-detail-harga').textContent.trim(),
+          admin: document.getElementById('invoice-detail-admin').textContent.trim(),
+          total: document.getElementById('invoice-detail-total').textContent.trim()
+        };
+
+        sendQueue.push(data);
+        if (!isSending) processQueue();
+      });
+    }
+
+    async function processQueue() {
+      if (sendQueue.length === 0) {
+        isSending = false;
+        return;
+      }
+      isSending = true;
+      const data = sendQueue.shift();
+      if (konfirmasiBtn) konfirmasiBtn.textContent = 'Mengirim...';
+
+      // Jika webhookUrl masih digunakan, bagian ini bisa dihapus jika tidak diperlukan
+      const payload = {
+        embeds: [{
+          title: "✅ Pembelian Sukses - ADEN PEDIA",
+          description: "Terima kasih telah berbelanja! Diamond/Membership sedang diproses.",
+          color: 0x22c55e,
+          thumbnail: { url: "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" },
+          fields: [
+            { name: "💎 Produk", value: data.product || "Tidak diketahui", inline: true },
+            { name: "🆔 User ID", value: `\`${data.userId || '-'}\``, inline: true },
+            { name: "🔢 Jumlah", value: data.qty || "1x", inline: true },
+            { name: "💰 Harga", value: data.harga || "-", inline: true },
+            { name: "⚙️ Admin Fee", value: data.admin || "-", inline: true },
+            { name: "🏷️ Total Bayar", value: `**${data.total || '-'}**`, inline: true }
+          ],
+          footer: { text: "Status: Berhasil • Dikonfirmasi • " + timeAgo(new Date()), icon_url: "https://img.icons8.com/fluency/48/000000/checkmark.png" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        // Jika webhook tidak diperlukan, comment atau hapus bagian fetch ini
+        const res = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
-    </script>
-
-    <style>
-        @keyframes fall {
-            0% { transform: translateY(-100vh) translateX(0) rotate(0deg); }
-            100% { transform: translateY(100vh) translateX(60px) rotate(360deg); }
+        if (res.ok) {
+          startManualProgress();
+        } else {
+          alert('Gagal mengirim notifikasi. Silakan hubungi admin.');
         }
-    </style>
+      } catch (err) {
+        console.error(err);
+        alert('Koneksi bermasalah saat mengirim konfirmasi.');
+      }
 
-    <!-- Firebase Counter (Visitor, Download, RegisteredPlayerCount) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+      setTimeout(() => processQueue(), 3000);
+    }
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBQvmYGP8c93BqLBlvQ7xsaiaXy7HIRM5c",
-            authDomain: "hitungan-admin.firebaseapp.com",
-            databaseURL: "https://hitungan-admin-default-rtdb.firebaseio.com",
-            projectId: "hitungan-admin",
-            storageBucket: "hitungan-admin.firebasestorage.app",
-            messagingSenderId: "1041471299780",
-            appId: "1:1041471299780:web:2ed0a350235911cb6ce991",
-            measurementId: "G-BENXNW4SB2"
-        };
+    function startManualProgress() {
+      const banner = document.getElementById('status-banner');
+      const title = document.getElementById('status-title');
+      const desc = document.getElementById('status-desc');
+      const badge = document.getElementById('payment-badge');
+      const statusEl = document.getElementById('invoice-status');
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+      title.textContent = 'Memproses Pesanan...';
+      desc.textContent = 'Pembayaran sudah dikonfirmasi';
+      banner.classList.remove('bg-yellow-600/20', 'border-yellow-500/40');
+      banner.classList.add('bg-green-900/30', 'border-green-500/40');
+      badge.textContent = 'Dikonfirmasi';
+      badge.classList.remove('bg-yellow-600/30', 'text-yellow-300');
+      badge.classList.add('bg-orange-600/30', 'text-orange-400');
+      statusEl.textContent = 'Dikonfirmasi';
+      statusEl.classList.remove('text-yellow-300');
+      statusEl.classList.add('text-orange-400');
 
-        const visitorRef = ref(db, 'visitorCount');
-        const downloadRef = ref(db, 'downloadCount');
-        const registeredRef = ref(db, 'registeredPlayerCount'); // ← Sesuai permintaanmu
+      const steps = [
+        { id: 'step1', text: 'Pembayaran sudah diterima oleh sistem...' },
+        { id: 'step2', text: 'Sedang diverifikasi ke server Free Fire...' },
+        { id: 'step3', text: 'Pesanan sedang diproses...' },
+        { id: 'step4', text: 'Diamond / Membership berhasil dikirim!' }
+      ];
 
-        // Update semua counter realtime
-        onValue(visitorRef, (snap) => updateCount('.visitor-count', snap.val()));
-        onValue(downloadRef, (snap) => updateCount('.download-count', snap.val()));
-        onValue(registeredRef, (snap) => updateCount('.registered-count', snap.val()));
+      let i = 0;
+      const bar = document.getElementById('progress-bar');
+      const txt = document.getElementById('progress-text');
+      const interval = setInterval(() => {
+        if (i >= steps.length) {
+          clearInterval(interval);
+          txt.textContent = 'Transaksi selesai ✓ Terima kasih telah berbelanja!';
+          title.textContent = 'Pesanan Berhasil!';
+          desc.textContent = 'Silakan cek akun Free Fire Anda sekarang.';
+          document.getElementById('success-message').classList.remove('hidden');
+          document.getElementById('instructions').classList.add('hidden');
+          statusEl.textContent = 'Sukses';
+          statusEl.classList.remove('text-orange-400');
+          statusEl.classList.add('text-green-400');
 
-        function updateCount(selector, value) {
-            const count = value || 0;
-            document.querySelectorAll(selector).forEach(el => {
-                el.textContent = count.toLocaleString('id-ID');
-                el.classList.add('count-up');
-                setTimeout(() => el.classList.remove('count-up'), 600);
-            });
+          let countdown = 5;
+          const cdEl = document.getElementById('countdown-refresh');
+          const notice = document.getElementById('refresh-notice');
+          notice.classList.remove('hidden');
+          const cdInterval = setInterval(() => {
+            countdown--;
+            cdEl.textContent = countdown;
+            if (countdown <= 0) {
+              clearInterval(cdInterval);
+              window.location.reload();
+            }
+          }, 1000);
+          return;
         }
 
-        // +1 Visitor (maksimal 1x per jam per device)
-        window.recordVisit = function() {
-            const last = localStorage.getItem('lastVisit');
-            const now = Date.now();
-            if (last && (now - parseInt(last) < 3600000)) return;
-            localStorage.setItem('lastVisit', now.toString());
-            runTransaction(visitorRef, (current) => (current || 0) + 1);
-        };
+        document.getElementById(steps[i].id).classList.remove('bg-muted', 'text-gray-400');
+        document.getElementById(steps[i].id).classList.add('bg-primary', 'text-darkbg');
+        bar.style.width = `${(i + 1) * 25}%`;
+        txt.textContent = steps[i].text;
+        i++;
+      }, 1800);
+    }
 
-        // +1 Download (maksimal 1x per jam per device)
-        window.recordDownload = function() {
-            const last = localStorage.getItem('lastDownload');
-            const now = Date.now();
-            if (last && (now - parseInt(last) < 3600000)) return;
-            localStorage.setItem('lastDownload', now.toString());
-            runTransaction(downloadRef, (current) => (current || 0) + 1);
-        };
-
-        // +1 Registered Player (HANYA SEKALI seumur hidup per device)
-        window.recordRegistered = function() {
-            if (localStorage.getItem('kipasEverRegistered')) return;
-            localStorage.setItem('kipasEverRegistered', 'true');
-            runTransaction(registeredRef, (current) => (current || 0) + 1);
-        };
-    </script>
+    updateTotal();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
