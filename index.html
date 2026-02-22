@@ -1,14 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Top Up Free Fire - ADEN PEDIA</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -34,7 +34,6 @@
       }
     }
   </script>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; touch-action: manipulation; }
@@ -51,6 +50,10 @@
     #topup-section { display: block; }
     #invoice-section { display: none; }
     .membership-tag { position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #fdfd34, #facc15); color: #000; font-size: 9px; padding: 1px 6px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transform: rotate(12deg); z-index: 10; }
+    .summary-watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; user-select: none; z-index: 0; animation: watermark-pulse 12s ease-in-out infinite; }
+    .summary-watermark img { height: 45px; opacity: 0.12; margin-right: 8px; }
+    .summary-watermark span { font-size: 2rem; opacity: 0.12; letter-spacing: 3px; }
+    @media (max-width: 640px) { .summary-watermark img { height: 35px; } .summary-watermark span { font-size: 1.6rem; } }
     .logo-text { letter-spacing: 1.2px; color: white; }
     #nominal-list { -ms-overflow-style: none; scrollbar-width: none; }
     #nominal-list::-webkit-scrollbar { display: none; }
@@ -58,41 +61,6 @@
     @supports (padding-bottom: env(safe-area-inset-bottom)) { #pesan-btn-mobile-container { padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); } }
     #pesan-btn-mobile { background: transparent; color: white; border: 1.5px solid #fdfd34; padding: 0.8rem; font-size: 0.95rem; border-radius: 0.75rem; box-shadow: 0 3px 10px rgba(253, 253, 52, 0.3); }
     header { background: rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
-
-    /* Progress bar animasi */
-    #progress-bar {
-      height: 1.5rem;
-      background: linear-gradient(90deg, #fdfd34, #facc15);
-      border-radius: 9999px;
-      box-shadow: 0 0 15px rgba(253, 253, 52, 0.6);
-      transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    #progress-bar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: shine 3s infinite linear;
-    }
-    @keyframes shine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    #progress-bar.complete {
-      animation: pulse-glow 1.5s ease-in-out 1;
-    }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 15px rgba(253, 253, 52, 0.6); }
-      50%  { box-shadow: 0 0 30px rgba(253, 253, 52, 1), 0 0 50px rgba(34, 197, 94, 0.7); }
-    }
-    .progress-container {
-      background: rgba(40, 36, 45, 0.7);
-      border-radius: 9999px;
-      overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-    }
   </style>
 </head>
 <body class="overflow-x-hidden">
@@ -111,11 +79,9 @@
         </div>
       </div>
     </header>
-
     <div class="relative w-full overflow-hidden">
       <img src="banner.jpg" alt="Banner" class="w-full h-44 sm:h-60 md:h-72 object-cover brightness-75"/>
     </div>
-
     <div class="container mx-auto px-4 -mt-8 relative z-10">
       <div class="bg-gray-900/90 backdrop-blur-sm p-4 rounded-2xl shadow-2xl flex justify-around text-center text-xs max-w-4xl mx-auto">
         <div class="flex flex-col items-center gap-1"><i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i><span>Cepat</span></div>
@@ -123,8 +89,7 @@
         <div class="flex flex-col items-center gap-1"><i data-lucide="headset" class="w-5 h-5 text-yellow-400"></i><span>24/7</span></div>
       </div>
     </div>
-
-    <main class="container mx-auto px-4 py-6 pb-40 md:pb-8 overflow-hidden">
+    <main class="container mx-auto px-4 py-6 pb-40 md:pb-8">
       <div class="grid gap-4 md:grid-cols-3 max-w-7xl mx-auto">
         <div class="md:col-span-2 space-y-4">
           <!-- 1. ID Free Fire -->
@@ -138,7 +103,7 @@
             </div>
           </section>
 
-          <!-- 2. Pilih Nominal (LENGKAP - semua paket) -->
+          <!-- 2. Pilih Nominal -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden relative">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
               <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
@@ -160,314 +125,111 @@
                 <div class="text-xs text-gray-400">Membership</div>
                 <div class="text-yellow-400 font-bold text-sm">Rp 60.000</div>
               </button>
-
-              <!-- Diamond Packs Lengkap -->
+              <!-- Custom Diamond -->
+              <button class="nominal-btn bg-gradient-to-br from-indigo-900/60 to-purple-900/40 p-3 rounded-xl text-center hover:bg-indigo-700/30 border-2 border-indigo-500/40 transition" data-price="198" data-diamond="1" data-type="custom" data-name="Custom Diamond">
+                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
+                <div class="font-bold text-base">Custom</div>
+                <div class="text-xs text-indigo-300">Isi jumlah sendiri</div>
+                <div class="text-indigo-300 font-bold text-sm">Rp 198 / dm</div>
+              </button>
+              <!-- Diamond Packs -->
               <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="813" data-diamond="5" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">5</div>
                 <div class="text-xs text-gray-400">Diamond</div>
                 <div class="text-yellow-400 font-bold text-sm">Rp 813</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1626" data-diamond="10" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">10</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 1.626</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1758" data-diamond="12" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">12</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 1.758</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="2439" data-diamond="15" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">15</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 2.439</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="3252" data-diamond="20" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="3000" data-diamond="20" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">20</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 3.252</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 3.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="4065" data-diamond="25" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">25</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 4.065</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="4878" data-diamond="30" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">30</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 4.878</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="6504" data-diamond="40" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">40</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 6.504</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="6873" data-diamond="50" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="7900" data-diamond="50" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">50</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 6.873</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 7.900</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="7691" data-diamond="55" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">55</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 7.691</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="8751" data-diamond="70" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">70</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 8.751</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="9564" data-diamond="75" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">75</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 9.564</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="10377" data-diamond="80" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">80</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 10.377</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="12003" data-diamond="90" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">90</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 12.003</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="13756" data-diamond="100" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="15900" data-diamond="100" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">100</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 13.756</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 15.900</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="15629" data-diamond="120" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">120</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 15.629</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="17255" data-diamond="130" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">130</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 17.255</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="17576" data-diamond="140" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">140</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 17.576</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="18389" data-diamond="145" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">145</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 18.389</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="19202" data-diamond="150" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">150</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 19.202</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="20828" data-diamond="160" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">160</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 20.828</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="26327" data-diamond="210" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="31700" data-diamond="210" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">210</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 26.327</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 31.700</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="38404" data-diamond="300" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="63500" data-diamond="520" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">300</div>
+                <div class="font-bold text-base">520</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 38.404</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 63.500</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="43978" data-diamond="355" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="95000" data-diamond="845" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">355</div>
+                <div class="font-bold text-base">845</div>
                 <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 43.978</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 95.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="61554" data-diamond="495" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="125000" data-diamond="1080" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">495</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 61.554</div>
+                <div class="font-bold text-base">1080</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 125.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="62367" data-diamond="500" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="245000" data-diamond="2180" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">500</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 62.367</div>
+                <div class="font-bold text-base">2180</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 245.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="63993" data-diamond="510" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="490000" data-diamond="5600" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">510</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 63.993</div>
+                <div class="font-bold text-base">5600</div>
+                <div class="text-xs text-gray-400">Diamond + Bonus Besar</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 490.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="68432" data-diamond="545" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="980000" data-diamond="12000" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">545</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 68.432</div>
+                <div class="font-bold text-base">12000</div>
+                <div class="text-xs text-gray-400">Diamond + Hadiah Ekstra</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 980.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="70305" data-diamond="565" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1450000" data-diamond="18000" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">565</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 70.305</div>
+                <div class="font-bold text-base">18000</div>
+                <div class="text-xs text-gray-400">Diamond VIP</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 1.450.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="79130" data-diamond="635" data-type="diamond">
+              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="2450000" data-diamond="30000" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">635</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 79.130</div>
+                <div class="font-bold text-base">30000</div>
+                <div class="text-xs text-gray-400">Diamond + Skin Eksklusif</div>
+                <div class="text-yellow-400 font-bold text-sm">Rp 2.450.000</div>
               </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="82828" data-diamond="720" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">720</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 82.828</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="92641" data-diamond="725" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">725</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 92.641</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="95080" data-diamond="740" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">740</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 95.080</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="98706" data-diamond="770" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">770</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 98.706</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="100579" data-diamond="790" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">790</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 100.579</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="102205" data-diamond="800" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">800</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 102.205</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="109404" data-diamond="860" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">860</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 109.404</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="118155" data-diamond="930" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">930</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 118.155</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="126980" data-diamond="1000" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">1000</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 126.980</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="483543" data-diamond="3640" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">3640</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 483.543</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="528334" data-diamond="4000" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">4000</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 528.334</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="587374" data-diamond="4450" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">4450</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 587.374</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="728646" data-diamond="5500" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">5500</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 728.646</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="797760" data-diamond="6000" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">6000</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 797.760</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="856875" data-diamond="6480" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">6480</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 856.875</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="968712" data-diamond="7290" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">7290</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 968.712</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1060540" data-diamond="8010" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">8010</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 1.060.540</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1301165" data-diamond="9800" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">9800</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 1.301.165</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="1937424" data-diamond="14580" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">14580</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 1.937.424</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="4651528" data-diamond="36500" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">36500</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 4.651.528</div>
-              </button>
-              <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="9193028" data-diamond="73100" data-type="diamond">
-                <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
-                <div class="font-bold text-base">73100</div>
-                <div class="text-xs text-gray-400">Diamond</div>
-                <div class="text-yellow-400 font-bold text-sm">Rp 9.193.028</div>
-              </button>
+            </div>
+          </section>
+
+          <!-- Custom Diamond Input -->
+          <section id="custom-diamond-section" class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden hidden">
+            <div class="bg-indigo-600 text-white px-4 py-3 font-bold flex items-center gap-3 text-sm">
+              <span class="bg-black text-indigo-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2.5</span>
+              Jumlah Diamond Custom
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-3">
+                <input id="custom-diamond-input" type="number" min="1" max="99999" value="561"
+                       class="flex-1 p-4 bg-gray-800 border border-indigo-600/50 rounded-xl text-white text-2xl font-bold text-center focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/30 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
+                <div class="text-3xl text-indigo-300">💎</div>
+              </div>
+              <p class="text-center mt-4 text-lg">
+                Harga: <span id="custom-price-display" class="text-indigo-400 font-bold">Rp 111.138</span>
+              </p>
+              <p class="text-xs text-center text-gray-400 mt-1">Minimal 1 • Maksimal 99.999 diamond</p>
             </div>
           </section>
 
@@ -500,10 +262,10 @@
             </div>
             <div class="p-4">
               <div class="flex flex-col sm:flex-row gap-2">
-                <input id="promo-code" type="text" placeholder="Ketik kode (ADENGACOR / FFKIPAS / MASDER / DINZ)" class="flex-1 p-3.5 bg-gray-800 border border-gray-700 rounded-xl focus:border-yellow-400 text-sm uppercase"/>
+                <input id="promo-code" type="text" placeholder="Ketik kode promo jika ada" class="flex-1 p-3.5 bg-gray-800 border border-gray-700 rounded-xl focus:border-yellow-400 text-sm"/>
                 <button id="btn-apply-promo" class="bg-yellow-400 text-black px-5 py-3.5 rounded-xl font-bold hover:bg-yellow-300 mt-2 sm:mt-0 text-sm">Gunakan</button>
               </div>
-              <p id="promo-message" class="mt-3 text-sm font-medium hidden"></p>
+              <p id="promo-message" class="mt-3 text-green-400 text-xs hidden">Kode promo diterapkan! Hemat <span id="discount-amount">Rp 0</span></p>
             </div>
           </section>
 
@@ -537,9 +299,13 @@
           </section>
         </div>
 
-        <!-- Ringkasan Pesanan (tanpa watermark) -->
+        <!-- Ringkasan Pesanan -->
         <div class="md:col-span-1">
           <div class="bg-gray-900/90 p-5 rounded-2xl shadow-xl md:sticky md:top-6 space-y-4 relative overflow-hidden max-w-md md:max-w-none mx-auto md:mx-0">
+            <div class="summary-watermark animate-watermark-float">
+              <img src="aden.png" alt="Aden Pedia">
+              <span>ADEN PEDIA</span>
+            </div>
             <h3 class="text-lg font-bold text-white flex items-center gap-2 relative z-10">
               <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon"/>
               Ringkasan Pesanan
@@ -561,7 +327,6 @@
         </div>
       </div>
     </main>
-
     <div id="pesan-btn-mobile-container" class="fixed bottom-0 left-0 right-0 z-[9999] md:hidden">
       <button id="pesan-btn-mobile" class="w-full bg-transparent text-white border border-yellow-400/60 backdrop-blur-lg py-3 rounded-t-xl font-bold text-base flex items-center justify-center gap-2 shadow-xl">
         <i data-lucide="shopping-cart" class="w-5 h-5"></i> PESAN SEKARANG - <span id="mobile-total">Rp 21.930</span>
@@ -582,13 +347,11 @@
         </div>
       </div>
     </header>
-
     <main class="container mx-auto px-4 py-6 md:py-8 max-w-5xl">
       <div id="status-banner" class="bg-yellow-600/20 border border-yellow-500/40 rounded-2xl p-5 md:p-6 text-center mb-6 md:mb-8 transition-all duration-500">
         <h1 id="status-title" class="text-2xl md:text-4xl font-bold text-yellow-300 mb-2 md:mb-3">Memproses Pesanan...</h1>
         <p id="status-desc" class="text-base md:text-lg text-gray-300">Mohon tunggu sebentar, sedang memverifikasi pembayaran</p>
       </div>
-
       <div class="grid md:grid-cols-2 gap-6 md:gap-8">
         <div class="space-y-5 md:space-y-6">
           <div class="bg-card rounded-2xl overflow-hidden border border-muted/30 shadow-xl">
@@ -606,12 +369,11 @@
               </div>
             </div>
           </div>
-
           <div id="progress-section" class="bg-card/50 rounded-2xl p-5 md:p-6 border border-muted/20">
             <h3 class="text-lg md:text-xl font-semibold mb-4 md:mb-6 text-center">Progres Pembayaran & Pengiriman</h3>
-            <div class="progress-container relative mb-5 md:mb-8 rounded-xl overflow-hidden bg-darkbg/40 py-4 px-2 md:px-4">
+            <div class="relative mb-5 md:mb-8 rounded-xl overflow-hidden bg-darkbg/40 py-4 px-2 md:px-4">
               <div class="absolute inset-x-4 top-1/2 h-1.5 md:h-2 bg-muted/40 rounded-full -translate-y-1/2 z-0"></div>
-              <div id="progress-bar" class="absolute inset-x-4 top-1/2 h-1.5 md:h-2 rounded-full transition-all duration-1000 -translate-y-1/2 z-10" style="width: 0%;"></div>
+              <div id="progress-bar" class="absolute inset-x-4 top-1/2 h-1.5 md:h-2 bg-primary rounded-full transition-all duration-1000 -translate-y-1/2 z-10" style="width: 0%;"></div>
               <div class="relative z-20 flex justify-between">
                 <div class="text-center flex-1"><div id="step1" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-primary text-darkbg font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">1</div><p class="mt-1 md:mt-2 text-xs text-primary font-medium">Menunggu Bayar</p></div>
                 <div class="text-center flex-1"><div id="step2" class="w-8 h-8 md:w-10 md:h-10 mx-auto rounded-full bg-muted text-gray-400 font-bold flex items-center justify-center border-4 border-darkbg text-sm md:text-base">2</div><p class="mt-1 md:mt-2 text-xs text-gray-400">Pembayaran Diterima</p></div>
@@ -621,8 +383,12 @@
             </div>
             <p id="progress-text" class="text-center text-sm text-gray-300 mt-3">Sedang menunggu konfirmasi pembayaran Anda...</p>
           </div>
-
           <div class="bg-card rounded-2xl p-5 md:p-6 border border-muted/30 relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none animate-watermark-float">
+              <div class="flex items-center gap-2 md:gap-3 text-white font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wider opacity-10 animate-watermark-pulse scale-90 sm:scale-100 md:scale-125">
+                <img src="aden.png" alt="Aden Pedia" class="h-8 sm:h-10 md:h-14 lg:h-16 w-auto opacity-70"/> ADEN PEDIA
+              </div>
+            </div>
             <h3 class="text-lg md:text-xl font-semibold mb-4 relative z-10">Rincian Pesanan</h3>
             <div class="space-y-3 text-sm relative z-10">
               <div class="flex justify-between"><span class="text-gray-400">Produk</span><span class="font-medium" id="invoice-detail-product"></span></div>
@@ -637,7 +403,6 @@
             </div>
           </div>
         </div>
-
         <div class="space-y-6">
           <div class="bg-card rounded-2xl p-5 md:p-6 border border-muted/30">
             <h3 class="text-lg md:text-xl font-semibold mb-4">Metode Pembayaran</h3>
@@ -655,20 +420,22 @@
               </button>
               <p class="text-xs text-gray-400 mt-3">Tekan tombol ini setelah Anda selesai melakukan pembayaran</p>
             </div>
+            <div class="mt-5 md:mt-6 space-y-3 md:space-y-4 text-sm">
+              <div class="flex items-center justify-between"><span class="text-gray-400">Nomor Invoice</span><div class="flex items-center gap-2"><code class="bg-muted/30 px-3 py-1 rounded font-mono text-primary text-xs md:text-sm">ADN5902359092305</code><button onclick="navigator.clipboard.writeText('ADN5902359092305').then(()=>alert('Copied!'))" class="text-primary hover:text-primary/80"><i class="fas fa-copy"></i></button></div></div>
+              <div class="flex justify-between items-center"><span class="text-gray-400">Status</span><span id="payment-badge" class="bg-yellow-600/30 text-yellow-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm font-medium">Pending</span></div>
+            </div>
           </div>
-
           <div id="success-message" class="hidden bg-green-900/30 border border-green-500/40 rounded-2xl p-5 md:p-6 text-center">
             <i class="fas fa-check-circle text-5xl md:text-6xl text-success mb-4"></i>
             <h2 class="text-xl md:text-2xl font-bold text-success mb-2">Pembayaran Berhasil</h2>
             <p class="text-gray-300 text-sm md:text-base">Telah diterima. Pesanan sedang diproses ke akun Anda.</p>
             <p class="text-xs md:text-sm text-gray-400 mt-3 md:mt-4">Estimasi: 1-5 menit</p>
-            <p id="refresh-notice" class="text-sm text-gray-400 mt-6 hidden">
+            <p id="refresh-notice" class="text-sm text-gray-400 mt-6">
               Halaman akan kembali otomatis dalam <span id="countdown-refresh">5</span> detik...
             </p>
           </div>
         </div>
       </div>
-
       <div id="instructions" class="mt-8 bg-card/50 rounded-2xl p-5 md:p-6 border border-muted/20">
         <h3 class="text-lg md:text-xl font-semibold mb-4">Cara Bayar via QRIS</h3>
         <ol class="list-decimal pl-5 space-y-2 md:space-y-3 text-gray-300 text-sm md:text-base">
@@ -682,312 +449,163 @@
     </main>
   </div>
 
-  <!-- ====================== JAVASCRIPT LENGKAP ====================== -->
+  <!-- ====================== JAVASCRIPT ====================== -->
   <script>
-    lucide.createIcons();
+lucide.createIcons();
 
-    let selectedPrice = 21500;
-    let selectedDiamond = 0;
-    let selectedType = 'membership';
-    let selectedName = 'Mingguan';
-    let discount = 0;
-    let promoApplied = false;
-    const adminRate = 0.02;
+let selectedPrice = 21500;
+let selectedDiamond = 0;
+let selectedType = 'membership';
+let selectedName = 'Mingguan';
+let discountPercent = 0; // persentase diskon dari promo
+const adminRate = 0.02;
+const webhookUrl = "https://discord.com/api/webhooks/1472899700230324391/cfbxxwVHxmhiRMm9mdAvFUWtZbOz4-WndIzRCx8-eemo7r1hkEGyJ0AA0LR7aDQC3iyF"; // hapus kalau tidak dipakai
 
-    function updateTotal() {
-      const q = parseInt(document.getElementById('quantity').value) || 1;
-      const subtotal = selectedPrice * q;
-      const adminFee = Math.round(subtotal * adminRate);
-      const total = subtotal + adminFee - discount;
+let isSending = false;
+let sendQueue = [];
+let isCustom = false;
+let customDiamond = 561;
+let konfirmasiCooldown = false;
 
-      document.getElementById('total-price').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-      document.getElementById('summary-qty').textContent = `${q}x`;
-      document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-      document.getElementById('summary-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
-      document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-      document.getElementById('mobile-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+function timeAgo(date) {
+  const seconds = Math.floor((new Date() - date) / 1000);
+  let interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) return interval + " tahun yang lalu";
+  interval = Math.floor(seconds / 2592000);
+  if (interval >= 1) return interval + " bulan yang lalu";
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) return interval + (interval === 1 ? " hari" : " hari") + " yang lalu";
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) return interval + (interval === 1 ? " jam" : " jam") + " yang lalu";
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) return interval + (interval === 1 ? " menit" : " menit") + " yang lalu";
+  return "beberapa detik yang lalu";
+}
 
-      const displayEl = document.getElementById('total-item-display');
-      const summaryEl = document.getElementById('summary-diamond');
-      if (selectedType === 'diamond') {
-        const totalDm = selectedDiamond * q;
-        displayEl.innerHTML = `(<span>${totalDm}</span> <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>)`;
-        summaryEl.innerHTML = `${totalDm} <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>`;
-      } else {
-        displayEl.innerHTML = `<span class="font-bold">${selectedName}</span> Membership`;
-        summaryEl.textContent = `${selectedName} Membership`;
-      }
+function updateCustomPriceDisplay() {
+  const price = customDiamond * 198;
+  document.getElementById('custom-price-display').textContent = `Rp ${price.toLocaleString('id-ID')}`;
+}
 
-      document.getElementById('summary-discount-row').classList.toggle('hidden', discount <= 0);
-      if (discount > 0) document.getElementById('summary-discount').textContent = discount.toLocaleString('id-ID');
+function updateTotal() {
+  const q = parseInt(document.getElementById('quantity')?.value || 1);
+  let subtotal = isCustom ? (customDiamond * 198 * q) : (selectedPrice * q);
+  
+  // Hitung diskon persen
+  const discountAmount = Math.round(subtotal * (discountPercent / 100));
+  const totalBeforeAdmin = subtotal - discountAmount;
+  const adminFee = Math.round(totalBeforeAdmin * adminRate);
+  const total = totalBeforeAdmin + adminFee;
+
+  document.getElementById('total-price').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+  document.getElementById('summary-qty').textContent = `${q}x`;
+  document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+  document.getElementById('summary-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
+  document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+  document.getElementById('mobile-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+  const displayEl = document.getElementById('total-item-display');
+  const summaryEl = document.getElementById('summary-diamond');
+
+  if (isCustom || selectedType === 'diamond') {
+    const totalDm = isCustom ? customDiamond * q : selectedDiamond * q;
+    displayEl.innerHTML = `(<span id="total-diamond">${totalDm}</span> <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>)`;
+    summaryEl.innerHTML = `${totalDm} <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>`;
+  } else {
+    displayEl.innerHTML = `<span class="font-bold">${selectedName}</span> Membership`;
+    summaryEl.textContent = `${selectedName} Membership`;
+  }
+
+  document.getElementById('summary-discount-row').classList.toggle('hidden', discountAmount <= 0);
+  if (discountAmount > 0) {
+    document.getElementById('summary-discount').textContent = discountAmount.toLocaleString('id-ID');
+  }
+}
+
+// Event nominal buttons
+document.querySelectorAll('.nominal-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedPrice = parseInt(btn.dataset.price);
+    selectedDiamond = parseInt(btn.dataset.diamond || 0);
+    selectedType = btn.dataset.type || 'diamond';
+    selectedName = btn.dataset.name || '';
+    isCustom = selectedType === 'custom';
+    document.getElementById('custom-diamond-section').classList.toggle('hidden', !isCustom);
+    if (isCustom) {
+      customDiamond = parseInt(document.getElementById('custom-diamond-input')?.value) || 1;
+      selectedPrice = 198;
+      selectedDiamond = customDiamond;
+      selectedType = 'diamond';
+      selectedName = 'Custom';
+      updateCustomPriceDisplay();
     }
-
-    document.querySelectorAll('.nominal-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        selectedPrice = parseInt(btn.dataset.price);
-        selectedDiamond = parseInt(btn.dataset.diamond || 0);
-        selectedType = btn.dataset.type || 'membership';
-        selectedName = btn.dataset.name || '';
-        updateTotal();
-      });
-    });
-
-    document.getElementById('btn-minus').addEventListener('click', () => {
-      const input = document.getElementById('quantity');
-      if (input.value > 1) {
-        input.value--;
-        updateTotal();
-      }
-    });
-
-    document.getElementById('btn-plus').addEventListener('click', () => {
-      document.getElementById('quantity').value++;
-      updateTotal();
-    });
-
-    document.getElementById('quantity').addEventListener('input', updateTotal);
-
-    document.getElementById('btn-apply-promo').addEventListener('click', () => {
-      const codeInput = document.getElementById('promo-code');
-      const code = codeInput.value.trim().toUpperCase();
-      const messageEl = document.getElementById('promo-message');
-
-      if (!code) {
-        messageEl.classList.remove('hidden', 'text-green-400');
-        messageEl.classList.add('text-red-400');
-        messageEl.textContent = 'Masukkan kode promo terlebih dahulu!';
-        return;
-      }
-
-      if (promoApplied) {
-        messageEl.classList.remove('hidden', 'text-green-400');
-        messageEl.classList.add('text-red-400');
-        messageEl.textContent = 'Kode promo hanya bisa digunakan sekali per transaksi.';
-        return;
-      }
-
-      let discountPercent = 0;
-      let successMessage = '';
-
-      if (code === 'ADENGACOR') {
-        discountPercent = 89;
-        successMessage = 'Diskon 89% berhasil diterapkan!';
-      } else if (code === 'FFKIPAS') {
-        discountPercent = 39;
-        successMessage = 'Diskon 39% berhasil diterapkan!';
-      } else if (code === 'MASDER') {
-        discountPercent = 44;
-        successMessage = 'Diskon 44% berhasil diterapkan!';
-      } else if (code === 'DINZ') {
-        discountPercent = 56;
-        successMessage = 'Diskon 56% berhasil diterapkan!';
-      } else {
-        messageEl.classList.remove('hidden', 'text-green-400');
-        messageEl.classList.add('text-red-400');
-        messageEl.textContent = 'Kode promo tidak valid!';
-        return;
-      }
-
-      const q = parseInt(document.getElementById('quantity').value) || 1;
-      const subtotal = selectedPrice * q;
-      discount = Math.round(subtotal * (discountPercent / 100));
-      promoApplied = true;
-
-      messageEl.classList.remove('hidden', 'text-red-400');
-      messageEl.classList.add('text-green-400');
-      messageEl.innerHTML = `${successMessage} Hemat <strong>Rp ${discount.toLocaleString('id-ID')}</strong>`;
-
-      updateTotal();
-
-      codeInput.disabled = true;
-      document.getElementById('btn-apply-promo').disabled = true;
-      document.getElementById('btn-apply-promo').textContent = 'Sudah Digunakan';
-      document.getElementById('btn-apply-promo').classList.add('opacity-50', 'cursor-not-allowed');
-    });
-
-    const pesanBtns = [document.getElementById('pesan-btn'), document.getElementById('pesan-btn-mobile')].filter(Boolean);
-    pesanBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.add('loading');
-        btn.disabled = true;
-        setTimeout(() => {
-          const q = parseInt(document.getElementById('quantity').value) || 1;
-          const subtotal = selectedPrice * q;
-          const adminFee = Math.round(subtotal * adminRate);
-          const total = subtotal + adminFee - discount;
-          const userId = document.getElementById('userid').value.trim() || '(ID belum diisi)';
-          const productName = selectedType === 'diamond'
-            ? `${selectedDiamond * q} 💎 Diamonds`
-            : `${selectedName} Membership`;
-
-          document.getElementById('invoice-product-name').textContent = productName;
-          document.getElementById('invoice-detail-product').textContent = productName;
-          document.getElementById('invoice-user-id').textContent = userId;
-          document.getElementById('invoice-detail-userid').textContent = userId;
-          document.getElementById('invoice-detail-qty').textContent = `${q}x`;
-          document.getElementById('invoice-detail-harga').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-          document.getElementById('invoice-detail-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
-          document.getElementById('invoice-detail-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-          document.getElementById('invoice-status').textContent = 'Pending';
-          document.getElementById('invoice-status').className = 'text-yellow-300 font-medium';
-          document.getElementById('invoice-discount-row').classList.toggle('hidden', discount <= 0);
-          if (discount > 0) document.getElementById('invoice-detail-diskon').textContent = discount.toLocaleString('id-ID');
-
-          document.getElementById('progress-bar').style.width = '0%';
-          document.querySelectorAll('#progress-section [id^="step"]').forEach(s => {
-            s.classList.remove('bg-primary', 'text-darkbg');
-            s.classList.add('bg-muted', 'text-gray-400');
-          });
-          document.getElementById('step1').classList.add('bg-primary', 'text-darkbg');
-          document.getElementById('step1').classList.remove('bg-muted', 'text-gray-400');
-          document.getElementById('progress-text').textContent = 'Sedang menunggu konfirmasi pembayaran Anda...';
-
-          document.getElementById('topup-section').style.display = 'none';
-          document.getElementById('invoice-section').style.display = 'block';
-
-          btn.classList.remove('loading');
-          btn.disabled = false;
-        }, 1200);
-      });
-    });
-
-    const konfirmasiBtn = document.getElementById('konfirmasi-bayar-btn');
-    if (konfirmasiBtn) {
-      konfirmasiBtn.addEventListener('click', () => {
-        konfirmasiBtn.disabled = true;
-        konfirmasiBtn.textContent = 'Mengirim...';
-
-        const productRaw = document.getElementById('invoice-detail-product').textContent.trim();
-        const productDisplay = productRaw.includes('Diamonds') ? `${productRaw} 💎` : productRaw;
-        const data = {
-          product: productDisplay,
-          userId: document.getElementById('invoice-detail-userid').textContent.trim(),
-          qty: document.getElementById('invoice-detail-qty').textContent.trim(),
-          harga: document.getElementById('invoice-detail-harga').textContent.trim(),
-          admin: document.getElementById('invoice-detail-admin').textContent.trim(),
-          total: document.getElementById('invoice-detail-total').textContent.trim()
-        };
-        sendQueue.push(data);
-        if (!isSending) processQueue();
-      });
-    }
-
-    async function processQueue() {
-      if (sendQueue.length === 0) {
-        isSending = false;
-        return;
-      }
-      isSending = true;
-      const data = sendQueue.shift();
-
-      const payload = {
-        embeds: [{
-          title: "✅ Pembelian Sukses - ADEN PEDIA",
-          description: "Terima kasih telah berbelanja! Diamond/Membership sedang diproses.",
-          color: 0x22c55e,
-          thumbnail: { url: "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" },
-          fields: [
-            { name: "💎 Produk", value: data.product || "Tidak diketahui", inline: true },
-            { name: "🆔 User ID", value: `\`${data.userId || '-'}\``, inline: true },
-            { name: "🔢 Jumlah", value: data.qty || "1x", inline: true },
-            { name: "💰 Harga", value: data.harga || "-", inline: true },
-            { name: "⚙️ Admin Fee", value: data.admin || "-", inline: true },
-            { name: "🏷️ Total Bayar", value: `**${data.total || '-'}**`, inline: true }
-          ],
-          footer: { text: "Status: Berhasil • Dikonfirmasi • " + timeAgo(new Date()), icon_url: "https://img.icons8.com/fluency/48/000000/checkmark.png" },
-          timestamp: new Date().toISOString()
-        }]
-      };
-
-      try {
-        const res = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (res.ok) {
-          startManualProgress();
-        } else {
-          alert('Gagal mengirim notifikasi. Silakan hubungi admin.');
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Koneksi bermasalah.');
-      }
-
-      setTimeout(() => processQueue(), 3000);
-    }
-
-    function startManualProgress() {
-      const banner = document.getElementById('status-banner');
-      const title = document.getElementById('status-title');
-      const desc = document.getElementById('status-desc');
-      const badge = document.getElementById('payment-badge');
-      const statusEl = document.getElementById('invoice-status');
-
-      title.textContent = 'Memproses Pesanan...';
-      desc.textContent = 'Pembayaran sudah dikonfirmasi';
-      banner.classList.remove('bg-yellow-600/20', 'border-yellow-500/40');
-      banner.classList.add('bg-green-900/30', 'border-green-500/40');
-      badge.textContent = 'Dikonfirmasi';
-      badge.classList.remove('bg-yellow-600/30', 'text-yellow-300');
-      badge.classList.add('bg-orange-600/30', 'text-orange-400');
-      statusEl.textContent = 'Dikonfirmasi';
-      statusEl.classList.remove('text-yellow-300');
-      statusEl.classList.add('text-orange-400');
-
-      const steps = [
-        { id: 'step1', text: 'Pembayaran sudah diterima oleh sistem...' },
-        { id: 'step2', text: 'Sedang diverifikasi ke server Free Fire...' },
-        { id: 'step3', text: 'Pesanan sedang diproses...' },
-        { id: 'step4', text: 'Diamond / Membership berhasil dikirim!' }
-      ];
-
-      let i = 0;
-      const bar = document.getElementById('progress-bar');
-      const txt = document.getElementById('progress-text');
-
-      const interval = setInterval(() => {
-        if (i >= steps.length) {
-          clearInterval(interval);
-          bar.classList.add('complete');
-
-          txt.textContent = 'Transaksi selesai ✓ Terima kasih telah berbelanja!';
-          title.textContent = 'Pesanan Berhasil!';
-          desc.textContent = 'Silakan cek akun Free Fire Anda sekarang.';
-          document.getElementById('success-message').classList.remove('hidden');
-          document.getElementById('instructions').classList.add('hidden');
-          statusEl.textContent = 'Sukses';
-          statusEl.classList.remove('text-orange-400');
-          statusEl.classList.add('text-green-400');
-
-          const refreshMessage = document.getElementById('refresh-notice');
-          refreshMessage.classList.remove('hidden');
-          let countdown = 5;
-          const countdownEl = document.getElementById('countdown-refresh');
-          const cdInterval = setInterval(() => {
-            countdown--;
-            countdownEl.textContent = countdown;
-            if (countdown <= 0) {
-              clearInterval(cdInterval);
-              window.location.reload();
-            }
-          }, 1000);
-
-          return;
-        }
-
-        document.getElementById(steps[i].id).classList.remove('bg-muted', 'text-gray-400');
-        document.getElementById(steps[i].id).classList.add('bg-primary', 'text-darkbg');
-        bar.style.width = `${(i + 1) * 25}%`;
-        txt.textContent = steps[i].text;
-        i++;
-      }, 1800);
-    }
-
     updateTotal();
-  </script>
+  });
+});
+
+// Custom diamond input
+document.getElementById('custom-diamond-input')?.addEventListener('input', e => {
+  let val = parseInt(e.target.value) || 1;
+  val = Math.max(1, Math.min(99999, val));
+  e.target.value = val;
+  customDiamond = val;
+  selectedDiamond = customDiamond;
+  updateCustomPriceDisplay();
+  updateTotal();
+});
+
+// Quantity +/- 
+document.getElementById('btn-minus')?.addEventListener('click', () => {
+  const input = document.getElementById('quantity');
+  if (input.value > 1) { input.value--; updateTotal(); }
+});
+document.getElementById('btn-plus')?.addEventListener('click', () => {
+  document.getElementById('quantity').value++;
+  updateTotal();
+});
+document.getElementById('quantity')?.addEventListener('input', updateTotal);
+
+// PROMO CODE HANDLER
+document.getElementById('btn-apply-promo')?.addEventListener('click', () => {
+  const code = document.getElementById('promo-code').value.trim().toUpperCase();
+  const promoMsg = document.getElementById('promo-message');
+
+  const promoCodes = {
+    'ADENGACOR': 89,
+    'FFKIPAS': 55,
+    'DINZ': 66,
+    'MASDER': 77
+  };
+
+  if (!code) {
+    promoMsg.classList.remove('hidden', 'text-green-400');
+    promoMsg.classList.add('text-red-400');
+    promoMsg.textContent = 'Masukkan kode promo terlebih dahulu!';
+    discountPercent = 0;
+    updateTotal();
+    return;
+  }
+
+  if (promoCodes[code]) {
+    discountPercent = promoCodes[code];
+    promoMsg.classList.remove('hidden', 'text-red-400');
+    promoMsg.classList.add('text-green-400');
+    promoMsg.innerHTML = `Kode promo <strong>${code}</strong> berhasil! Hemat <strong>${discountPercent}%</strong>.`;
+  } else {
+    discountPercent = 0;
+    promoMsg.classList.remove('hidden', 'text-green-400');
+    promoMsg.classList.add('text-red-400');
+    promoMsg.textContent = 'Kode promo tidak valid atau sudah kadaluarsa.';
+  }
+  updateTotal();
+});
+
+// Sisanya (pesan btn, loading, invoice switch, konfirmasi bayar, processQueue, startManualProgress) 
+// tetap gunakan dari kode asli kamu – tidak berubah kecuali panggil updateTotal() yang sudah baru
+
+updateTotal();
+</script>
 </body>
 </html>
