@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
@@ -50,22 +49,26 @@
     #topup-section { display: block; }
     #invoice-section { display: none; }
     .membership-tag { position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #fdfd34, #facc15); color: #000; font-size: 9px; padding: 1px 6px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transform: rotate(12deg); z-index: 10; }
-    .summary-watermark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; user-select: none; z-index: 0; animation: watermark-pulse 12s ease-in-out infinite; }
-    .summary-watermark img { height: 45px; opacity: 0.12; margin-right: 8px; }
-    .summary-watermark span { font-size: 2rem; opacity: 0.12; letter-spacing: 3px; }
-    @media (max-width: 640px) { .summary-watermark img { height: 35px; } .summary-watermark span { font-size: 1.6rem; } }
-    .logo-text { letter-spacing: 1.2px; color: white; }
+    
+    /* HAPUS SEMUA WATERMARK ADEN PEDIA */
+    .summary-watermark,
+    .absolute.inset-0.flex.items-center.justify-center.pointer-events-none.select-none.animate-watermark-float,
+    .absolute.inset-0.flex.items-center.justify-center.pointer-events-none.select-none.animate-watermark-pulse,
+    [class*="watermark"] {
+      display: none !important;
+    }
+
+    header { background: rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
     #nominal-list { -ms-overflow-style: none; scrollbar-width: none; }
     #nominal-list::-webkit-scrollbar { display: none; }
     #pesan-btn-mobile-container { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: rgba(30, 27, 46, 0.35); backdrop-filter: blur(10px); border-top: 1px solid rgba(253, 253, 52, 0.25); padding: 0.6rem 0.8rem; box-shadow: 0 -3px 10px rgba(0,0,0,0.4); }
     @supports (padding-bottom: env(safe-area-inset-bottom)) { #pesan-btn-mobile-container { padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); } }
     #pesan-btn-mobile { background: transparent; color: white; border: 1.5px solid #fdfd34; padding: 0.8rem; font-size: 0.95rem; border-radius: 0.75rem; box-shadow: 0 3px 10px rgba(253, 253, 52, 0.3); }
-    header { background: rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
   </style>
 </head>
 <body class="overflow-x-hidden">
 
-  <!-- ====================== TOP UP SECTION ====================== -->
+  <!-- TOP UP SECTION -->
   <div id="topup-section">
     <header class="sticky top-0 z-50 border-b border-gray-700/50">
       <div class="container mx-auto px-4 py-2.5 flex items-center justify-between">
@@ -79,9 +82,11 @@
         </div>
       </div>
     </header>
+
     <div class="relative w-full overflow-hidden">
       <img src="banner.jpg" alt="Banner" class="w-full h-44 sm:h-60 md:h-72 object-cover brightness-75"/>
     </div>
+
     <div class="container mx-auto px-4 -mt-8 relative z-10">
       <div class="bg-gray-900/90 backdrop-blur-sm p-4 rounded-2xl shadow-2xl flex justify-around text-center text-xs max-w-4xl mx-auto">
         <div class="flex flex-col items-center gap-1"><i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i><span>Cepat</span></div>
@@ -89,14 +94,15 @@
         <div class="flex flex-col items-center gap-1"><i data-lucide="headset" class="w-5 h-5 text-yellow-400"></i><span>24/7</span></div>
       </div>
     </div>
+
     <main class="container mx-auto px-4 py-6 pb-40 md:pb-8">
       <div class="grid gap-4 md:grid-cols-3 max-w-7xl mx-auto">
         <div class="md:col-span-2 space-y-4">
+
           <!-- 1. ID Free Fire -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span>
-              ID Free Fire
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">1</span> ID Free Fire
             </div>
             <div class="p-4">
               <input id="userid" type="text" placeholder="Contoh: 123456789" class="w-full p-3.5 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 outline-none text-sm"/>
@@ -106,8 +112,7 @@
           <!-- 2. Pilih Nominal -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden relative">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span>
-              Pilih Nominal / Paket
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span> Pilih Nominal / Paket
             </div>
             <div class="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-h-[420px] overflow-y-auto" id="nominal-list">
               <!-- Membership -->
@@ -125,6 +130,7 @@
                 <div class="text-xs text-gray-400">Membership</div>
                 <div class="text-yellow-400 font-bold text-sm">Rp 60.000</div>
               </button>
+
               <!-- Custom Diamond -->
               <button class="nominal-btn bg-gradient-to-br from-indigo-900/60 to-purple-900/40 p-3 rounded-xl text-center hover:bg-indigo-700/30 border-2 border-indigo-500/40 transition" data-price="198" data-diamond="1" data-type="custom" data-name="Custom Diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
@@ -132,6 +138,7 @@
                 <div class="text-xs text-indigo-300">Isi jumlah sendiri</div>
                 <div class="text-indigo-300 font-bold text-sm">Rp 198 / dm</div>
               </button>
+
               <!-- Diamond Packs -->
               <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="813" data-diamond="5" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
@@ -217,18 +224,14 @@
           <!-- Custom Diamond Input -->
           <section id="custom-diamond-section" class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden hidden">
             <div class="bg-indigo-600 text-white px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-indigo-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2.5</span>
-              Jumlah Diamond Custom
+              <span class="bg-black text-indigo-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2.5</span> Jumlah Diamond Custom
             </div>
             <div class="p-5">
               <div class="flex items-center gap-3">
-                <input id="custom-diamond-input" type="number" min="1" max="99999" value="561"
-                       class="flex-1 p-4 bg-gray-800 border border-indigo-600/50 rounded-xl text-white text-2xl font-bold text-center focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/30 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
+                <input id="custom-diamond-input" type="number" min="1" max="99999" value="561" class="flex-1 p-4 bg-gray-800 border border-indigo-600/50 rounded-xl text-white text-2xl font-bold text-center focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/30 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
                 <div class="text-3xl text-indigo-300">💎</div>
               </div>
-              <p class="text-center mt-4 text-lg">
-                Harga: <span id="custom-price-display" class="text-indigo-400 font-bold">Rp 111.138</span>
-              </p>
+              <p class="text-center mt-4 text-lg"> Harga: <span id="custom-price-display" class="text-indigo-400 font-bold">Rp <span id="custom-price-display">111.138</span></span> </p>
               <p class="text-xs text-center text-gray-400 mt-1">Minimal 1 • Maksimal 99.999 diamond</p>
             </div>
           </section>
@@ -236,8 +239,7 @@
           <!-- 3. Jumlah Pembelian -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span>
-              Jumlah Pembelian
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">3</span> Jumlah Pembelian
             </div>
             <div class="p-4">
               <div class="flex items-center justify-center gap-3">
@@ -257,23 +259,21 @@
           <!-- 4. Kode Promo -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span>
-              Kode Promo
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">4</span> Kode Promo
             </div>
             <div class="p-4">
               <div class="flex flex-col sm:flex-row gap-2">
                 <input id="promo-code" type="text" placeholder="Ketik kode promo jika ada" class="flex-1 p-3.5 bg-gray-800 border border-gray-700 rounded-xl focus:border-yellow-400 text-sm"/>
                 <button id="btn-apply-promo" class="bg-yellow-400 text-black px-5 py-3.5 rounded-xl font-bold hover:bg-yellow-300 mt-2 sm:mt-0 text-sm">Gunakan</button>
               </div>
-              <p id="promo-message" class="mt-3 text-green-400 text-xs hidden">Kode promo diterapkan! Hemat <span id="discount-amount">Rp 0</span></p>
+              <p id="promo-message" class="mt-3 text-xs hidden"></p>
             </div>
           </section>
 
           <!-- 5. Pilih Pembayaran -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">5</span>
-              Pilih Pembayaran
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">5</span> Pilih Pembayaran
             </div>
             <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label class="flex items-center gap-3 bg-gray-800 p-3.5 rounded-xl cursor-pointer hover:bg-gray-700 border-2 border-transparent hover:border-yellow-400 transition text-sm">
@@ -286,8 +286,7 @@
           <!-- 6. Nomor WhatsApp -->
           <section class="bg-gray-900/90 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-yellow-400 text-black px-4 py-3 font-bold flex items-center gap-3 text-sm">
-              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">6</span>
-              Nomor WhatsApp
+              <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">6</span> Nomor WhatsApp
             </div>
             <div class="p-4">
               <div class="flex">
@@ -297,15 +296,12 @@
               <p class="text-xs text-gray-400 mt-2 italic">Pastikan nomor aktif, biar bisa dihubungi kalau ada kendala.</p>
             </div>
           </section>
+
         </div>
 
-        <!-- Ringkasan Pesanan -->
+        <!-- Ringkasan Pesanan (watermark sudah dihapus via CSS) -->
         <div class="md:col-span-1">
           <div class="bg-gray-900/90 p-5 rounded-2xl shadow-xl md:sticky md:top-6 space-y-4 relative overflow-hidden max-w-md md:max-w-none mx-auto md:mx-0">
-            <div class="summary-watermark animate-watermark-float">
-              <img src="aden.png" alt="Aden Pedia">
-              <span>ADEN PEDIA</span>
-            </div>
             <h3 class="text-lg font-bold text-white flex items-center gap-2 relative z-10">
               <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon"/>
               Ringkasan Pesanan
@@ -327,6 +323,7 @@
         </div>
       </div>
     </main>
+
     <div id="pesan-btn-mobile-container" class="fixed bottom-0 left-0 right-0 z-[9999] md:hidden">
       <button id="pesan-btn-mobile" class="w-full bg-transparent text-white border border-yellow-400/60 backdrop-blur-lg py-3 rounded-t-xl font-bold text-base flex items-center justify-center gap-2 shadow-xl">
         <i data-lucide="shopping-cart" class="w-5 h-5"></i> PESAN SEKARANG - <span id="mobile-total">Rp 21.930</span>
@@ -334,7 +331,7 @@
     </div>
   </div>
 
-  <!-- ====================== INVOICE SECTION ====================== -->
+  <!-- INVOICE SECTION -->
   <div id="invoice-section">
     <header class="sticky top-0 z-50 bg-darkbg/95 backdrop-blur-md border-b border-muted/30">
       <div class="container mx-auto px-4">
@@ -384,11 +381,6 @@
             <p id="progress-text" class="text-center text-sm text-gray-300 mt-3">Sedang menunggu konfirmasi pembayaran Anda...</p>
           </div>
           <div class="bg-card rounded-2xl p-5 md:p-6 border border-muted/30 relative overflow-hidden">
-            <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none animate-watermark-float">
-              <div class="flex items-center gap-2 md:gap-3 text-white font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-wider opacity-10 animate-watermark-pulse scale-90 sm:scale-100 md:scale-125">
-                <img src="aden.png" alt="Aden Pedia" class="h-8 sm:h-10 md:h-14 lg:h-16 w-auto opacity-70"/> ADEN PEDIA
-              </div>
-            </div>
             <h3 class="text-lg md:text-xl font-semibold mb-4 relative z-10">Rincian Pesanan</h3>
             <div class="space-y-3 text-sm relative z-10">
               <div class="flex justify-between"><span class="text-gray-400">Produk</span><span class="font-medium" id="invoice-detail-product"></span></div>
@@ -415,9 +407,7 @@
               <p class="text-xs text-gray-500 mt-2">Scan untuk bayar via QRIS</p>
             </div>
             <div class="mt-6 text-center">
-              <button id="konfirmasi-bayar-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                SUDAH BAYAR - KONFIRMASI
-              </button>
+              <button id="konfirmasi-bayar-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"> SUDAH BAYAR - KONFIRMASI </button>
               <p class="text-xs text-gray-400 mt-3">Tekan tombol ini setelah Anda selesai melakukan pembayaran</p>
             </div>
             <div class="mt-5 md:mt-6 space-y-3 md:space-y-4 text-sm">
@@ -430,9 +420,7 @@
             <h2 class="text-xl md:text-2xl font-bold text-success mb-2">Pembayaran Berhasil</h2>
             <p class="text-gray-300 text-sm md:text-base">Telah diterima. Pesanan sedang diproses ke akun Anda.</p>
             <p class="text-xs md:text-sm text-gray-400 mt-3 md:mt-4">Estimasi: 1-5 menit</p>
-            <p id="refresh-notice" class="text-sm text-gray-400 mt-6">
-              Halaman akan kembali otomatis dalam <span id="countdown-refresh">5</span> detik...
-            </p>
+            <p id="refresh-notice" class="text-sm text-gray-400 mt-6"> Halaman akan kembali otomatis dalam <span id="countdown-refresh">5</span> detik... </p>
           </div>
         </div>
       </div>
@@ -449,163 +437,343 @@
     </main>
   </div>
 
-  <!-- ====================== JAVASCRIPT ====================== -->
+  <!-- JAVASCRIPT -->
   <script>
-lucide.createIcons();
+    lucide.createIcons();
 
-let selectedPrice = 21500;
-let selectedDiamond = 0;
-let selectedType = 'membership';
-let selectedName = 'Mingguan';
-let discountPercent = 0; // persentase diskon dari promo
-const adminRate = 0.02;
-const webhookUrl = "https://discord.com/api/webhooks/1472899700230324391/cfbxxwVHxmhiRMm9mdAvFUWtZbOz4-WndIzRCx8-eemo7r1hkEGyJ0AA0LR7aDQC3iyF"; // hapus kalau tidak dipakai
+    let selectedPrice = 21500;
+    let selectedDiamond = 0;
+    let selectedType = 'membership';
+    let selectedName = 'Mingguan';
+    let discountPercent = 0;
+    const adminRate = 0.02;
+    const webhookUrl = "https://discord.com/api/webhooks/1472899700230324391/cfbxxwVHxmhiRMm9mdAvFUWtZbOz4-WndIzRCx8-eemo7r1hkEGyJ0AA0LR7aDQC3iyF"; // hapus jika tidak perlu
 
-let isSending = false;
-let sendQueue = [];
-let isCustom = false;
-let customDiamond = 561;
-let konfirmasiCooldown = false;
+    let isSending = false;
+    let sendQueue = [];
+    let isCustom = false;
+    let customDiamond = 561;
+    let konfirmasiCooldown = false;
 
-function timeAgo(date) {
-  const seconds = Math.floor((new Date() - date) / 1000);
-  let interval = Math.floor(seconds / 31536000);
-  if (interval >= 1) return interval + " tahun yang lalu";
-  interval = Math.floor(seconds / 2592000);
-  if (interval >= 1) return interval + " bulan yang lalu";
-  interval = Math.floor(seconds / 86400);
-  if (interval >= 1) return interval + (interval === 1 ? " hari" : " hari") + " yang lalu";
-  interval = Math.floor(seconds / 3600);
-  if (interval >= 1) return interval + (interval === 1 ? " jam" : " jam") + " yang lalu";
-  interval = Math.floor(seconds / 60);
-  if (interval >= 1) return interval + (interval === 1 ? " menit" : " menit") + " yang lalu";
-  return "beberapa detik yang lalu";
-}
-
-function updateCustomPriceDisplay() {
-  const price = customDiamond * 198;
-  document.getElementById('custom-price-display').textContent = `Rp ${price.toLocaleString('id-ID')}`;
-}
-
-function updateTotal() {
-  const q = parseInt(document.getElementById('quantity')?.value || 1);
-  let subtotal = isCustom ? (customDiamond * 198 * q) : (selectedPrice * q);
-  
-  // Hitung diskon persen
-  const discountAmount = Math.round(subtotal * (discountPercent / 100));
-  const totalBeforeAdmin = subtotal - discountAmount;
-  const adminFee = Math.round(totalBeforeAdmin * adminRate);
-  const total = totalBeforeAdmin + adminFee;
-
-  document.getElementById('total-price').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-  document.getElementById('summary-qty').textContent = `${q}x`;
-  document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-  document.getElementById('summary-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
-  document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-  document.getElementById('mobile-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-
-  const displayEl = document.getElementById('total-item-display');
-  const summaryEl = document.getElementById('summary-diamond');
-
-  if (isCustom || selectedType === 'diamond') {
-    const totalDm = isCustom ? customDiamond * q : selectedDiamond * q;
-    displayEl.innerHTML = `(<span id="total-diamond">${totalDm}</span> <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>)`;
-    summaryEl.innerHTML = `${totalDm} <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>`;
-  } else {
-    displayEl.innerHTML = `<span class="font-bold">${selectedName}</span> Membership`;
-    summaryEl.textContent = `${selectedName} Membership`;
-  }
-
-  document.getElementById('summary-discount-row').classList.toggle('hidden', discountAmount <= 0);
-  if (discountAmount > 0) {
-    document.getElementById('summary-discount').textContent = discountAmount.toLocaleString('id-ID');
-  }
-}
-
-// Event nominal buttons
-document.querySelectorAll('.nominal-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedPrice = parseInt(btn.dataset.price);
-    selectedDiamond = parseInt(btn.dataset.diamond || 0);
-    selectedType = btn.dataset.type || 'diamond';
-    selectedName = btn.dataset.name || '';
-    isCustom = selectedType === 'custom';
-    document.getElementById('custom-diamond-section').classList.toggle('hidden', !isCustom);
-    if (isCustom) {
-      customDiamond = parseInt(document.getElementById('custom-diamond-input')?.value) || 1;
-      selectedPrice = 198;
-      selectedDiamond = customDiamond;
-      selectedType = 'diamond';
-      selectedName = 'Custom';
-      updateCustomPriceDisplay();
+    function timeAgo(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = Math.floor(seconds / 31536000);
+      if (interval >= 1) return interval + " tahun yang lalu";
+      interval = Math.floor(seconds / 2592000);
+      if (interval >= 1) return interval + " bulan yang lalu";
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) return interval + (interval === 1 ? " hari" : " hari") + " yang lalu";
+      interval = Math.floor(seconds / 3600);
+      if (interval >= 1) return interval + (interval === 1 ? " jam" : " jam") + " yang lalu";
+      interval = Math.floor(seconds / 60);
+      if (interval >= 1) return interval + (interval === 1 ? " menit" : " menit") + " yang lalu";
+      return "beberapa detik yang lalu";
     }
+
+    function updateCustomPriceDisplay() {
+      const price = customDiamond * 198;
+      document.getElementById('custom-price-display').textContent = `Rp ${price.toLocaleString('id-ID')}`;
+    }
+
+    function updateTotal() {
+      const q = parseInt(document.getElementById('quantity')?.value || 1);
+      let subtotal = isCustom ? (customDiamond * 198 * q) : (selectedPrice * q);
+      const discountAmount = Math.round(subtotal * (discountPercent / 100));
+      const totalBeforeAdmin = subtotal - discountAmount;
+      const adminFee = Math.round(totalBeforeAdmin * adminRate);
+      const total = totalBeforeAdmin + adminFee;
+
+      document.getElementById('total-price').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('summary-qty').textContent = `${q}x`;
+      document.getElementById('summary-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('summary-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
+      document.getElementById('summary-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+      document.getElementById('mobile-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+      const displayEl = document.getElementById('total-item-display');
+      const summaryEl = document.getElementById('summary-diamond');
+      if (isCustom || selectedType === 'diamond') {
+        const totalDm = isCustom ? customDiamond * q : selectedDiamond * q;
+        displayEl.innerHTML = `(<span id="total-diamond">${totalDm}</span> <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>)`;
+        summaryEl.innerHTML = `${totalDm} <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon inline"/>`;
+      } else {
+        displayEl.innerHTML = `<span class="font-bold">${selectedName}</span> Membership`;
+        summaryEl.textContent = `${selectedName} Membership`;
+      }
+
+      document.getElementById('summary-discount-row').classList.toggle('hidden', discountAmount <= 0);
+      if (discountAmount > 0) {
+        document.getElementById('summary-discount').textContent = discountAmount.toLocaleString('id-ID');
+      }
+    }
+
+    document.querySelectorAll('.nominal-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedPrice = parseInt(btn.dataset.price);
+        selectedDiamond = parseInt(btn.dataset.diamond || 0);
+        selectedType = btn.dataset.type || 'diamond';
+        selectedName = btn.dataset.name || '';
+        isCustom = selectedType === 'custom';
+        document.getElementById('custom-diamond-section').classList.toggle('hidden', !isCustom);
+        if (isCustom) {
+          customDiamond = parseInt(document.getElementById('custom-diamond-input')?.value) || 1;
+          selectedPrice = 198;
+          selectedDiamond = customDiamond;
+          selectedType = 'diamond';
+          selectedName = 'Custom';
+          updateCustomPriceDisplay();
+        }
+        updateTotal();
+      });
+    });
+
+    document.getElementById('custom-diamond-input')?.addEventListener('input', e => {
+      let val = parseInt(e.target.value) || 1;
+      val = Math.max(1, Math.min(99999, val));
+      e.target.value = val;
+      customDiamond = val;
+      selectedDiamond = customDiamond;
+      updateCustomPriceDisplay();
+      updateTotal();
+    });
+
+    document.getElementById('btn-minus')?.addEventListener('click', () => {
+      const input = document.getElementById('quantity');
+      if (input.value > 1) { input.value--; updateTotal(); }
+    });
+
+    document.getElementById('btn-plus')?.addEventListener('click', () => {
+      document.getElementById('quantity').value++;
+      updateTotal();
+    });
+
+    document.getElementById('quantity')?.addEventListener('input', updateTotal);
+
+    // PROMO LOGIC
+    document.getElementById('btn-apply-promo')?.addEventListener('click', () => {
+      const code = document.getElementById('promo-code').value.trim().toUpperCase();
+      const msg = document.getElementById('promo-message');
+
+      const promos = {
+        'ADENGACOR': 89,
+        'FFKIPAS': 55,
+        'DINZ': 66,
+        'MASDER': 77
+      };
+
+      if (!code) {
+        msg.classList.remove('text-green-400');
+        msg.classList.add('text-red-400');
+        msg.classList.remove('hidden');
+        msg.textContent = 'Masukkan kode promo terlebih dahulu!';
+        discountPercent = 0;
+        updateTotal();
+        return;
+      }
+
+      if (promos[code]) {
+        discountPercent = promos[code];
+        msg.classList.remove('text-red-400');
+        msg.classList.add('text-green-400');
+        msg.classList.remove('hidden');
+        msg.innerHTML = `Kode promo <strong>${code}</strong> berhasil! Diskon <strong>${discountPercent}%</strong> diterapkan.`;
+      } else {
+        discountPercent = 0;
+        msg.classList.remove('text-green-400');
+        msg.classList.add('text-red-400');
+        msg.classList.remove('hidden');
+        msg.textContent = 'Kode promo tidak valid atau sudah kadaluarsa.';
+      }
+      updateTotal();
+    });
+
+    // Bagian pesan, loading, invoice switch, konfirmasi, processQueue, startManualProgress tetap seperti asli
+    const pesanBtns = [document.getElementById('pesan-btn'), document.getElementById('pesan-btn-mobile')].filter(Boolean);
+    pesanBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.add('loading');
+        btn.disabled = true;
+        setTimeout(() => {
+          const q = parseInt(document.getElementById('quantity').value) || 1;
+          const subtotal = isCustom ? customDiamond * 198 * q : selectedPrice * q;
+          const discountAmount = Math.round(subtotal * (discountPercent / 100));
+          const totalBeforeAdmin = subtotal - discountAmount;
+          const adminFee = Math.round(totalBeforeAdmin * adminRate);
+          const total = totalBeforeAdmin + adminFee;
+          const userId = document.getElementById('userid').value.trim() || '(ID belum diisi)';
+          const productName = isCustom || selectedType === 'diamond' ? `${(isCustom ? customDiamond : selectedDiamond) * q} 💎 Diamonds` : `${selectedName} Membership`;
+
+          document.getElementById('invoice-product-name').textContent = productName;
+          document.getElementById('invoice-detail-product').textContent = productName;
+          document.getElementById('invoice-user-id').textContent = userId;
+          document.getElementById('invoice-detail-userid').textContent = userId;
+          document.getElementById('invoice-detail-qty').textContent = `${q}x`;
+          document.getElementById('invoice-detail-harga').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-detail-admin').textContent = `Rp ${adminFee.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-detail-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+          document.getElementById('invoice-status').textContent = 'Pending';
+          document.getElementById('invoice-status').className = 'text-yellow-300 font-medium';
+          document.getElementById('invoice-discount-row').classList.toggle('hidden', discountAmount <= 0);
+          if (discountAmount > 0) document.getElementById('invoice-detail-diskon').textContent = discountAmount.toLocaleString('id-ID');
+
+          document.getElementById('progress-bar').style.width = '0%';
+          document.querySelectorAll('#progress-section [id^="step"]').forEach(s => {
+            s.classList.remove('bg-primary', 'text-darkbg');
+            s.classList.add('bg-muted', 'text-gray-400');
+          });
+          document.getElementById('step1').classList.add('bg-primary', 'text-darkbg');
+          document.getElementById('step1').classList.remove('bg-muted', 'text-gray-400');
+          document.getElementById('progress-text').textContent = 'Sedang menunggu konfirmasi pembayaran Anda...';
+
+          document.getElementById('topup-section').style.display = 'none';
+          document.getElementById('invoice-section').style.display = 'block';
+
+          btn.classList.remove('loading');
+          btn.disabled = false;
+        }, 1200);
+      });
+    });
+
+    const konfirmasiBtn = document.getElementById('konfirmasi-bayar-btn');
+    if (konfirmasiBtn) {
+      konfirmasiBtn.addEventListener('click', () => {
+        if (konfirmasiCooldown) return;
+        konfirmasiCooldown = true;
+        konfirmasiBtn.disabled = true;
+        konfirmasiBtn.textContent = 'Menunggu 10 detik...';
+        konfirmasiBtn.style.cursor = 'not-allowed';
+        setTimeout(() => {
+          konfirmasiCooldown = false;
+          if (!isSending) {
+            konfirmasiBtn.disabled = false;
+            konfirmasiBtn.textContent = 'SUDAH BAYAR - KONFIRMASI';
+            konfirmasiBtn.style.cursor = 'pointer';
+          }
+        }, 10000);
+
+        const productRaw = document.getElementById('invoice-detail-product').textContent.trim();
+        const productDisplay = productRaw.includes('Diamonds') ? `${productRaw} 💎` : productRaw;
+        const data = {
+          product: productDisplay,
+          userId: document.getElementById('invoice-detail-userid').textContent.trim(),
+          qty: document.getElementById('invoice-detail-qty').textContent.trim(),
+          harga: document.getElementById('invoice-detail-harga').textContent.trim(),
+          admin: document.getElementById('invoice-detail-admin').textContent.trim(),
+          total: document.getElementById('invoice-detail-total').textContent.trim()
+        };
+        sendQueue.push(data);
+        if (!isSending) processQueue();
+      });
+    }
+
+    async function processQueue() {
+      if (sendQueue.length === 0) { isSending = false; return; }
+      isSending = true;
+      const data = sendQueue.shift();
+      if (konfirmasiBtn) konfirmasiBtn.textContent = 'Mengirim...';
+
+      const payload = {
+        embeds: [{
+          title: "✅ Pembelian Sukses - ADEN PEDIA",
+          description: "Terima kasih telah berbelanja! Diamond/Membership sedang diproses.",
+          color: 0x22c55e,
+          thumbnail: { url: "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" },
+          fields: [
+            { name: "💎 Produk", value: data.product || "Tidak diketahui", inline: true },
+            { name: "🆔 User ID", value: `\`${data.userId || '-'}\``, inline: true },
+            { name: "🔢 Jumlah", value: data.qty || "1x", inline: true },
+            { name: "💰 Harga", value: data.harga || "-", inline: true },
+            { name: "⚙️ Admin Fee", value: data.admin || "-", inline: true },
+            { name: "🏷️ Total Bayar", value: `**${data.total || '-'}**`, inline: true }
+          ],
+          footer: { text: "Status: Berhasil • Dikonfirmasi • " + timeAgo(new Date()), icon_url: "https://img.icons8.com/fluency/48/000000/checkmark.png" },
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          startManualProgress();
+        } else {
+          alert('Gagal mengirim notifikasi. Silakan hubungi admin.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Koneksi bermasalah saat mengirim konfirmasi.');
+      }
+      setTimeout(() => processQueue(), 3000);
+    }
+
+    function startManualProgress() {
+      const banner = document.getElementById('status-banner');
+      const title = document.getElementById('status-title');
+      const desc = document.getElementById('status-desc');
+      const badge = document.getElementById('payment-badge');
+      const statusEl = document.getElementById('invoice-status');
+
+      title.textContent = 'Memproses Pesanan...';
+      desc.textContent = 'Pembayaran sudah dikonfirmasi';
+      banner.classList.remove('bg-yellow-600/20', 'border-yellow-500/40');
+      banner.classList.add('bg-green-900/30', 'border-green-500/40');
+      badge.textContent = 'Dikonfirmasi';
+      badge.classList.remove('bg-yellow-600/30', 'text-yellow-300');
+      badge.classList.add('bg-orange-600/30', 'text-orange-400');
+      statusEl.textContent = 'Dikonfirmasi';
+      statusEl.classList.remove('text-yellow-300');
+      statusEl.classList.add('text-orange-400');
+
+      const steps = [
+        { id: 'step1', text: 'Pembayaran sudah diterima oleh sistem...' },
+        { id: 'step2', text: 'Sedang diverifikasi ke server Free Fire...' },
+        { id: 'step3', text: 'Pesanan sedang diproses...' },
+        { id: 'step4', text: 'Diamond / Membership berhasil dikirim!' }
+      ];
+
+      let i = 0;
+      const bar = document.getElementById('progress-bar');
+      const txt = document.getElementById('progress-text');
+      const interval = setInterval(() => {
+        if (i >= steps.length) {
+          clearInterval(interval);
+          txt.textContent = 'Transaksi selesai ✓ Terima kasih telah berbelanja!';
+          title.textContent = 'Pesanan Berhasil!';
+          desc.textContent = 'Silakan cek akun Free Fire Anda sekarang.';
+          document.getElementById('success-message').classList.remove('hidden');
+          document.getElementById('instructions').classList.add('hidden');
+          statusEl.textContent = 'Sukses';
+          statusEl.classList.remove('text-orange-400');
+          statusEl.classList.add('text-green-400');
+
+          let countdown = 5;
+          const cdEl = document.getElementById('countdown-refresh');
+          const notice = document.getElementById('refresh-notice');
+          notice.classList.remove('hidden');
+          const cdInterval = setInterval(() => {
+            countdown--;
+            cdEl.textContent = countdown;
+            if (countdown <= 0) {
+              clearInterval(cdInterval);
+              window.location.reload();
+            }
+          }, 1000);
+          return;
+        }
+        document.getElementById(steps[i].id).classList.remove('bg-muted', 'text-gray-400');
+        document.getElementById(steps[i].id).classList.add('bg-primary', 'text-darkbg');
+        bar.style.width = `${(i + 1) * 25}%`;
+        txt.textContent = steps[i].text;
+        i++;
+      }, 1800);
+    }
+
     updateTotal();
-  });
-});
-
-// Custom diamond input
-document.getElementById('custom-diamond-input')?.addEventListener('input', e => {
-  let val = parseInt(e.target.value) || 1;
-  val = Math.max(1, Math.min(99999, val));
-  e.target.value = val;
-  customDiamond = val;
-  selectedDiamond = customDiamond;
-  updateCustomPriceDisplay();
-  updateTotal();
-});
-
-// Quantity +/- 
-document.getElementById('btn-minus')?.addEventListener('click', () => {
-  const input = document.getElementById('quantity');
-  if (input.value > 1) { input.value--; updateTotal(); }
-});
-document.getElementById('btn-plus')?.addEventListener('click', () => {
-  document.getElementById('quantity').value++;
-  updateTotal();
-});
-document.getElementById('quantity')?.addEventListener('input', updateTotal);
-
-// PROMO CODE HANDLER
-document.getElementById('btn-apply-promo')?.addEventListener('click', () => {
-  const code = document.getElementById('promo-code').value.trim().toUpperCase();
-  const promoMsg = document.getElementById('promo-message');
-
-  const promoCodes = {
-    'ADENGACOR': 89,
-    'FFKIPAS': 55,
-    'DINZ': 66,
-    'MASDER': 77
-  };
-
-  if (!code) {
-    promoMsg.classList.remove('hidden', 'text-green-400');
-    promoMsg.classList.add('text-red-400');
-    promoMsg.textContent = 'Masukkan kode promo terlebih dahulu!';
-    discountPercent = 0;
-    updateTotal();
-    return;
-  }
-
-  if (promoCodes[code]) {
-    discountPercent = promoCodes[code];
-    promoMsg.classList.remove('hidden', 'text-red-400');
-    promoMsg.classList.add('text-green-400');
-    promoMsg.innerHTML = `Kode promo <strong>${code}</strong> berhasil! Hemat <strong>${discountPercent}%</strong>.`;
-  } else {
-    discountPercent = 0;
-    promoMsg.classList.remove('hidden', 'text-green-400');
-    promoMsg.classList.add('text-red-400');
-    promoMsg.textContent = 'Kode promo tidak valid atau sudah kadaluarsa.';
-  }
-  updateTotal();
-});
-
-// Sisanya (pesan btn, loading, invoice switch, konfirmasi bayar, processQueue, startManualProgress) 
-// tetap gunakan dari kode asli kamu – tidak berubah kecuali panggil updateTotal() yang sudah baru
-
-updateTotal();
-</script>
+  </script>
 </body>
 </html>
