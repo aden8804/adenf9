@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | ADEN PEDIA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .btn-pesan { 
+            background-color: #FACC15 !important; 
+            color: #000000 !important; 
+            font-weight: 900 !important; 
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen p-4 md:p-8">
+
+    <div id="authContainer" class="fixed inset-0 z-50 bg-gray-900 flex justify-center items-center p-4">
+        <div class="w-full max-w-sm bg-gray-800 p-8 rounded-3xl border border-gray-700 shadow-2xl">
+            <h2 id="authTitle" class="text-2xl font-black mb-6 text-white">Masuk</h2>
+            <form id="authForm" class="space-y-4">
+                <input type="text" id="inUser" required class="w-full p-4 rounded-xl bg-gray-700 outline-none text-white" placeholder="Username">
+                <input type="password" id="inPass" required class="w-full p-4 rounded-xl bg-gray-700 outline-none text-white" placeholder="Password">
+                <button type="submit" class="w-full py-4 bg-blue-600 rounded-xl font-bold hover:bg-blue-700 transition text-white">Lanjut</button>
+            </form>
+            <button onclick="toggleMode()" class="mt-4 w-full text-sm text-gray-400" id="toggleBtn">Belum punya akun? Daftar</button>
+        </div>
+    </div>
+
+    <div id="dashSection" class="hidden max-w-lg mx-auto space-y-6">
+        <div class="bg-gray-800 p-6 rounded-2xl flex items-center gap-4 border border-gray-700">
+            <img id="userAvatar" src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/Icon_face_male_head_sc_Samurai.png" class="w-16 h-16 rounded-full border-2 border-yellow-500">
+            <div>
+                <h2 id="welcome" class="text-xl font-black text-white">WELCOME!</h2>
+                <p class="text-gray-400 text-xs">Member Area</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 text-center">
+            <img id="rankIcon" src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/Icon_Rank_Medal_1_1.png" class="w-24 h-24 mx-auto mb-4">
+            <p id="vRank" class="text-2xl font-black text-white">BRONZE</p>
+            <p class="text-xs text-yellow-500 font-bold">Multiplier: x<span id="vMult">1</span></p>
+            <div class="h-px bg-gray-700 my-4"></div>
+            <div class="flex justify-around">
+                <div><p class="text-xs text-gray-400 uppercase">Total Saldo</p><p id="vSaldo" class="font-bold text-white text-lg">Rp 0</p></div>
+                <div><p class="text-xs text-gray-400 uppercase">Total Orderan</p><p id="vPengeluaran" class="font-bold text-white text-lg">0</p></div>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-4 rounded-xl border border-gray-700 text-center">
+            <p id="timerDisplay" class="text-sm text-blue-400 font-bold mb-2">Tunggu: 14m 18s</p>
+            <button id="btnClaim" onclick="doClaim()" class="w-full py-4 bg-blue-600 rounded-xl font-bold text-white hover:bg-blue-700 transition opacity-50" disabled>Klaim Reward</button>
+            <div class="mt-4 flex gap-2">
+                <input type="text" id="adminCode" placeholder="Kode VIP..." class="w-full p-2 rounded-lg bg-gray-700 outline-none text-sm text-center text-white">
+                <button onclick="checkAdmin()" class="bg-red-600 px-4 rounded-lg font-bold text-xs text-white">GO</button>
+            </div>
+        </div>
+
+        <button onclick="doOrder()" class="btn-pesan w-full py-4 rounded-2xl flex items-center justify-center gap-2 shadow-xl active:scale-95 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+            PESAN SEKARANG - <span id="mobile-total">Rp 0</span>
+        </button>
+    </div>
+
+    <script>
+        const RANK_CONFIG = {
+            "BRONZE": { min: 0, mult: 1, icon: "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/Icon_Rank_Medal_1_1.png" },
+            "MAFIA": { min: 1000000000, mult: 20, icon: "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/Icon_face_Jumpsuit25.png" }
+        };
+        const CLAIM_COOLDOWN = 900000;
+        let isLogin = true;
+
+        function refreshDash() {
+            const u = sessionStorage.getItem('currentUser');
+            if(!u) return;
+            let d = JSON.parse(localStorage.getItem(u) || '{"saldo":0, "pengeluaran":0, "lastClaim":0}');
+            let rName = d.saldo >= 1000000000 ? "MAFIA" : "BRONZE";
+            
+            document.getElementById('welcome').innerText = "WELCOME! @" + u;
+            document.getElementById('vSaldo').innerText = "Rp " + Math.floor(d.saldo).toLocaleString();
+            document.getElementById('vPengeluaran').innerText = d.pengeluaran;
+            document.getElementById('vRank').innerText = rName;
+            document.getElementById('vMult').innerText = RANK_CONFIG[rName].mult;
+            document.getElementById('rankIcon').src = RANK_CONFIG[rName].icon;
+            document.getElementById('mobile-total').innerText = "Rp " + Math.floor(d.saldo * 0.08).toLocaleString();
+        }
+
+        setInterval(() => {
+            const u = sessionStorage.getItem('currentUser');
+            if(u) {
+                let d = JSON.parse(localStorage.getItem(u));
+                d.saldo += 1;
+                localStorage.setItem(u, JSON.stringify(d));
+                refreshDash();
+            }
+        }, 2000);
+
+        function doOrder() {
+            const u = sessionStorage.getItem('currentUser');
+            let d = JSON.parse(localStorage.getItem(u));
+            if(!d || d.saldo < 10000) return alert("Error: Saldo kurang dari 10.000");
+            d.saldo -= Math.floor(d.saldo * 0.08);
+            d.pengeluaran += 1;
+            localStorage.setItem(u, JSON.stringify(d));
+            refreshDash();
+            window.location.href = "freefire.html";
+        }
+
+        function doClaim() {
+            const u = sessionStorage.getItem('currentUser');
+            let d = JSON.parse(localStorage.getItem(u));
+            let mult = d.saldo >= 1000000000 ? 20 : 1;
+            d.saldo += (200000 * mult);
+            d.lastClaim = Date.now();
+            localStorage.setItem(u, JSON.stringify(d));
+            refreshDash();
+        }
+
+        function checkAdmin() {
+            if(document.getElementById('adminCode').value === "ADENVIP2929") {
+                const u = sessionStorage.getItem('currentUser');
+                let d = JSON.parse(localStorage.getItem(u));
+                d.saldo = 1000000001;
+                localStorage.setItem(u, JSON.stringify(d));
+                refreshDash(); alert("Mode MAFIA Aktif!");
+            } else alert("Kode Salah!");
+        }
+
+        function toggleMode() {
+            isLogin = !isLogin;
+            document.getElementById('authTitle').innerText = isLogin ? "Masuk" : "Daftar";
+        }
+
+        document.getElementById('authForm').onsubmit = (e) => {
+            e.preventDefault();
+            const u = document.getElementById('inUser').value;
+            const p = document.getElementById('inPass').value;
+            if(!localStorage.getItem(u)) localStorage.setItem(u, JSON.stringify({pass: p, saldo: 0, pengeluaran: 0, lastClaim: 0}));
+            sessionStorage.setItem('currentUser', u);
+            document.getElementById('authContainer').classList.add('hidden');
+            document.getElementById('dashSection').classList.remove('hidden');
+            refreshDash();
+        };
+
+        setInterval(() => {
+            const u = sessionStorage.getItem('currentUser');
+            if(!u) return;
+            const d = JSON.parse(localStorage.getItem(u));
+            const timeLeft = (d.lastClaim + CLAIM_COOLDOWN) - Date.now();
+            const btn = document.getElementById('btnClaim'), timer = document.getElementById('timerDisplay');
+            if(timeLeft > 0) {
+                timer.innerText = `Tunggu: ${Math.floor(timeLeft/60000)}m ${Math.floor((timeLeft%60000)/1000)}s`;
+                btn.disabled = true; btn.classList.add('opacity-50');
+            } else { timer.innerText = "Bisa Klaim Sekarang!"; btn.disabled = false; btn.classList.remove('opacity-50'); }
+        }, 1000);
+    </script>
+</body>
+</html>
