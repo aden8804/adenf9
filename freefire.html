@@ -24,14 +24,6 @@
             darkbg: '#403b4a',
             card: '#28242d',
             muted: '#756c89',
-          },
-          animation: {
-            'watermark-float': 'float 14s ease-in-out infinite',
-            'watermark-pulse': 'pulse 10s ease-in-out infinite',
-          },
-          keyframes: {
-            float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
-            pulse: { '0%, 100%': { opacity: '0.10' }, '50%': { opacity: '0.18' } }
           }
         }
       }
@@ -40,35 +32,22 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; touch-action: manipulation; }
+    html, body { width: 100%; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; }
     body { background: linear-gradient(to bottom right, #1a1625, #0f0b18); color: #f0eef5; min-height: 100vh; font-family: system-ui, sans-serif; }
     .container { width: 100%; max-width: 100vw !important; margin-left: auto !important; margin-right: auto !important; padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
     @media (min-width: 768px) { .container { padding-left: 1.5rem !important; padding-right: 1.5rem !important; } }
     img { max-width: 100%; height: auto; display: block; }
-    .grid, .flex { min-width: 0; }
-    .nominal-btn.selected { border-color: #fdfd34 !important; background-color: rgba(253, 253, 52, 0.15) !important; transform: scale(1.03); }
-    input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .membership-icon { width: 52px; height: 52px; object-fit: contain; margin: 0 auto 8px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); }
     .diamond-icon { width: 22px; height: 22px; object-fit: contain; }
+    .nominal-btn.selected { border-color: #fdfd34 !important; background-color: rgba(253, 253, 52, 0.15) !important; transform: scale(1.03); }
     #pesan-btn.loading::after, #pesan-btn-mobile.loading::after { content: ''; display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 6px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     #topup-section { display: block; }
     #invoice-section { display: none; }
     .membership-tag { position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, #fdfd34, #facc15); color: #000; font-size: 9px; padding: 1px 6px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transform: rotate(12deg); z-index: 10; }
-    
-    /* HAPUS SEMUA WATERMARK ADEN PEDIA */
-    .summary-watermark,
-    .absolute.inset-0.flex.items-center.justify-center.pointer-events-none.select-none.animate-watermark-float,
-    .absolute.inset-0.flex.items-center.justify-center.pointer-events-none.select-none.animate-watermark-pulse,
-    [class*="watermark"] {
-      display: none !important;
-    }
-
-    header { background: rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
     #nominal-list { -ms-overflow-style: none; scrollbar-width: none; }
     #nominal-list::-webkit-scrollbar { display: none; }
     #pesan-btn-mobile-container { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: rgba(30, 27, 46, 0.35); backdrop-filter: blur(10px); border-top: 1px solid rgba(253, 253, 52, 0.25); padding: 0.6rem 0.8rem; box-shadow: 0 -3px 10px rgba(0,0,0,0.4); }
-    @supports (padding-bottom: env(safe-area-inset-bottom)) { #pesan-btn-mobile-container { padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); } }
-    #pesan-btn-mobile { background: transparent; color: white; border: 1.5px solid #fdfd34; padding: 0.8rem; font-size: 0.95rem; border-radius: 0.75rem; box-shadow: 0 3px 10px rgba(253, 253, 52, 0.3); }
   </style>
 </head>
 <body class="overflow-x-hidden">
@@ -120,11 +99,12 @@
               <span class="bg-black text-yellow-400 w-7 h-7 rounded-full flex items-center justify-center text-xs">2</span> Pilih Nominal / Paket
             </div>
             <div class="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-h-[420px] overflow-y-auto" id="nominal-list">
+
               <!-- Membership Mingguan -->
               <button class="nominal-btn relative bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition selected" 
                       data-price="24520" data-diamond="0" data-type="membership" data-name="Mingguan">
                 <div class="membership-tag">BEST+</div>
-                <i class="fas fa-crown text-yellow-400 text-2xl mx-auto mb-1"></i>
+                <img src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/2021414/i3g4mcqja2agrici6ra82g.png" alt="Mingguan" class="membership-icon">
                 <div class="font-bold text-base">Mingguan</div>
                 <div class="text-xs text-gray-400">Membership</div>
                 <div class="text-yellow-400 font-bold text-sm">Rp 24.520</div>
@@ -134,7 +114,7 @@
               <button class="nominal-btn relative bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" 
                       data-price="71325" data-diamond="0" data-type="membership" data-name="Bulanan">
                 <div class="membership-tag">BEST+</div>
-                <i class="fas fa-crown text-yellow-400 text-3xl mx-auto mb-1"></i>
+                <img src="https://gamensia.com/assets/images/product/imagesz-20241222140221ddde86.webp" alt="Bulanan" class="membership-icon">
                 <div class="font-bold text-base">Bulanan</div>
                 <div class="text-xs text-gray-400">Membership</div>
                 <div class="text-yellow-400 font-bold text-sm">Rp 71.325</div>
@@ -149,7 +129,7 @@
                 <div class="text-indigo-300 font-bold text-sm">Rp 198 / dm</div>
               </button>
 
-              <!-- Diamond Packs (lainnya tetap sama) -->
+              <!-- Diamond Packs -->
               <button class="nominal-btn bg-gray-800 p-3 rounded-xl text-center hover:bg-yellow-400/20 border-2 border-transparent transition" data-price="813" data-diamond="5" data-type="diamond">
                 <img src="https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/FF_UI_HackerStore_Diamond.png" alt="Diamond" class="diamond-icon mx-auto mb-1"/>
                 <div class="font-bold text-base">5</div>
@@ -441,9 +421,6 @@
             <h2 class="text-xl md:text-2xl font-bold text-success mb-2">Pembayaran Berhasil</h2>
             <p class="text-gray-300 text-sm md:text-base">Telah diterima. Pesanan sedang diproses ke akun Anda.</p>
             <p class="text-xs md:text-sm text-gray-400 mt-3 md:mt-4">Estimasi: 1-5 menit</p>
-            <p id="refresh-notice" class="text-sm text-gray-400 mt-6"> 
-              Halaman akan kembali otomatis dalam <span id="countdown-refresh">5</span> detik... 
-            </p>
           </div>
         </div>
       </div>
@@ -526,9 +503,7 @@
       }
 
       document.getElementById('summary-discount-row').classList.toggle('hidden', discountAmount <= 0);
-      if (discountAmount > 0) {
-        document.getElementById('summary-discount').textContent = discountAmount.toLocaleString('id-ID');
-      }
+      if (discountAmount > 0) document.getElementById('summary-discount').textContent = discountAmount.toLocaleString('id-ID');
     }
 
     // Nominal buttons
@@ -718,20 +693,26 @@
       setTimeout(() => processQueue(), 3000);
     }
 
+    // FUNGSI AUTO REFRESH KE index.html
     function startManualProgress() {
       const banner = document.getElementById('status-banner');
       const title = document.getElementById('status-title');
       const desc = document.getElementById('status-desc');
       const badge = document.getElementById('payment-badge');
       const statusEl = document.getElementById('invoice-status');
+      const progressText = document.getElementById('progress-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      banner.classList.remove('bg-yellow-600/20', 'border-yellow-500/40');
+      banner.classList.add('bg-green-900/30', 'border-green-500/40');
 
       title.textContent = 'Memproses Pesanan...';
       desc.textContent = 'Pembayaran sudah dikonfirmasi';
-      banner.classList.remove('bg-yellow-600/20', 'border-yellow-500/40');
-      banner.classList.add('bg-green-900/30', 'border-green-500/40');
+
       badge.textContent = 'Dikonfirmasi';
       badge.classList.remove('bg-yellow-600/30', 'text-yellow-300');
       badge.classList.add('bg-orange-600/30', 'text-orange-400');
+
       statusEl.textContent = 'Dikonfirmasi';
       statusEl.classList.remove('text-yellow-300');
       statusEl.classList.add('text-orange-400');
@@ -743,42 +724,48 @@
         { id: 'step4', text: 'Diamond / Membership berhasil dikirim!' }
       ];
 
-      let i = 0;
-      const bar = document.getElementById('progress-bar');
-      const txt = document.getElementById('progress-text');
+      let currentStep = 0;
+
       const interval = setInterval(() => {
-        if (i >= steps.length) {
+        if (currentStep > 0) {
+          const prev = document.getElementById(steps[currentStep - 1].id);
+          prev.classList.remove('bg-muted', 'text-gray-400');
+          prev.classList.add('bg-primary', 'text-darkbg');
+        }
+
+        const currentEl = document.getElementById(steps[currentStep].id);
+        currentEl.classList.remove('bg-muted', 'text-gray-400');
+        currentEl.classList.add('bg-primary', 'text-darkbg');
+
+        progressBar.style.width = `${(currentStep + 1) * 25}%`;
+        progressText.textContent = steps[currentStep].text;
+
+        currentStep++;
+
+        if (currentStep >= steps.length) {
           clearInterval(interval);
-          txt.textContent = 'Transaksi selesai ✓ Terima kasih telah berbelanja!';
+
           title.textContent = 'Pesanan Berhasil!';
-          desc.textContent = 'Silakan cek akun Free Fire Anda sekarang.';
-          document.getElementById('success-message').classList.remove('hidden');
-          document.getElementById('instructions').classList.add('hidden');
+          desc.textContent = 'Diamond/Membership telah dikirim ke akun Free Fire Anda.';
+          progressText.textContent = 'Transaksi selesai ✓ Terima kasih telah berbelanja di ADEN PEDIA!';
+
           statusEl.textContent = 'Sukses';
           statusEl.classList.remove('text-orange-400');
           statusEl.classList.add('text-green-400');
 
-          let countdown = 5;
-          const cdEl = document.getElementById('countdown-refresh');
-          const notice = document.getElementById('refresh-notice');
-          notice.classList.remove('hidden');
+          badge.textContent = 'Sukses';
+          badge.classList.remove('bg-orange-600/30', 'text-orange-400');
+          badge.classList.add('bg-green-600/30', 'text-green-400');
 
-          const cdInterval = setInterval(() => {
-            countdown--;
-            cdEl.textContent = countdown;
-            if (countdown <= 0) {
-              clearInterval(cdInterval);
-              window.location.href = "index.html";   // Redirect ke index.html
-            }
-          }, 1000);
-          return;
+          document.getElementById('success-message').classList.remove('hidden');
+          document.getElementById('instructions').classList.add('hidden');
+
+          // AUTO REFRESH ke index.html setelah 3 detik
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 3000);
         }
-        document.getElementById(steps[i].id).classList.remove('bg-muted', 'text-gray-400');
-        document.getElementById(steps[i].id).classList.add('bg-primary', 'text-darkbg');
-        bar.style.width = `${(i + 1) * 25}%`;
-        txt.textContent = steps[i].text;
-        i++;
-      }, 1800);
+      }, 1600);
     }
 
     updateTotal();
